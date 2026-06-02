@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Models - STEM Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .role-models-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .role-model-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.5s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .role-model-card:nth-child(1) { animation-delay: 0.1s; }
+        .role-model-card:nth-child(2) { animation-delay: 0.2s; }
+        .role-model-card:nth-child(3) { animation-delay: 0.3s; }
+        .role-model-card:nth-child(4) { animation-delay: 0.4s; }
+        .role-model-card:nth-child(5) { animation-delay: 0.5s; }
+        .role-model-card:nth-child(6) { animation-delay: 0.6s; }
+        .role-model-card:nth-child(7) { animation-delay: 0.7s; }
+        .role-model-card:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .role-model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .role-model-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .role-model-name {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .role-model-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .role-model-background {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .role-model-quote {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .role-model-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .inspiration-section {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .inspiration-section h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .inspiration-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .role-models-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 STEM Explorer</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Inspiring STEM Role Models 🌟</h1>
+        <p>Meet diverse pioneers and trailblazers who have made incredible contributions to science, technology, engineering, and mathematics. Their stories prove that with passion and dedication, you can achieve anything!</p>
+    </div>
+
+    <div class="role-models-grid">
+        {% for role_model in role_models %}
+        <div class="role-model-card">
+            <div class="role-model-icon">
+                {% if role_model.gender == 'Female' %}
+                    👩‍🔬
+                {% else %}
+                    👨‍🔬
+                {% endif %}
+            </div>
+
+            <h2 class="role-model-name">{{ role_model.name }}</h2>
+            <div class="role-model-title">{{ role_model.title }}</div>
+            <p class="role-model-background">{{ role_model.background }}</p>
+
+            <div class="role-model-quote">
+                "{{ role_model.quote }}"
+            </div>
+
+            <div class="role-model-tags">
+                <span class="tag">{{ role_model.ethnicity }}</span>
+                <span class="tag">{{ role_model.gender }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="inspiration-section">
+        <h2>You Can Be Next! 🚀</h2>
+        <p>These role models started just like you — curious, ambitious, and ready to make a difference. Take our quiz to discover which STEM career path aligns with your unique interests and talents.</p>
+        <a href="/quiz" class="btn">Discover Your Path</a>
+    </div>
+</body>
+</html>

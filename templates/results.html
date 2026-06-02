@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Career Matches - STEM Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .results-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .results-header h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .overall-message {
+            color: #666;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease-out both;
+        }
+
+        .match-card:nth-child(1) { animation-delay: 0.1s; }
+        .match-card:nth-child(2) { animation-delay: 0.2s; }
+        .match-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .match-title {
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .match-score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .match-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .why-fit {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .why-fit h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-fit p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .next-steps {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .next-steps h4 {
+            color: #f57c00;
+            margin-bottom: 0.5rem;
+        }
+
+        .next-steps p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .role-models-section {
+            margin-top: 1.5rem;
+        }
+
+        .role-models-section h4 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .role-model-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .role-model-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .role-model-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .role-model-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-model-title {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-model-quote {
+            font-style: italic;
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .results-header h1 {
+                font-size: 2rem;
+            }
+
+            .match-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 STEM Explorer</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="results-container">
+        <div class="results-header">
+            <h1>🎉 Your Perfect STEM Matches!</h1>
+            <p class="overall-message" id="overallMessage">Loading your personalized career matches...</p>
+        </div>
+
+        <div id="matchesContainer">
+            <!-- Career matches will be dynamically inserted here -->
+        </div>
+
+        <div class="action-buttons">
+            <a href="/quiz" class="btn btn-secondary">Retake Quiz</a>
+            <a href="/careers" class="btn btn-primary">Explore All Careers</a>
+            <a href="/role-models" class="btn btn-primary">Meet More Role Models</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const matchesData = sessionStorage.getItem('careerMatches');
+
+            if (!matchesData) {
+                window.location.href = '/quiz';
+                return;
+            }
+
+            const data = JSON.parse(matchesData);
+
+            // Update overall message
+            if (data.overall_message) {
+                document.getElementById('overallMessage').textContent = data.overall_message;
+            }
+
+            // Render matches
+            const container = document.getElementById('matchesContainer');
+            data.matches.forEach((match, index) => {
+                const matchCard = document.createElement('div');
+                matchCard.className = 'match-card';
+
+                // Build role models HTML
+                let roleModelsHTML = '';
+                if (match.role_models && match.role_models.length > 0) {
+                    const roleModelCards = match.role_models.map(rm => `
+                        <div class="role-model-card">
+                            <div class="role-model-name">${rm.name}</div>
+                            <div class="role-model-title">${rm.title}</div>
+                            <div class="role-model-quote">"${rm.quote}"</div>
+                        </div>
+                    `).join('');
+
+                    roleModelsHTML = `
+                        <div class="role-models-section">
+                            <h4>🌟 Role Models in this Field</h4>
+                            <div class="role-model-cards">
+                                ${roleModelCards}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                matchCard.innerHTML = `
+                    <div class="match-header">
+                        <h2 class="match-title">${index + 1}. ${match.title}</h2>
+                        <div class="match-score">${match.match_score}% Match</div>
+                    </div>
+
+                    <p class="match-description">${match.description}</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">💰 Salary Range</div>
+                            <div class="info-value">${match.salary_range}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">📈 Job Growth</div>
+                            <div class="info-value">${match.growth}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">🎓 Education</div>
+                            <div class="info-value">${match.education}</div>
+                        </div>
+                    </div>
+
+                    <div class="why-fit">
+                        <h4>🎯 Why This Career Matches You</h4>
+                        <p>${match.why_good_fit}</p>
+                    </div>
+
+                    <div class="next-steps">
+                        <h4>🚀 Next Steps</h4>
+                        <p>${match.next_steps}</p>
+                    </div>
+
+                    ${roleModelsHTML}
+                `;
+
+                container.appendChild(matchCard);
+            });
+        });
+    </script>
+</body>
+</html>

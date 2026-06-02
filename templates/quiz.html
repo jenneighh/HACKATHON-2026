@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quiz - STEM Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            margin-bottom: 2rem;
+        }
+
+        .question-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .question-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .text-input-area {
+            margin-top: 1rem;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        select {
+            min-height: auto;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .options-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 STEM Explorer</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Find Your STEM Path 🎯</h1>
+            <p>Answer a few questions to discover careers that match your interests</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="quizForm">
+            <div class="question-section">
+                <h3>1. What activities do you enjoy?</h3>
+                <p class="question-description">Select all that interest you</p>
+                <div class="options-grid" id="interests">
+                    <div class="option-card" data-value="coding">
+                        <div class="option-icon">💻</div>
+                        <div class="option-label">Coding</div>
+                    </div>
+                    <div class="option-card" data-value="problem_solving">
+                        <div class="option-icon">🧩</div>
+                        <div class="option-label">Problem Solving</div>
+                    </div>
+                    <div class="option-card" data-value="design">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-label">Design</div>
+                    </div>
+                    <div class="option-card" data-value="building">
+                        <div class="option-icon">🔧</div>
+                        <div class="option-label">Building Things</div>
+                    </div>
+                    <div class="option-card" data-value="research">
+                        <div class="option-icon">🔬</div>
+                        <div class="option-label">Research</div>
+                    </div>
+                    <div class="option-card" data-value="helping">
+                        <div class="option-icon">🤝</div>
+                        <div class="option-label">Helping Others</div>
+                    </div>
+                    <div class="option-card" data-value="analytics">
+                        <div class="option-icon">📊</div>
+                        <div class="option-label">Data Analysis</div>
+                    </div>
+                    <div class="option-card" data-value="nature">
+                        <div class="option-icon">🌿</div>
+                        <div class="option-label">Nature</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>2. What are your favorite subjects?</h3>
+                <p class="question-description">Select all that apply</p>
+                <div class="options-grid" id="subjects">
+                    <div class="option-card" data-value="mathematics">
+                        <div class="option-icon">➗</div>
+                        <div class="option-label">Mathematics</div>
+                    </div>
+                    <div class="option-card" data-value="computer_science">
+                        <div class="option-icon">💾</div>
+                        <div class="option-label">Computer Science</div>
+                    </div>
+                    <div class="option-card" data-value="physics">
+                        <div class="option-icon">⚛️</div>
+                        <div class="option-label">Physics</div>
+                    </div>
+                    <div class="option-card" data-value="biology">
+                        <div class="option-icon">🧬</div>
+                        <div class="option-label">Biology</div>
+                    </div>
+                    <div class="option-card" data-value="chemistry">
+                        <div class="option-icon">⚗️</div>
+                        <div class="option-label">Chemistry</div>
+                    </div>
+                    <div class="option-card" data-value="engineering">
+                        <div class="option-icon">⚙️</div>
+                        <div class="option-label">Engineering</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>3. What skills do you have or want to develop?</h3>
+                <p class="question-description">Choose your strongest or most interesting skills</p>
+                <div class="options-grid" id="skills">
+                    <div class="option-card" data-value="programming">
+                        <div class="option-icon">👨‍💻</div>
+                        <div class="option-label">Programming</div>
+                    </div>
+                    <div class="option-card" data-value="creativity">
+                        <div class="option-icon">✨</div>
+                        <div class="option-label">Creativity</div>
+                    </div>
+                    <div class="option-card" data-value="critical_thinking">
+                        <div class="option-icon">🧠</div>
+                        <div class="option-label">Critical Thinking</div>
+                    </div>
+                    <div class="option-card" data-value="communication">
+                        <div class="option-icon">💬</div>
+                        <div class="option-label">Communication</div>
+                    </div>
+                    <div class="option-card" data-value="teamwork">
+                        <div class="option-icon">👥</div>
+                        <div class="option-label">Teamwork</div>
+                    </div>
+                    <div class="option-card" data-value="attention_to_detail">
+                        <div class="option-icon">🔍</div>
+                        <div class="option-label">Attention to Detail</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>4. What work environment appeals to you?</h3>
+                <p class="question-description">Choose one</p>
+                <select id="environment" required>
+                    <option value="">Select an environment...</option>
+                    <option value="office">Office setting with a team</option>
+                    <option value="remote">Remote/flexible work from anywhere</option>
+                    <option value="lab">Laboratory or research facility</option>
+                    <option value="field">Outdoor/fieldwork</option>
+                    <option value="mixed">Mix of different environments</option>
+                </select>
+            </div>
+
+            <div class="question-section">
+                <h3>5. What are your career goals?</h3>
+                <p class="question-description">Tell us what you hope to achieve</p>
+                <div class="text-input-area">
+                    <textarea id="goals" placeholder="e.g., I want to make a positive impact on the environment, create innovative technology, help people through science, etc." required></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Cancel</button>
+                <button type="submit" class="btn btn-primary">Get My Matches 🚀</button>
+            </div>
+        </form>
+
+        <div id="loadingSection" class="loading hidden">
+            <div class="spinner"></div>
+            <h3>Analyzing your profile...</h3>
+            <p>Our AI is finding the perfect STEM careers for you!</p>
+        </div>
+    </div>
+
+    <script>
+        // Multi-select option cards
+        const optionGroups = ['interests', 'subjects', 'skills'];
+        optionGroups.forEach(groupId => {
+            const group = document.getElementById(groupId);
+            group.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('selected');
+                    updateProgress();
+                });
+            });
+        });
+
+        // Update progress bar
+        function updateProgress() {
+            const interests = document.querySelectorAll('#interests .option-card.selected').length;
+            const subjects = document.querySelectorAll('#subjects .option-card.selected').length;
+            const skills = document.querySelectorAll('#skills .option-card.selected').length;
+            const environment = document.getElementById('environment').value;
+            const goals = document.getElementById('goals').value;
+
+            let progress = 0;
+            if (interests > 0) progress += 20;
+            if (subjects > 0) progress += 20;
+            if (skills > 0) progress += 20;
+            if (environment) progress += 20;
+            if (goals.length > 10) progress += 20;
+
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        document.getElementById('environment').addEventListener('change', updateProgress);
+        document.getElementById('goals').addEventListener('input', updateProgress);
+
+        // Form submission
+        document.getElementById('quizForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Collect selected values
+            const getSelected = (groupId) => {
+                return Array.from(document.querySelectorAll(`#${groupId} .option-card.selected`))
+                    .map(card => card.dataset.value);
+            };
+
+            const formData = {
+                interests: getSelected('interests'),
+                subjects: getSelected('subjects'),
+                skills: getSelected('skills'),
+                environment: document.getElementById('environment').value,
+                goals: document.getElementById('goals').value
+            };
+
+            // Validate
+            if (formData.interests.length === 0 || formData.subjects.length === 0 || formData.skills.length === 0) {
+                alert('Please select at least one option for interests, subjects, and skills.');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('quizForm').classList.add('hidden');
+            document.getElementById('loadingSection').classList.remove('hidden');
+
+            try {
+                const response = await fetch('/api/match-careers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+
+                // Store results and redirect
+                sessionStorage.setItem('careerMatches', JSON.stringify(result));
+                window.location.href = '/results';
+
+            } catch (error) {
+                alert('Something went wrong. Please try again!');
+                console.error(error);
+                document.getElementById('quizForm').classList.remove('hidden');
+                document.getElementById('loadingSection').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
