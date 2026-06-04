@@ -430,17 +430,206 @@ def rule_based_matching(data):
         "overall_message": f"Based on your interests in {', '.join(interests[:3])}, you have amazing potential in STEM! These careers align with your passions and can lead to a fulfilling future. Remember, every expert started as a beginner - your journey starts now!"
     }
 
+@app.route("/api/mentor", methods=["POST"])
+def mentor():
+    try:
+        data = request.get_json()
+        if not data or "message" not in data:
+            return jsonify({"response": "Please send a message!"}), 400
+
+        user_message = data["message"].lower()
+        career = data.get("career", "STEM professional")
+
+        # Career-specific information
+        career_info = STEM_CAREERS.get(
+            next((k for k, v in STEM_CAREERS.items() if v["title"] == career), "software_engineer"),
+            STEM_CAREERS["software_engineer"]
+        )
+
+        # Mentor responses based on common questions
+        if "how many" in user_message and ("class" in user_message or "course" in user_message):
+            response = f"""Great question! To become a {career}, here's what you typically need:
+
+📚 **High School** (4 years):
+• Core: {', '.join(career_info['subjects'][:3])}
+• Plus standard requirements: English, Social Studies, etc.
+
+🎓 **College** (4 years for Bachelor's):
+• About 120-130 credit hours total
+• 40-50 classes covering major requirements, general education, and electives
+• {career_info['education']}
+
+💡 **The good news**: You don't need to take them all at once! Most students take 4-5 classes per semester. Focus on building a strong foundation first, then specialize in what you love!"""
+
+        elif "hard" in user_message or "difficult" in user_message:
+            response = f"""Honestly? {career} has its challenges, but it's absolutely achievable! Here's the real talk:
+
+💪 **What makes it challenging:**
+• Requires dedication and consistent practice
+• Some concepts take time to master
+• Problem-solving can be frustrating at first
+
+✨ **Why you CAN do it:**
+• Everyone struggles at first — even experts!
+• Breaking problems into small steps makes them manageable
+• There's a huge community ready to help you
+• Your unique perspective is valuable!
+
+The "hard" part isn't about being naturally smart — it's about being persistent. Most successful {career}s weren't prodigies; they just didn't give up. And with your interests in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
+
+        elif "skill" in user_message:
+            response = f"""To succeed as a {career}, you'll want to develop these skills:
+
+🎯 **Core Skills:**
+{chr(10).join([f'• {skill.title()}' for skill in career_info['skills']])}
+
+📖 **Subjects to Master:**
+{chr(10).join([f'• {subject.title()}' for subject in career_info['subjects']])}
+
+💡 **How to Build These Skills:**
+• Start with beginner-friendly online courses (Khan Academy, Coursera)
+• Work on small projects that interest you
+• Join clubs or online communities
+• Find a mentor or study group
+• Practice regularly — even 30 minutes a day helps!
+
+Remember: Nobody is born with these skills. Everyone learns them step by step. You've got this! 💪"""
+
+        elif "start" in user_message or "begin" in user_message:
+            projects = career_info.get('beginner_projects', ['Build a personal website', 'Create a simple app', 'Join online coding communities'])
+            next_steps = career_info.get('next_steps', ['Learn basics online', 'Join a STEM club', 'Find a mentor'])
+
+            response = f"""Let's get you started on your {career} journey! Here's your action plan:
+
+🚀 **This Week:**
+1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses in your field'}
+2. {next_steps[1] if len(next_steps) > 1 else 'Join a relevant online community'}
+3. Watch YouTube videos about "Day in the Life of a {career}"
+
+🛠️ **This Month:**
+Start a beginner project:
+{chr(10).join([f'• {project}' for project in projects])}
+
+📚 **This Year:**
+• Take relevant classes at school
+• Build a portfolio of 2-3 small projects
+• Attend STEM events or competitions
+• Connect with professionals in the field
+
+The key is to start small and stay consistent. Pick ONE thing from this list and do it today! What sounds most exciting to you? 🌟"""
+
+        elif "salary" in user_message or "money" in user_message or "pay" in user_message:
+            response = f"""Let's talk about the financial side of {career}:
+
+💰 **Salary Range:** {career_info['salary_range']}
+📊 **Average:** {career_info.get('avg_salary', 'Varies by location and experience')}
+
+**What affects your salary:**
+• Location (Silicon Valley pays more than smaller cities)
+• Experience (entry-level vs. senior positions)
+• Company size (startups vs. big tech)
+• Your specialty within the field
+
+**Career growth:** {career_info['growth']}
+
+💡 **The real value:**
+Beyond the salary, {career} offers:
+• Job security and demand
+• Flexibility (remote work options)
+• Continuous learning opportunities
+• Making real impact: {career_info['impact']}
+
+Focus on building skills and passion — the salary will follow! 🚀"""
+
+        elif "college" in user_message or "university" in user_message:
+            response = f"""Here's the college path for {career}:
+
+🎓 **Typical Degree:** {career_info['education']}
+
+**Timeline:**
+• 4 years for Bachelor's degree (most common path)
+• Optional: 2 years for Master's (for specialization or research)
+• Some positions accept associate degrees or bootcamps!
+
+💡 **You don't need a fancy school!**
+• Many successful professionals went to state universities
+• Online programs and bootcamps are gaining respect
+• Projects and skills matter more than school name
+• Scholarships and financial aid make it affordable
+
+**What matters most:**
+• Strong foundation in {', '.join(career_info['subjects'][:2])}
+• Hands-on projects and internships
+• Building a network
+• Passion and persistence!
+
+Remember: Your college choice should fit YOUR situation — budget, location, learning style. Success comes from what YOU do with the opportunity! 🌟"""
+
+        elif "woman" in user_message or "girl" in user_message or "female" in user_message:
+            response = f"""Absolutely YES! Women are making incredible contributions to {career} and ALL of STEM! 👩‍🔬
+
+**Here's the truth:**
+• Women bring unique perspectives that IMPROVE technology
+• Companies actively want more diverse teams
+• There are tons of support networks for women in STEM
+• Role models are everywhere (check our Role Models section!)
+
+**Resources for you:**
+• Girls Who Code (free programs!)
+• Society of Women Engineers (scholarships + community)
+• Women in STEM mentorship programs
+• Female-focused hackathons and competitions
+
+**Real talk:**
+• Yes, you might sometimes be the only woman in the room
+• Yes, there are challenges
+• BUT: You belong here. Your perspective is NEEDED.
+• The industry is actively working to be more inclusive
+
+Don't let anyone tell you that you don't belong in {career}. The field needs more women like YOU! 💪✨"""
+
+        else:
+            # Default response for other questions
+            response = f"""That's a great question about {career}!
+
+While I don't have a specific answer for that, here's what I can help you with:
+
+• **How many classes do I need?** — Course requirements
+• **Is {career} hard?** — Real talk about challenges
+• **What skills do I need?** — Complete skill breakdown
+• **How do I get started?** — Step-by-step action plan
+• **What's the salary?** — Financial expectations
+• **What about college?** — Education pathways
+
+Try asking one of these, or rephrase your question! I'm here to help you succeed in {career}! 🚀"""
+
+        return jsonify({"response": response})
+
+    except Exception as e:
+        print(f"Mentor ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"response": "Oops! Something went wrong. Please try again!"}), 500
+
 @app.route("/api/chat", methods=["POST"])
 def chat():
     try:
         data = request.get_json()
+        if not data or "message" not in data:
+            return jsonify({"response": "Please send a message!"}), 400
+
         user_message = data["message"].lower()
 
         # Simple demo chatbot responses (no AI needed for now)
         responses = {
             "hello": "Hi there! 👋 I'm your STEM Career Guide! Ask me anything about STEM careers, what classes to take, or how to get started!",
             "hi": "Hello! 👋 I'm here to help you explore STEM careers! What would you like to know?",
-            "help": "I can help you with:\n• Finding STEM careers that fit you\n• What classes you should take\n• Whether you can do STEM (yes you can!)\n• Project ideas to get started\n\nWhat interests you?",
+            "help": "I can help you with:\n• Finding STEM careers that fit you\n• What classes you should take\n• Whether you can do STEM (yes you can!)\n• Project ideas to get started\n• Summer camps, scholarships, and competitions\n\nWhat interests you?",
+            "camp": "Great question! 🏕️ There are tons of amazing STEM summer camps!\n• Girls Who Code - Free 2-week coding program\n• NASA STEM Programs - Virtual & in-person\n• AI4ALL - AI education for underrepresented students\n• Engineering For Kids - Find local camps by state\n\nCheck out the 'Opportunities' section on the homepage for more links!",
+            "summer": "Summer is a perfect time for STEM! ☀️ You can:\n• Join a summer coding camp (Girls Who Code is free!)\n• Participate in NASA programs\n• Work on personal projects\n• Enter science competitions\n• Take free online courses\n\nScroll down to see all our opportunities!",
+            "scholarship": "Yes! There are many STEM scholarships! 💰 Here are some great ones:\n• Society of Women Engineers (SWE)\n• National Society of Black Engineers (NSBE)\n• Hispanic Scholarship Fund (HSF)\n• Generation Google Scholarship\n• STEM Scholarships Database\n\nCheck the Opportunities section for direct links to apply!",
+            "competition": "STEM competitions are awesome for building skills! 🏆 Try:\n• Google Science Fair - Global online competition\n• FIRST Robotics - Build robots with teams\n• MATHCOUNTS - Math competition\n• Congressional App Challenge - Create an app\n• Regeneron Science Talent Search - Research competition\n\nFind more details in our Opportunities section!",
+            "free": "Tons of free STEM resources! 📚 Here are the best:\n• Khan Academy - Math, science, coding\n• Coursera - College-level courses\n• Code.org - Learn computer science\n• MIT OpenCourseWare - Free MIT courses\n\nAll completely free! Check our Opportunities section for links.",
             "math": "Being 'bad at math' doesn't mean you can't do STEM! 💪 Many successful STEM professionals struggled with math at first. The key is practice and finding the right learning style. Plus, many STEM fields focus more on creativity and problem-solving than pure math. Would you like to know which STEM careers use less heavy math?",
             "career": "Great question! There are so many exciting STEM careers! 🚀 Based on your interests, I'd recommend taking our quiz to find your perfect match. We have careers in:\n• Software Engineering\n• Biomedical Engineering\n• Cybersecurity\n• Aerospace Engineering\n• And more!\n\nWhat are you passionate about?",
             "class": "For STEM careers, here are some key classes:\n📚 Essential: Math, Science, Computer Science\n💡 Helpful: Physics, Chemistry, Biology\n🎨 Bonus: Design, Statistics, Engineering\n\nStart with what interests you most! Which field are you curious about?",
@@ -465,8 +654,10 @@ def chat():
         return jsonify({"response": response_text})
 
     except Exception as e:
-        print(f"ERROR: {e}")
-        return jsonify({"error": str(e)}), 500
+        print(f"Chat ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"response": "Oops! Something went wrong. Please try again!"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

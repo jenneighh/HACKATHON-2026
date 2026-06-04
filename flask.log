@@ -1,0 +1,31 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 126-289-242
+127.0.0.1 - - [04/Jun/2026 10:14:40] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 10:14:44] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 10:14:47] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 10:14:50] "POST /api/chat HTTP/1.1" 400 -
+127.0.0.1 - - [04/Jun/2026 11:43:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/icon-192.png HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /careers HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /role-models HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /static/icon-512.png HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:43:59] "GET /quiz HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:49:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:49:36] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:49:36] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /quiz HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /static/icon-192.png HTTP/1.1" 304 -

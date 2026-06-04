@@ -730,6 +730,360 @@
             transform: translateY(-3px);
         }
 
+        /* Career Pathway Map */
+        .pathway-section {
+            background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 100%);
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pathway-title {
+            text-align: center;
+            color: #70697E;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .pathway-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pathway-step {
+            flex: 1;
+            min-width: 140px;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(112, 105, 126, 0.15);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .pathway-step:hover {
+            transform: translateY(-8px);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-label {
+            color: #70697E;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-detail {
+            color: #98899C;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .pathway-arrow {
+            font-size: 2rem;
+            color: #BDB2BC;
+            flex-shrink: 0;
+        }
+
+        /* Mini Projects Section */
+        .projects-section {
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .projects-title {
+            text-align: center;
+            color: #70697E;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .projects-subtitle {
+            text-align: center;
+            color: #98899C;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 8px 25px rgba(112, 105, 126, 0.12);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: #98899C;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: #70697E;
+            font-size: 1.2rem;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .difficulty-badge {
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .difficulty-beginner {
+            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+            color: #70697E;
+        }
+
+        .difficulty-easy {
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            color: #70697E;
+        }
+
+        .project-description {
+            color: #98899C;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            color: #BDB2BC;
+            font-size: 1.1rem;
+            margin-top: 0.1rem;
+        }
+
+        .meta-content {
+            flex: 1;
+        }
+
+        .meta-label {
+            color: #70697E;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-text {
+            color: #98899C;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .skills-mini {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.25rem;
+        }
+
+        .skill-mini-tag {
+            background: #E0D8E0;
+            color: #70697E;
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Mentor Chat Section */
+        .mentor-chat-section {
+            background: linear-gradient(135deg, #E8D5F8 0%, #F3E5F5 100%);
+            border-radius: 35px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.15);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mentor-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .mentor-header h2 {
+            font-size: 2.2rem;
+            color: #70697E;
+            margin-bottom: 0.5rem;
+        }
+
+        .mentor-subtitle {
+            color: #98899C;
+            font-size: 1.1rem;
+        }
+
+        .mentor-chat-box {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(112, 105, 126, 0.1);
+        }
+
+        .mentor-message {
+            margin-bottom: 1.2rem;
+            padding: 1.2rem;
+            border-radius: 18px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mentor-message.mentor {
+            background: linear-gradient(135deg, #E0D8F0 0%, #F0E8F5 100%);
+            color: #70697E;
+            margin-right: 15%;
+            border-left: 4px solid #98899C;
+        }
+
+        .mentor-message.student {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            margin-left: 15%;
+            text-align: right;
+        }
+
+        .mentor-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .mentor-text {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .mentor-input-area {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .mentor-input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 3px solid #E0D8E0;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .mentor-input:focus {
+            border-color: #98899C;
+            box-shadow: 0 0 15px rgba(152, 137, 156, 0.2);
+        }
+
+        .mentor-send-btn {
+            padding: 1.2rem 2.2rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .mentor-send-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(112, 105, 126, 0.3);
+        }
+
+        .mentor-send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .quick-question-btn {
+            padding: 0.7rem 1.3rem;
+            background: white;
+            color: #70697E;
+            border: 2px solid #E0D8E0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .quick-question-btn:hover {
+            border-color: #98899C;
+            background: #F8F5F8;
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 0;
@@ -794,6 +1148,25 @@
                 font-size: 1.3rem;
             }
 
+            .pathway-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .pathway-arrow {
+                transform: rotate(90deg);
+                font-size: 1.5rem;
+            }
+
+            .pathway-title,
+            .projects-title {
+                font-size: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
             .nav-links {
                 gap: 1rem;
                 font-size: 0.9rem;
@@ -809,6 +1182,35 @@
 
             .timeline-time {
                 align-self: flex-start;
+            }
+
+            .mentor-chat-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .mentor-input-area {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .mentor-send-btn {
+                width: 100%;
+            }
+
+            .mentor-message.mentor {
+                margin-right: 5%;
+            }
+
+            .mentor-message.student {
+                margin-left: 5%;
+            }
+
+            .quick-questions {
+                flex-direction: column;
+            }
+
+            .quick-question-btn {
+                width: 100%;
             }
         }
     </style>
@@ -874,6 +1276,47 @@
             </div>
         </div>
 
+        <!-- Ask a Mentor Section -->
+        <div class="mentor-chat-section">
+            <div class="mentor-header">
+                <h2>💬 Ask a Mentor</h2>
+                <p class="mentor-subtitle">Get personalized advice about your chosen career path</p>
+            </div>
+
+            <div class="quick-questions">
+                <button class="quick-question-btn" onclick="askQuickQuestion('How many classes do I need to take?')">
+                    How many classes do I need to take?
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('Is this career hard?')">
+                    Is this career hard?
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('What skills do I need?')">
+                    What skills do I need?
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('How do I get started?')">
+                    How do I get started?
+                </button>
+            </div>
+
+            <div class="mentor-chat-box" id="mentorChatBox">
+                <div class="mentor-message mentor">
+                    <div class="mentor-label">🎓 Your STEM Mentor</div>
+                    <div class="mentor-text" id="mentorGreeting">
+                        Hi! I'm here to answer your questions about becoming a <span id="mentorCareerTitle">STEM professional</span>. Ask me anything about classes, difficulty, skills, or how to get started!
+                    </div>
+                </div>
+            </div>
+
+            <div class="mentor-input-area">
+                <textarea
+                    id="mentorInput"
+                    class="mentor-input"
+                    placeholder="Ask your mentor anything about your career path..."
+                    rows="2"></textarea>
+                <button class="mentor-send-btn" onclick="sendMentorMessage()" id="mentorSendBtn">Send</button>
+            </div>
+        </div>
+
         <!-- Day in My Future Life -->
         <div id="dayTimelineContainer"></div>
 
@@ -892,6 +1335,169 @@
     </div>
 
     <script>
+        // Career pathway data
+        const careerPathways = {
+            'Software Engineer': [
+                { icon: '🏫', label: 'High School', detail: 'Take computer science, math, logic classes' },
+                { icon: '🎓', label: 'College', detail: 'Computer Science or related degree' },
+                { icon: '💻', label: 'Skills', detail: 'Learn Python, JavaScript, problem-solving' },
+                { icon: '🚀', label: 'Projects', detail: 'Build websites, apps, contribute to open source' },
+                { icon: '💼', label: 'Internship', detail: 'Software engineering intern at tech companies' },
+                { icon: '✨', label: 'Career', detail: 'Software Engineer at top companies!' }
+            ],
+            'Biomedical Engineer': [
+                { icon: '🏫', label: 'High School', detail: 'Biology, physics, math, chemistry courses' },
+                { icon: '🎓', label: 'College', detail: 'Biomedical Engineering degree' },
+                { icon: '🔬', label: 'Skills', detail: 'Learn CAD, biology, engineering design' },
+                { icon: '🚀', label: 'Projects', detail: 'Design prosthetics, medical devices, 3D printing' },
+                { icon: '💼', label: 'Internship', detail: 'Medical device companies, hospitals, research labs' },
+                { icon: '✨', label: 'Career', detail: 'Biomedical Engineer creating life-saving tech!' }
+            ],
+            'Cybersecurity Analyst': [
+                { icon: '🏫', label: 'High School', detail: 'Computer science, math, IT courses' },
+                { icon: '🎓', label: 'College', detail: 'Cybersecurity, Computer Science, or IT degree' },
+                { icon: '🛡️', label: 'Skills', detail: 'Learn networking, encryption, ethical hacking' },
+                { icon: '🚀', label: 'Projects', detail: 'Security audits, password tools, network monitoring' },
+                { icon: '💼', label: 'Internship', detail: 'Security firms, tech companies, government agencies' },
+                { icon: '✨', label: 'Career', detail: 'Cybersecurity Analyst protecting digital assets!' }
+            ],
+            'Data Scientist': [
+                { icon: '🏫', label: 'High School', detail: 'Math, statistics, computer science' },
+                { icon: '🎓', label: 'College', detail: 'Data Science, Statistics, or Computer Science' },
+                { icon: '📊', label: 'Skills', detail: 'Python, R, SQL, statistics, machine learning' },
+                { icon: '🚀', label: 'Projects', detail: 'Data analysis, ML models, visualizations' },
+                { icon: '💼', label: 'Internship', detail: 'Data teams at companies, research institutions' },
+                { icon: '✨', label: 'Career', detail: 'Data Scientist uncovering insights!' }
+            ],
+            'Aerospace Engineer': [
+                { icon: '🏫', label: 'High School', detail: 'Physics, math, computer science' },
+                { icon: '🎓', label: 'College', detail: 'Aerospace Engineering degree' },
+                { icon: '✈️', label: 'Skills', detail: 'Aerodynamics, CAD, physics, programming' },
+                { icon: '🚀', label: 'Projects', detail: 'Rocket designs, flight simulations, robotics' },
+                { icon: '💼', label: 'Internship', detail: 'NASA, SpaceX, Boeing, aerospace companies' },
+                { icon: '✨', label: 'Career', detail: 'Aerospace Engineer designing the future!' }
+            ]
+        };
+
+        // Mini project ideas by career
+        const careerProjects = {
+            'Software Engineer': [
+                {
+                    title: 'Personal Portfolio Website',
+                    difficulty: 'Beginner',
+                    description: 'Build your own website to showcase your projects and skills using HTML, CSS, and JavaScript.',
+                    skills: ['HTML', 'CSS', 'JavaScript', 'Design'],
+                    connection: 'Learn the basics of web development and create something you can show colleges and employers!'
+                },
+                {
+                    title: 'Simple Mobile App',
+                    difficulty: 'Easy',
+                    description: 'Create a basic app like a to-do list, calculator, or weather app using tools like MIT App Inventor or Flutter.',
+                    skills: ['App Development', 'UI Design', 'Logic'],
+                    connection: 'Understand how mobile apps work and experience the full development cycle from idea to working app.'
+                },
+                {
+                    title: 'Contribute to Open Source',
+                    difficulty: 'Easy',
+                    description: 'Find a beginner-friendly open source project on GitHub and contribute by fixing bugs or adding features.',
+                    skills: ['Git', 'Collaboration', 'Code Review'],
+                    connection: 'Learn how real software teams work together and build your professional network!'
+                }
+            ],
+            'Biomedical Engineer': [
+                {
+                    title: '3D-Printed Prosthetic Hand',
+                    difficulty: 'Beginner',
+                    description: 'Design and 3D print a simple prosthetic hand model using free CAD software and accessible 3D printing.',
+                    skills: ['CAD Design', '3D Printing', 'Anatomy', 'Problem-Solving'],
+                    connection: 'Experience how biomedical engineers design assistive devices that change lives!'
+                },
+                {
+                    title: 'Heart Rate Monitor',
+                    difficulty: 'Easy',
+                    description: 'Build a simple heart rate detector using Arduino, sensors, and basic electronics.',
+                    skills: ['Electronics', 'Arduino', 'Sensors', 'Biology'],
+                    connection: 'Learn how medical devices measure vital signs and combine engineering with healthcare.'
+                },
+                {
+                    title: 'Health Tracking App Prototype',
+                    difficulty: 'Easy',
+                    description: 'Design a mobile app concept for tracking fitness, medications, or wellness using prototyping tools.',
+                    skills: ['UI/UX Design', 'Healthcare Tech', 'Prototyping'],
+                    connection: 'Explore how technology improves healthcare and patient outcomes!'
+                }
+            ],
+            'Cybersecurity Analyst': [
+                {
+                    title: 'Password Strength Checker',
+                    difficulty: 'Beginner',
+                    description: 'Create a tool that analyzes passwords and rates their security strength with improvement tips.',
+                    skills: ['Python', 'Security Concepts', 'Logic'],
+                    connection: 'Understand password security principles and learn how to protect user data!'
+                },
+                {
+                    title: 'Network Scanner Project',
+                    difficulty: 'Easy',
+                    description: 'Build a basic network scanner that detects devices on your home network (with permission!).',
+                    skills: ['Networking', 'Python', 'Security'],
+                    connection: 'Learn how networks work and how security professionals identify vulnerabilities.'
+                },
+                {
+                    title: 'Encryption/Decryption Tool',
+                    difficulty: 'Easy',
+                    description: 'Create a program that encrypts and decrypts messages using basic encryption algorithms.',
+                    skills: ['Cryptography', 'Programming', 'Math'],
+                    connection: 'Discover how sensitive data is protected online and in communications!'
+                }
+            ],
+            'Data Scientist': [
+                {
+                    title: 'Data Visualization Dashboard',
+                    difficulty: 'Beginner',
+                    description: 'Analyze a public dataset (sports stats, climate data) and create interactive visualizations.',
+                    skills: ['Python', 'Data Analysis', 'Visualization', 'Storytelling'],
+                    connection: 'Learn how data scientists turn raw numbers into meaningful insights and stories!'
+                },
+                {
+                    title: 'Movie Recommendation System',
+                    difficulty: 'Easy',
+                    description: 'Build a simple recommendation algorithm that suggests movies based on user preferences.',
+                    skills: ['Machine Learning', 'Python', 'Algorithms'],
+                    connection: 'Understand how Netflix, Spotify, and other platforms make personalized recommendations.'
+                },
+                {
+                    title: 'Social Media Sentiment Analysis',
+                    difficulty: 'Easy',
+                    description: 'Analyze tweets or reviews to determine if sentiment is positive, negative, or neutral.',
+                    skills: ['Natural Language Processing', 'Python', 'Data Science'],
+                    connection: 'See how companies use data to understand customer opinions and trends!'
+                }
+            ],
+            'Aerospace Engineer': [
+                {
+                    title: 'Paper Airplane Optimization',
+                    difficulty: 'Beginner',
+                    description: 'Test different paper airplane designs, measure flight distance/time, and optimize for performance.',
+                    skills: ['Aerodynamics', 'Testing', 'Data Collection', 'Design'],
+                    connection: 'Apply real aerodynamics principles used in aircraft and spacecraft design!'
+                },
+                {
+                    title: 'Rocket Launch Simulation',
+                    difficulty: 'Easy',
+                    description: 'Create a computer simulation of a rocket launch using physics engines or coding.',
+                    skills: ['Physics', 'Programming', 'Simulation', 'Math'],
+                    connection: 'Learn the physics behind space travel and how engineers plan missions!'
+                },
+                {
+                    title: 'Model Rocket Build & Launch',
+                    difficulty: 'Easy',
+                    description: 'Build and launch a model rocket, tracking altitude and flight characteristics.',
+                    skills: ['Engineering Design', 'Physics', 'Safety', 'Teamwork'],
+                    connection: 'Experience the full engineering process from design to test flight — just like real aerospace engineers!'
+                }
+            ]
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
             const matchesData = sessionStorage.getItem('careerMatches');
 
@@ -910,6 +1516,10 @@
             // Create Future You Dashboard
             if (data.matches && data.matches.length > 0) {
                 const topMatch = data.matches[0];
+
+                // Set current career for mentor chat
+                currentCareer = topMatch.title;
+                document.getElementById('mentorCareerTitle').textContent = topMatch.title;
                 const futureYouContainer = document.getElementById('futureYouContainer');
 
                 const matchScore = topMatch.match_score;
@@ -1052,11 +1662,67 @@
                 `;
             }
 
-            // Render match cards (simplified for additional matches)
+            // Render match cards with pathway and projects
             const container = document.getElementById('matchesContainer');
             data.matches.forEach((match, index) => {
                 const matchCard = document.createElement('div');
                 matchCard.className = 'match-card';
+
+                // Get pathway for this career
+                const pathway = careerPathways[match.title] || careerPathways['Software Engineer'];
+                const pathwayHTML = `
+                    <div class="pathway-section">
+                        <div class="pathway-title">Your Path to ${match.title}</div>
+                        <div class="pathway-steps">
+                            ${pathway.map((step, i) => `
+                                ${i > 0 ? '<div class="pathway-arrow">→</div>' : ''}
+                                <div class="pathway-step">
+                                    <div class="step-icon">${step.icon}</div>
+                                    <div class="step-label">${step.label}</div>
+                                    <div class="step-detail">${step.detail}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // Get projects for this career
+                const projects = careerProjects[match.title] || careerProjects['Software Engineer'];
+                const projectsHTML = `
+                    <div class="projects-section">
+                        <div class="projects-title">Start Building Today</div>
+                        <div class="projects-subtitle">Try these beginner-friendly projects to explore ${match.title}</div>
+                        <div class="projects-grid">
+                            ${projects.map(project => `
+                                <div class="project-card">
+                                    <div class="project-header">
+                                        <div class="project-title">${project.title}</div>
+                                        <div class="difficulty-badge difficulty-${project.difficulty.toLowerCase()}">${project.difficulty}</div>
+                                    </div>
+                                    <p class="project-description">${project.description}</p>
+                                    <div class="project-meta">
+                                        <div class="meta-item">
+                                            <div class="meta-icon">✨</div>
+                                            <div class="meta-content">
+                                                <div class="meta-label">Skills You'll Learn</div>
+                                                <div class="skills-mini">
+                                                    ${project.skills.map(skill => `<span class="skill-mini-tag">${skill}</span>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="meta-item">
+                                            <div class="meta-icon">🎯</div>
+                                            <div class="meta-content">
+                                                <div class="meta-label">Why It Matters</div>
+                                                <div class="meta-text">${project.connection}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
 
                 matchCard.innerHTML = `
                     <div class="match-header">
@@ -1080,6 +1746,9 @@
                             <div class="info-value">${match.education}</div>
                         </div>
                     </div>
+
+                    ${pathwayHTML}
+                    ${projectsHTML}
                 `;
 
                 container.appendChild(matchCard);
@@ -1091,6 +1760,97 @@
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
+
+        // Mentor Chat Functionality
+        let currentCareer = '';
+
+        function askQuickQuestion(question) {
+            const input = document.getElementById('mentorInput');
+            input.value = question;
+            sendMentorMessage();
+        }
+
+        async function sendMentorMessage() {
+            const input = document.getElementById('mentorInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            const chatBox = document.getElementById('mentorChatBox');
+            const sendBtn = document.getElementById('mentorSendBtn');
+
+            // Add student message
+            const studentMessage = document.createElement('div');
+            studentMessage.className = 'mentor-message student';
+            studentMessage.innerHTML = `
+                <div class="mentor-label">You</div>
+                <div class="mentor-text">${message}</div>
+            `;
+            chatBox.appendChild(studentMessage);
+
+            // Clear input and disable button
+            input.value = '';
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Thinking...';
+
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Send to mentor API
+                const response = await fetch('/api/mentor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        career: currentCareer
+                    })
+                });
+
+                const data = await response.json();
+
+                // Add mentor response
+                const mentorMessage = document.createElement('div');
+                mentorMessage.className = 'mentor-message mentor';
+                mentorMessage.innerHTML = `
+                    <div class="mentor-label">🎓 Your STEM Mentor</div>
+                    <div class="mentor-text">${data.response || 'Sorry, I had trouble understanding that. Can you rephrase your question?'}</div>
+                `;
+                chatBox.appendChild(mentorMessage);
+
+                // Scroll to bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'mentor-message mentor';
+                errorMessage.innerHTML = `
+                    <div class="mentor-label">🎓 Your STEM Mentor</div>
+                    <div class="mentor-text">Oops! Something went wrong. Please try again!</div>
+                `;
+                chatBox.appendChild(errorMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+            }
+        }
+
+        // Allow Enter key to send (Shift+Enter for new line)
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('mentorInput');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMentorMessage();
+                    }
+                });
+            }
+        });
 
         // Service Worker Registration for PWA
         if ('serviceWorker' in navigator) {

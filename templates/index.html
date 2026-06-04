@@ -752,6 +752,317 @@
             margin-top: 0.5rem;
         }
 
+        /* STEM Confidence Check Section */
+        .confidence-check-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFEDCC 100%);
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .confidence-check-section h2 {
+            text-align: center;
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #98899C;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .concerns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .concern-card {
+            background: white;
+            border: 3px solid #E0D8E0;
+            border-radius: 25px;
+            padding: 2rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .concern-card:hover {
+            transform: translateY(-8px);
+            border-color: #98899C;
+            box-shadow: 0 12px 35px rgba(112, 105, 126, 0.2);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
+        }
+
+        .concern-icon {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        .concern-text {
+            color: #70697E;
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .confidence-response {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 8px 30px rgba(112, 105, 126, 0.15);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .response-content {
+            color: #70697E;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .response-content h3 {
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .response-content p {
+            margin-bottom: 1rem;
+            color: #98899C;
+        }
+
+        .response-content strong {
+            color: #70697E;
+        }
+
+        /* Myth Buster Section */
+        .myth-buster-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .myth-buster-section h2 {
+            text-align: center;
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .myth-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .myth-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(112, 105, 126, 0.12);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .myth-card:nth-child(1) { animation-delay: 0.1s; }
+        .myth-card:nth-child(2) { animation-delay: 0.2s; }
+        .myth-card:nth-child(3) { animation-delay: 0.3s; }
+        .myth-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .myth-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .myth-header, .truth-header {
+            margin-bottom: 1rem;
+        }
+
+        .myth-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCCB 100%);
+            color: #70697E;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .truth-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #B3E5FC 0%, #C8E6C9 100%);
+            color: #70697E;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .myth-text {
+            color: #70697E;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .truth-text {
+            color: #98899C;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Opportunities Section */
+        .opportunities-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #E8F4FD 0%, #D4E9FC 100%);
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .opportunities-section h2 {
+            text-align: center;
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .opportunity-category {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(112, 105, 126, 0.12);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .opportunity-category:nth-child(1) { animation-delay: 0.1s; }
+        .opportunity-category:nth-child(2) { animation-delay: 0.2s; }
+        .opportunity-category:nth-child(3) { animation-delay: 0.3s; }
+        .opportunity-category:nth-child(4) { animation-delay: 0.4s; }
+
+        .opportunity-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #E0D8E0;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .category-header h3 {
+            color: #70697E;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .opportunity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .opportunity-item {
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #F8F5F8 0%, #FFFFFF 100%);
+            border-radius: 15px;
+            border-left: 4px solid #98899C;
+            transition: all 0.3s ease;
+        }
+
+        .opportunity-item:hover {
+            transform: translateX(5px);
+            border-left-color: #70697E;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.15);
+        }
+
+        .opportunity-item h4 {
+            color: #70697E;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .opportunity-item p {
+            color: #98899C;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .opportunity-link {
+            display: inline-block;
+            color: #70697E;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .opportunity-link:hover {
+            color: #98899C;
+            transform: translateX(3px);
+        }
+
+        .opportunity-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #98899C;
+            transition: width 0.3s ease;
+        }
+
+        .opportunity-link:hover::after {
+            width: 100%;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
@@ -870,6 +1181,41 @@
                 font-size: 2.5rem;
             }
 
+            .confidence-check-section,
+            .myth-buster-section {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .confidence-check-section h2,
+            .myth-buster-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .concerns-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .myth-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .opportunities-section {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .opportunities-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
             .shape {
                 display: none;
             }
@@ -970,6 +1316,95 @@
         </div>
     </div>
 
+    <!-- STEM Confidence Check Section -->
+    <div class="confidence-check-section">
+        <h2>💭 Feeling Unsure About STEM?</h2>
+        <p class="section-subtitle">You're not alone! Pick what's on your mind, and let's talk about it.</p>
+
+        <div class="concerns-grid">
+            <button class="concern-card" onclick="showConfidenceResponse('start')">
+                <div class="concern-icon">🤔</div>
+                <div class="concern-text">I don't know where to start</div>
+            </button>
+
+            <button class="concern-card" onclick="showConfidenceResponse('math')">
+                <div class="concern-icon">🧮</div>
+                <div class="concern-text">I'm bad at math</div>
+            </button>
+
+            <button class="concern-card" onclick="showConfidenceResponse('network')">
+                <div class="concern-icon">👥</div>
+                <div class="concern-text">I don't know anyone in STEM</div>
+            </button>
+
+            <button class="concern-card" onclick="showConfidenceResponse('smart')">
+                <div class="concern-icon">🧠</div>
+                <div class="concern-text">I'm scared I'm not smart enough</div>
+            </button>
+
+            <button class="concern-card" onclick="showConfidenceResponse('impact')">
+                <div class="concern-icon">❤️</div>
+                <div class="concern-text">I want a career that helps people</div>
+            </button>
+        </div>
+
+        <div class="confidence-response" id="confidenceResponse" style="display: none;">
+            <div class="response-content" id="responseContent"></div>
+        </div>
+    </div>
+
+    <!-- Myth Buster Section -->
+    <div class="myth-buster-section">
+        <h2>🚫 STEM Myths vs. ✨ Reality</h2>
+        <p class="section-subtitle">Let's bust some common myths that might be holding you back!</p>
+
+        <div class="myth-cards-grid">
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">STEM is only for people who are naturally good at math.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">Math is a skill you build with practice! STEM also needs creativity, teamwork, communication, and curiosity. Many successful STEM professionals weren't "math whizzes" at first.</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">I need to know coding before college.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">Most students learn coding for the first time in high school or college! Everyone starts somewhere, and there are tons of free resources to help you learn at your own pace.</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">I don't see people like me in STEM.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">STEM needs more diverse voices like yours! Role models from many backgrounds are already changing the field, and the industry is actively working to become more inclusive. You belong here!</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">STEM careers are boring and isolating.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">STEM is incredibly collaborative! You'll work on teams, solve real-world problems, create amazing things, and make a positive impact. Plus, STEM jobs offer flexibility and creativity!</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Chatbot Section -->
     <div class="chatbot-section">
         <h2>💬 Ask Your STEM Questions</h2>
@@ -1049,11 +1484,231 @@
         </div>
     </div>
 
+    <!-- Opportunities Section -->
+    <div class="opportunities-section">
+        <h2>🚀 Take Action: Opportunities For You!</h2>
+        <p class="section-subtitle">Get started with summer camps, competitions, scholarships, and more!</p>
+
+        <div class="opportunities-grid">
+            <!-- Summer Camps -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">⛺</div>
+                    <h3>Summer Camps & Programs</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>🎓 Girls Who Code Summer Immersion</h4>
+                        <p>Free 2-week coding program for high school girls</p>
+                        <a href="https://girlswhocode.com/programs/summer-immersion-program" target="_blank" class="opportunity-link">Learn More →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 STEM Summer Camps by State</h4>
+                        <p>Find local STEM camps near you across the US</p>
+                        <a href="https://www.engineeringforkids.com/locations/" target="_blank" class="opportunity-link">Find Camps →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🚀 NASA STEM Programs</h4>
+                        <p>Virtual and in-person programs from NASA</p>
+                        <a href="https://www.nasa.gov/learning-resources/for-kids-and-students/" target="_blank" class="opportunity-link">Explore →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 AI4ALL Summer Programs</h4>
+                        <p>AI education for underrepresented students</p>
+                        <a href="https://ai-4-all.org/" target="_blank" class="opportunity-link">Apply →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitions -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">🏆</div>
+                    <h3>Competitions & Challenges</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>💡 Google Science Fair</h4>
+                        <p>Global online science competition for ages 13-18</p>
+                        <a href="https://www.googlesciencefair.com/" target="_blank" class="opportunity-link">Enter →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🤖 FIRST Robotics Competition</h4>
+                        <p>Build robots and compete with teams worldwide</p>
+                        <a href="https://www.firstinspires.org/robotics/frc" target="_blank" class="opportunity-link">Join Team →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🧮 MATHCOUNTS Competition</h4>
+                        <p>National math competition for middle schoolers</p>
+                        <a href="https://www.mathcounts.org/" target="_blank" class="opportunity-link">Register →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 Congressional App Challenge</h4>
+                        <p>Create an app and compete in your district</p>
+                        <a href="https://www.congressionalappchallenge.us/" target="_blank" class="opportunity-link">Submit App →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 Regeneron Science Talent Search</h4>
+                        <p>Prestigious national science research competition</p>
+                        <a href="https://www.societyforscience.org/regeneron-sts/" target="_blank" class="opportunity-link">Apply →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scholarships -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">💰</div>
+                    <h3>Scholarships & Financial Aid</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>🎓 Society of Women Engineers (SWE)</h4>
+                        <p>Scholarships for women pursuing engineering</p>
+                        <a href="https://swe.org/scholarships/" target="_blank" class="opportunity-link">Apply →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🌟 National Society of Black Engineers</h4>
+                        <p>Scholarships and support for Black STEM students</p>
+                        <a href="https://www.nsbe.org/Programs/Scholarships.aspx" target="_blank" class="opportunity-link">Learn More →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🚀 Hispanic Scholarship Fund (HSF)</h4>
+                        <p>Scholarships for Hispanic students in all majors</p>
+                        <a href="https://www.hsf.net/scholarship" target="_blank" class="opportunity-link">Apply →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 Generation Google Scholarship</h4>
+                        <p>For students passionate about computer science</p>
+                        <a href="https://buildyourfuture.withgoogle.com/scholarships" target="_blank" class="opportunity-link">Details →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 STEM Scholarships Database</h4>
+                        <p>Search thousands of STEM-specific scholarships</p>
+                        <a href="https://www.scholarships.com/financial-aid/college-scholarships/scholarships-by-type/stem-scholarships/" target="_blank" class="opportunity-link">Search →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Online Resources -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">📚</div>
+                    <h3>Free Learning Resources</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>💻 Khan Academy</h4>
+                        <p>Free courses in math, science, and coding</p>
+                        <a href="https://www.khanacademy.org/" target="_blank" class="opportunity-link">Start Learning →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🎓 Coursera for Teens</h4>
+                        <p>Free college-level courses in STEM subjects</p>
+                        <a href="https://www.coursera.org/" target="_blank" class="opportunity-link">Browse →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🤖 Code.org</h4>
+                        <p>Learn computer science for free</p>
+                        <a href="https://code.org/" target="_blank" class="opportunity-link">Code Now →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 MIT OpenCourseWare</h4>
+                        <p>Free MIT courses online for everyone</p>
+                        <a href="https://ocw.mit.edu/" target="_blank" class="opportunity-link">Explore →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile menu toggle
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
+        }
+
+        // STEM Confidence Check responses
+        function showConfidenceResponse(concern) {
+            const responseDiv = document.getElementById('confidenceResponse');
+            const contentDiv = document.getElementById('responseContent');
+
+            const responses = {
+                start: `
+                    <h3>You're Already On the Right Track! 🌟</h3>
+                    <p><strong>Starting is the hardest part, and you're here!</strong> That takes courage.</p>
+                    <p>Here's the secret: <strong>nobody has it all figured out at first</strong>. Every scientist, engineer, and tech professional you admire started exactly where you are — curious but unsure.</p>
+                    <p><strong>Your next steps:</strong></p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Take our quick quiz to find careers that match your interests</li>
+                        <li>Explore beginner-friendly projects (no experience needed!)</li>
+                        <li>Connect with role models who started just like you</li>
+                        <li>Join a STEM club or online community where you can learn together</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every expert was once a beginner. Your journey starts with one small step! 💪</p>
+                `,
+                math: `
+                    <h3>Math is a Skill, Not a Talent! 🧮✨</h3>
+                    <p><strong>Here's the truth:</strong> Being "bad at math" doesn't exist. You just haven't found the right way to learn it yet!</p>
+                    <p>Many successful STEM professionals struggled with math at first. The difference? <strong>They kept going</strong>, and they found learning methods that worked for them.</p>
+                    <p><strong>What actually matters in STEM:</strong></p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Curiosity</strong> — wanting to understand how things work</li>
+                        <li><strong>Problem-solving</strong> — breaking big problems into smaller pieces</li>
+                        <li><strong>Creativity</strong> — thinking of new ways to solve challenges</li>
+                        <li><strong>Persistence</strong> — not giving up when things get tough</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Plus:</strong> Many STEM careers use basic math, not complex calculus. Tools and computers do the heavy lifting — you provide the creativity and thinking! 🎨🤖</p>
+                `,
+                network: `
+                    <h3>You're Building Your Network Right Now! 👥💫</h3>
+                    <p><strong>Not knowing anyone in STEM is actually super common</strong> — and it's totally okay! Most STEM professionals didn't grow up with connections either.</p>
+                    <p><strong>The good news:</strong> The STEM community is full of people who want to help newcomers succeed. They remember when they were in your shoes!</p>
+                    <p><strong>Ways to start building your STEM network:</strong></p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Connect with our role models</strong> — real people who want to mentor students like you</li>
+                        <li><strong>Join online communities</strong> — Discord servers, Reddit forums, student groups</li>
+                        <li><strong>Attend STEM events</strong> — hackathons, science fairs, club meetings</li>
+                        <li><strong>Reach out to professionals</strong> — many are happy to answer questions or do virtual coffee chats</li>
+                        <li><strong>Shadow programs</strong> — spend a day seeing what a STEM career looks like</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every connection starts with a simple "hello." You've got this! 🚀</p>
+                `,
+                smart: `
+                    <h3>Stop Right There! You ARE Smart Enough! 🧠✨</h3>
+                    <p><strong>Let's get this straight:</strong> STEM isn't about being "smart" — it's about being <strong>curious, determined, and willing to learn</strong>.</p>
+                    <p><strong>The "genius myth" is totally false.</strong> Most people in STEM aren't child prodigies — they're regular people who worked hard and didn't give up.</p>
+                    <p><strong>What STEM really needs:</strong></p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>People who ask questions</strong> — "why" and "how" are powerful</li>
+                        <li><strong>People who try things</strong> — even if they fail at first</li>
+                        <li><strong>People with different perspectives</strong> — YOUR unique viewpoint matters!</li>
+                        <li><strong>People who care about solving problems</strong> — passion beats "natural talent"</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Fun fact:</strong> Many famous scientists and engineers did poorly in school! Albert Einstein struggled with traditional education. Steve Jobs never finished college. What they had was <strong>passion and persistence</strong> — and so do you! 🌟</p>
+                    <p><strong>You belong in STEM. Period.</strong> 💪</p>
+                `,
+                impact: `
+                    <h3>STEM is ALL About Helping People! ❤️🌍</h3>
+                    <p><strong>If you want to make a difference, STEM is the perfect path!</strong> Every single STEM field exists to solve problems and improve lives.</p>
+                    <p><strong>How STEM careers help people:</strong></p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Biomedical Engineers</strong> — design prosthetics, medical devices, and life-saving technologies</li>
+                        <li><strong>Software Engineers</strong> — create apps for education, healthcare, accessibility, and connection</li>
+                        <li><strong>Environmental Scientists</strong> — protect our planet and fight climate change</li>
+                        <li><strong>Cybersecurity Analysts</strong> — protect people's data and privacy</li>
+                        <li><strong>Data Scientists</strong> — analyze information to improve healthcare, education, and social services</li>
+                        <li><strong>Aerospace Engineers</strong> — advance space exploration and develop technologies that save lives</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>The best part?</strong> STEM gives you the tools to create solutions for problems you care about. Want to help your community? Build healthcare access? Protect the environment? <strong>STEM is how you do it!</strong> 🚀</p>
+                    <p><strong>Your compassion + STEM skills = World-changing impact!</strong> 💫</p>
+                `
+            };
+
+            contentDiv.innerHTML = responses[concern];
+            responseDiv.style.display = 'block';
+            responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         // Chatbot functionality
@@ -1098,7 +1753,8 @@
                 // Add bot response to chat
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                botMessage.textContent = data.response;
+                // Handle both successful responses and error responses
+                botMessage.textContent = data.response || data.error || 'Oops! Something went wrong. Please try again!';
                 chatBox.appendChild(botMessage);
 
                 // Scroll to bottom
