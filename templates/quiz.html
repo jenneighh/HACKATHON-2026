@@ -13,17 +13,45 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
             min-height: 100vh;
             padding: 2rem;
+            color: #70697E;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            bottom: 50px;
+            left: -30px;
+            opacity: 0.3;
+            z-index: 0;
         }
 
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 25px;
             margin-bottom: 2rem;
         }
 
@@ -38,7 +66,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -52,22 +80,36 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #70697E;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #98899C;
         }
 
         .quiz-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 25px;
+            border-radius: 40px;
             padding: 3rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .quiz-header {
@@ -76,85 +118,320 @@
         }
 
         .quiz-header h1 {
-            color: #333;
+            color: #70697E;
             margin-bottom: 0.5rem;
+            font-size: 2.5rem;
         }
 
         .quiz-header p {
-            color: #666;
+            color: #98899C;
             font-size: 1.1rem;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 10px;
+            height: 12px;
+            background: #F5F0F5;
+            border-radius: 20px;
             margin-bottom: 2rem;
             overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            left: 0;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -30px; }
+            100% { left: 100%; }
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #FFE4E1 0%, #B3E5FC 50%, #C8E6C9 100%);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.5s ease;
+            border-radius: 20px;
         }
 
         .question-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .question-section h3 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            color: #70697E;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
         }
 
         .question-description {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            color: #98899C;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
         }
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.2rem;
             margin-bottom: 1rem;
         }
 
         .option-card {
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 1rem;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 100%);
+            border: 3px solid #E0D8E0;
+            border-radius: 25px;
+            padding: 1.5rem 1rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             user-select: none;
+            position: relative;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FFE4E1;
+            border-radius: 50%;
+            top: 8px;
+            right: 8px;
+            opacity: 0;
+            transition: all 0.3s;
+            transform: scale(0);
         }
 
         .option-card:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            border-color: #98899C;
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(152, 137, 156, 0.2);
         }
 
         .option-card.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            border-color: #70697E;
+            box-shadow: 0 12px 30px rgba(112, 105, 126, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .option-card.selected::before {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .option-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+        }
+
+        .option-card.selected .option-icon {
+            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+            animation: bounceIcon 0.5s ease;
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .css-icon {
+            width: 30px;
+            height: 30px;
+            position: relative;
+        }
+
+        /* Coding icon - brackets */
+        .icon-coding::before,
+        .icon-coding::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            border: 3px solid #70697E;
+            top: 5px;
+        }
+
+        .icon-coding::before {
+            left: 5px;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .icon-coding::after {
+            right: 5px;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Problem solving - puzzle piece */
+        .icon-puzzle {
+            width: 24px;
+            height: 24px;
+            background: #70697E;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .icon-puzzle::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #70697E;
+            border-radius: 50%;
+            top: -5px;
+            left: 7px;
+        }
+
+        /* Design - palette */
+        .icon-design {
+            width: 26px;
+            height: 26px;
+            background: #70697E;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+
+        .icon-design::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            top: 6px;
+            left: 6px;
+        }
+
+        /* Building - wrench */
+        .icon-build {
+            width: 6px;
+            height: 24px;
+            background: #70697E;
+            border-radius: 3px;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+
+        .icon-build::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 4px solid #70697E;
+            border-radius: 3px;
+            top: -4px;
+            left: -8px;
+        }
+
+        /* Research - microscope */
+        .icon-research {
+            width: 4px;
+            height: 20px;
+            background: #70697E;
+            position: relative;
+        }
+
+        .icon-research::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 3px solid #70697E;
+            border-radius: 50%;
+            top: -2px;
+            left: -7px;
+        }
+
+        /* Helping - heart */
+        .icon-heart {
+            width: 20px;
+            height: 18px;
+            background: #70697E;
+            position: relative;
+            transform: rotate(-45deg);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .icon-heart::before {
+            content: '';
+            width: 20px;
+            height: 18px;
+            background: #70697E;
+            position: absolute;
+            border-radius: 50% 50% 0 0;
+            transform: rotate(90deg);
+            left: -10px;
+            top: 0;
+        }
+
+        /* Analytics - bar chart */
+        .icon-chart {
+            width: 30px;
+            height: 24px;
+            position: relative;
+        }
+
+        .icon-chart::before,
+        .icon-chart::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: #70697E;
+            border-radius: 3px 3px 0 0;
+            bottom: 0;
+        }
+
+        .icon-chart::before {
+            left: 0;
+            height: 18px;
+        }
+
+        .icon-chart::after {
+            right: 0;
+            height: 24px;
+        }
+
+        .icon-chart .bar-mid {
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            background: #70697E;
+            border-radius: 3px 3px 0 0;
+            bottom: 0;
+            left: 12px;
+        }
+
+        /* Nature - leaf */
+        .icon-leaf {
+            width: 20px;
+            height: 24px;
+            background: #70697E;
+            border-radius: 50% 0;
+            transform: rotate(-45deg);
         }
 
         .option-label {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
+            color: #70697E;
         }
 
         .text-input-area {
@@ -163,19 +440,21 @@
 
         textarea, select {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            padding: 1.2rem;
+            border: 3px solid #E0D8E0;
+            border-radius: 20px;
             font-family: inherit;
             font-size: 1rem;
             resize: vertical;
             min-height: 100px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: #FFFBF5;
         }
 
         textarea:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #98899C;
+            box-shadow: 0 0 15px rgba(152, 137, 156, 0.2);
         }
 
         select {
@@ -191,33 +470,35 @@
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             color: white;
             flex: 1;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(112, 105, 126, 0.4);
         }
 
         .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
+            background: #F5F0F5;
+            color: #70697E;
+            border: 3px solid #E0D8E0;
         }
 
         .btn-secondary:hover {
-            background: #d0d0d0;
+            background: #E0D8E0;
+            transform: translateY(-2px);
         }
 
         .btn:disabled {
@@ -228,22 +509,46 @@
 
         .loading {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .spinner::before,
+        .spinner::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 6px solid transparent;
+            border-top-color: #FFE4E1;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            animation: spin 1.2s linear infinite;
+        }
+
+        .spinner::after {
+            border-top-color: #B3E5FC;
+            animation-delay: 0.3s;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .loading h3 {
+            color: #70697E;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .loading p {
+            color: #98899C;
         }
 
         .hidden {
@@ -256,7 +561,7 @@
             }
 
             .options-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
 
             .nav-links {
@@ -269,7 +574,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">🚀 STEM Explorer</div>
+            <div class="logo">STEM Explorer</div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/careers">Careers</a></li>
@@ -281,7 +586,7 @@
 
     <div class="quiz-container">
         <div class="quiz-header">
-            <h1>Find Your STEM Path 🎯</h1>
+            <h1>Find Your STEM Path</h1>
             <p>Answer a few questions to discover careers that match your interests</p>
         </div>
 
@@ -295,35 +600,53 @@
                 <p class="question-description">Select all that interest you</p>
                 <div class="options-grid" id="interests">
                     <div class="option-card" data-value="coding">
-                        <div class="option-icon">💻</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-coding"></div>
+                        </div>
                         <div class="option-label">Coding</div>
                     </div>
                     <div class="option-card" data-value="problem_solving">
-                        <div class="option-icon">🧩</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-puzzle"></div>
+                        </div>
                         <div class="option-label">Problem Solving</div>
                     </div>
                     <div class="option-card" data-value="design">
-                        <div class="option-icon">🎨</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-design"></div>
+                        </div>
                         <div class="option-label">Design</div>
                     </div>
                     <div class="option-card" data-value="building">
-                        <div class="option-icon">🔧</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-build"></div>
+                        </div>
                         <div class="option-label">Building Things</div>
                     </div>
                     <div class="option-card" data-value="research">
-                        <div class="option-icon">🔬</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-research"></div>
+                        </div>
                         <div class="option-label">Research</div>
                     </div>
                     <div class="option-card" data-value="helping">
-                        <div class="option-icon">🤝</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-heart"></div>
+                        </div>
                         <div class="option-label">Helping Others</div>
                     </div>
                     <div class="option-card" data-value="analytics">
-                        <div class="option-icon">📊</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-chart">
+                                <div class="bar-mid"></div>
+                            </div>
+                        </div>
                         <div class="option-label">Data Analysis</div>
                     </div>
                     <div class="option-card" data-value="nature">
-                        <div class="option-icon">🌿</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-leaf"></div>
+                        </div>
                         <div class="option-label">Nature</div>
                     </div>
                 </div>
@@ -334,27 +657,41 @@
                 <p class="question-description">Select all that apply</p>
                 <div class="options-grid" id="subjects">
                     <div class="option-card" data-value="mathematics">
-                        <div class="option-icon">➗</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-chart">
+                                <div class="bar-mid"></div>
+                            </div>
+                        </div>
                         <div class="option-label">Mathematics</div>
                     </div>
                     <div class="option-card" data-value="computer_science">
-                        <div class="option-icon">💾</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-coding"></div>
+                        </div>
                         <div class="option-label">Computer Science</div>
                     </div>
                     <div class="option-card" data-value="physics">
-                        <div class="option-icon">⚛️</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-research"></div>
+                        </div>
                         <div class="option-label">Physics</div>
                     </div>
                     <div class="option-card" data-value="biology">
-                        <div class="option-icon">🧬</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-leaf"></div>
+                        </div>
                         <div class="option-label">Biology</div>
                     </div>
                     <div class="option-card" data-value="chemistry">
-                        <div class="option-icon">⚗️</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-research"></div>
+                        </div>
                         <div class="option-label">Chemistry</div>
                     </div>
                     <div class="option-card" data-value="engineering">
-                        <div class="option-icon">⚙️</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-build"></div>
+                        </div>
                         <div class="option-label">Engineering</div>
                     </div>
                 </div>
@@ -365,27 +702,39 @@
                 <p class="question-description">Choose your strongest or most interesting skills</p>
                 <div class="options-grid" id="skills">
                     <div class="option-card" data-value="programming">
-                        <div class="option-icon">👨‍💻</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-coding"></div>
+                        </div>
                         <div class="option-label">Programming</div>
                     </div>
                     <div class="option-card" data-value="creativity">
-                        <div class="option-icon">✨</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-design"></div>
+                        </div>
                         <div class="option-label">Creativity</div>
                     </div>
                     <div class="option-card" data-value="critical_thinking">
-                        <div class="option-icon">🧠</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-puzzle"></div>
+                        </div>
                         <div class="option-label">Critical Thinking</div>
                     </div>
                     <div class="option-card" data-value="communication">
-                        <div class="option-icon">💬</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-heart"></div>
+                        </div>
                         <div class="option-label">Communication</div>
                     </div>
                     <div class="option-card" data-value="teamwork">
-                        <div class="option-icon">👥</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-heart"></div>
+                        </div>
                         <div class="option-label">Teamwork</div>
                     </div>
                     <div class="option-card" data-value="attention_to_detail">
-                        <div class="option-icon">🔍</div>
+                        <div class="option-icon">
+                            <div class="css-icon icon-research"></div>
+                        </div>
                         <div class="option-label">Attention to Detail</div>
                     </div>
                 </div>
@@ -414,7 +763,7 @@
 
             <div class="button-group">
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Cancel</button>
-                <button type="submit" class="btn btn-primary">Get My Matches 🚀</button>
+                <button type="submit" class="btn btn-primary">Get My Matches</button>
             </div>
         </form>
 

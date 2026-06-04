@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Career Matches - STEM Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FBF9F6;
+            min-height: 100vh;
+            padding: 2rem;
+            color: #70697E;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #FFE5D9 0%, #FFF8E7 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            top: 100px;
+            right: -80px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #D4F1F4 0%, #E8F8F5 100%);
+            border-radius: 50%;
+            bottom: 100px;
+            left: -60px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #70697E;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #98899C;
+        }
+
+        .results-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(112, 105, 126, 0.12);
+            animation: fadeInUp 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header h1 {
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .overall-message {
+            color: #98899C;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Future You Section */
+        .future-you-card {
+            background: linear-gradient(135deg, #D4F1F4 0%, #B8E5E8 100%);
+            color: #70697E;
+            border-radius: 35px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.15);
+            animation: revealCard 1s ease-out;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        @keyframes revealCard {
+            0% {
+                opacity: 0;
+                transform: rotateY(90deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0) scale(1);
+            }
+        }
+
+        .future-you-card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            opacity: 0.15;
+            background: linear-gradient(135deg, #FFE5D9 0%, #FFF8E7 100%);
+            border-radius: 50%;
+        }
+
+        .future-you-card::after {
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            opacity: 0.1;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+
+        .future-you-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .future-you-career {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .future-you-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .future-stat {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+            z-index: 2;
+            position: relative;
+        }
+
+        .future-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .future-stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .mini-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(112, 105, 126, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .mini-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #70697E 0%, #98899C 100%);
+            border-radius: 10px;
+            animation: fillProgress 2s ease-out;
+        }
+
+        @keyframes fillProgress {
+            from {
+                width: 0%;
+            }
+        }
+
+        .mini-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 60px;
+            gap: 5px;
+            margin-top: 0.8rem;
+        }
+
+        .mini-bar {
+            flex: 1;
+            background: linear-gradient(to top, #70697E 0%, #98899C 100%);
+            border-radius: 5px 5px 0 0;
+            animation: barGrow 1s ease-out backwards;
+        }
+
+        @keyframes barGrow {
+            from {
+                transform: scaleY(0);
+            }
+        }
+
+        .mini-bar:nth-child(1) { height: 40%; animation-delay: 0.2s; }
+        .mini-bar:nth-child(2) { height: 65%; animation-delay: 0.3s; }
+        .mini-bar:nth-child(3) { height: 85%; animation-delay: 0.4s; }
+        .mini-bar:nth-child(4) { height: 100%; animation-delay: 0.5s; }
+        .mini-bar:nth-child(5) { height: 75%; animation-delay: 0.6s; }
+
+        .future-impact {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .future-impact h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .motivational-message {
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .suggested-steps {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggested-steps h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .suggested-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .suggested-steps li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .suggested-steps li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Match Cards */
+        .match-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(112, 105, 126, 0.12);
+            animation: slideIn 0.5s ease-out both;
+            border: 3px solid #E0D8E0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .match-card:hover {
+            border-color: #98899C;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.18);
+        }
+
+        .match-card:nth-child(1) { animation-delay: 0.2s; }
+        .match-card:nth-child(2) { animation-delay: 0.4s; }
+        .match-card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .match-title {
+            color: #70697E;
+            font-size: 2rem;
+        }
+
+        .match-score {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .match-description {
+            color: #98899C;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            background: #F8F5F8;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid #E0D8E0;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #70697E;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #98899C;
+            font-size: 1rem;
+        }
+
+        .expandable-section {
+            margin-top: 1.5rem;
+        }
+
+        .expand-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #E0D8E0 0%, #BDB2BC 100%);
+            color: #70697E;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .expand-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.2);
+        }
+
+        .expanded-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: #F8F5F8;
+            border-radius: 15px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+
+        .expanded-content.show {
+            display: block;
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-section h4 {
+            color: #70697E;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-section p, .detail-section ul {
+            color: #98899C;
+            line-height: 1.6;
+        }
+
+        .detail-section ul {
+            margin-left: 1.5rem;
+        }
+
+        /* Role Models / Mentors Section */
+        .mentors-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #E0D8E0 0%, #BDB2BC 100%);
+            border-radius: 20px;
+        }
+
+        .mentors-section h3 {
+            color: #70697E;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .mentor-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .mentor-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+            transition: all 0.3s;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(112, 105, 126, 0.2);
+        }
+
+        .mentor-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #70697E;
+            margin-bottom: 0.5rem;
+        }
+
+        .mentor-title {
+            color: #98899C;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .mentor-info {
+            color: #70697E;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .mentor-quote {
+            font-style: italic;
+            color: #98899C;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: #F8F5F8;
+            border-radius: 8px;
+        }
+
+        .shadow-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .shadow-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #70697E;
+            border: 2px solid #BDB2BC;
+        }
+
+        .btn-secondary:hover {
+            background: #F8F5F8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .results-header h1 {
+                font-size: 2rem;
+            }
+
+            .future-you-title {
+                font-size: 2rem;
+            }
+
+            .match-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">✨ STEM Career Explorer</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="results-container">
+        <div class="results-header">
+            <h1>🎉 Your Perfect STEM Matches!</h1>
+            <p class="overall-message" id="overallMessage">Loading your personalized career matches...</p>
+        </div>
+
+        <!-- Future You Card will be inserted here -->
+        <div id="futureYouContainer"></div>
+
+        <div id="matchesContainer">
+            <!-- Career matches will be dynamically inserted here -->
+        </div>
+
+        <div class="action-buttons">
+            <a href="/quiz" class="btn btn-secondary">Retake Quiz</a>
+            <a href="/careers" class="btn btn-primary">Explore All Careers</a>
+            <a href="/role-models" class="btn btn-primary">Meet More Role Models</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const matchesData = sessionStorage.getItem('careerMatches');
+
+            if (!matchesData) {
+                window.location.href = '/quiz';
+                return;
+            }
+
+            const data = JSON.parse(matchesData);
+
+            // Update overall message
+            if (data.overall_message) {
+                document.getElementById('overallMessage').textContent = data.overall_message;
+            }
+
+            // Create "Future You" card for top match
+            if (data.matches && data.matches.length > 0) {
+                const topMatch = data.matches[0];
+                const futureYouContainer = document.getElementById('futureYouContainer');
+
+                const futureYouCard = document.createElement('div');
+                futureYouCard.className = 'future-you-card';
+                futureYouCard.innerHTML = `
+                    <div class="future-you-title">✨ Future You ✨</div>
+                    <div class="future-you-career">${topMatch.title}</div>
+
+                    <div class="future-you-grid">
+                        <div class="future-stat">
+                            <div class="future-stat-label">💰 Average Salary</div>
+                            <div class="future-stat-value">${topMatch.avg_salary || topMatch.salary_range}</div>
+                            <div class="mini-chart">
+                                <div class="mini-bar"></div>
+                                <div class="mini-bar"></div>
+                                <div class="mini-bar"></div>
+                                <div class="mini-bar"></div>
+                                <div class="mini-bar"></div>
+                            </div>
+                        </div>
+                        <div class="future-stat">
+                            <div class="future-stat-label">📈 Job Growth</div>
+                            <div class="future-stat-value">${topMatch.growth.split('(')[0].trim()}</div>
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="future-stat">
+                            <div class="future-stat-label">🎯 Match Score</div>
+                            <div class="future-stat-value">${topMatch.match_score}%</div>
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" style="width: ${topMatch.match_score}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="future-impact">
+                        <h3>🌟 Your Possible Impact</h3>
+                        <p>${topMatch.impact || topMatch.description}</p>
+                    </div>
+
+                    <div class="motivational-message">
+                        "This is just the beginning of your amazing STEM journey! Your unique talents and perspective are exactly what this field needs. Keep learning, stay curious, and never doubt that you belong here. ✨"
+                    </div>
+
+                    <div class="suggested-steps">
+                        <h3>🚀 Your Next Steps</h3>
+                        <ul>
+                            ${topMatch.next_steps ? topMatch.next_steps.map(step => `<li>${step}</li>`).join('') :
+                              `<li>Start learning the basics through online courses</li>
+                               <li>Join clubs or communities related to this field</li>
+                               <li>Connect with mentors and role models</li>
+                               <li>Work on beginner-friendly projects</li>`}
+                        </ul>
+                    </div>
+                `;
+                futureYouContainer.appendChild(futureYouCard);
+            }
+
+            // Render detailed match cards
+            const container = document.getElementById('matchesContainer');
+            data.matches.forEach((match, index) => {
+                const matchCard = document.createElement('div');
+                matchCard.className = 'match-card';
+
+                matchCard.innerHTML = `
+                    <div class="match-header">
+                        <h2 class="match-title">${index + 1}. ${match.title}</h2>
+                        <div class="match-score">${match.match_score}% Match</div>
+                    </div>
+
+                    <p class="match-description">${match.description}</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Salary Range</div>
+                            <div class="info-value">${match.salary_range}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><img src="https://cdn-icons-png.flaticon.com/512/3665/3665910.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Job Growth</div>
+                            <div class="info-value">${match.growth}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Education</div>
+                            <div class="info-value">${match.education}</div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-section">
+                        <button class="expand-btn" onclick="toggleExpand(${index})">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #70697E; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> See More Details & What a Day Looks Like
+                        </button>
+                        <div class="expanded-content" id="expanded-${index}">
+                            <div class="detail-section">
+                                <h4><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Why This Career Matches You</h4>
+                                <p>${match.why_good_fit}</p>
+                            </div>
+
+                            ${match.day_in_life ? `
+                            <div class="detail-section">
+                                <h4><img src="https://cdn-icons-png.flaticon.com/512/2838/2838779.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> A Day in This Career</h4>
+                                <p>${match.day_in_life}</p>
+                            </div>
+                            ` : ''}
+
+                            ${match.beginner_projects ? `
+                            <div class="detail-section">
+                                <h4><img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Beginner-Friendly Projects</h4>
+                                <ul>
+                                    ${match.beginner_projects.map(project => `<li>${project}</li>`).join('')}
+                                </ul>
+                            </div>
+                            ` : ''}
+
+                            <div class="detail-section">
+                                <h4><img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Next Steps</h4>
+                                <p>${match.next_steps}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${match.role_models && match.role_models.length > 0 ? `
+                    <div class="mentors-section">
+                        <h3><img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" style="width: 30px; height: 30px; vertical-align: middle; border: 2px solid #70697E; border-radius: 8px; padding: 3px; background: white; margin-right: 8px;"> Shadow & Learn From These Mentors</h3>
+                        <div class="mentor-cards">
+                            ${match.role_models.map(rm => `
+                                <div class="mentor-card">
+                                    <div class="mentor-name">${rm.name}</div>
+                                    <div class="mentor-title">${rm.title}</div>
+                                    <div class="mentor-info">
+                                        <strong>Background:</strong> ${rm.background}
+                                    </div>
+                                    ${rm.what_students_learn ? `
+                                    <div class="mentor-info">
+                                        <strong>What You'll Learn:</strong> ${rm.what_students_learn}
+                                    </div>
+                                    ` : ''}
+                                    <div class="mentor-quote">"${rm.quote}"</div>
+                                    <button class="shadow-btn" onclick="requestShadow('${rm.name}', '${match.title}')">
+                                        Request Shadow Opportunity <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 18px; height: 18px; vertical-align: middle; border: 2px solid white; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;">
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                `;
+
+                container.appendChild(matchCard);
+            });
+        });
+
+        function toggleExpand(index) {
+            const content = document.getElementById(`expanded-${index}`);
+            content.classList.toggle('show');
+        }
+
+        function requestShadow(mentorName, career) {
+            alert(`Great choice! You've expressed interest in shadowing ${mentorName} in ${career}!\n\nIn a full version of this app, this would:\n- Send a request to the mentor\n- Connect you with similar professionals\n- Provide next steps for the shadow opportunity\n\nFor now, explore the Role Models page to learn more about inspiring STEM professionals!`);
+        }
+    </script>
+</body>
+</html>

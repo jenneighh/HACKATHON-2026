@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEM Career Explorer - Find Your Future</title>
+    <title>STEM Career Explorer - Find Your Future ✨</title>
     <style>
         * {
             margin: 0;
@@ -13,19 +13,149 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
             min-height: 100vh;
             overflow-x: hidden;
+            color: #70697E;
         }
 
+        /* Floating background shapes */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+        }
+
+        .shape-blob {
+            width: 150px;
+            height: 150px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+        }
+
+        .shape-star {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 60px solid #FFE6F2;
+            position: relative;
+        }
+
+        .shape-star:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-top: 60px solid #FFE6F2;
+            position: absolute;
+            top: 30px;
+            left: -35px;
+        }
+
+        .shape-ring {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 8px solid #E8D5E8;
+            background: transparent;
+        }
+
+        .shape-dots {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #BDB2BC;
+            box-shadow: 20px 0 0 #BDB2BC, 40px 0 0 #BDB2BC, 0 20px 0 #BDB2BC, 20px 20px 0 #BDB2BC, 40px 20px 0 #BDB2BC;
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .shape-4 {
+            top: 30%;
+            right: 30%;
+            animation-delay: 9s;
+        }
+
+        .shape-5 {
+            top: 70%;
+            left: 50%;
+            animation-delay: 12s;
+        }
+
+        .shape-6 {
+            bottom: 10%;
+            right: 40%;
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+                opacity: 0.25;
+            }
+        }
+
+        /* Navbar */
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav-container {
@@ -39,7 +169,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -53,127 +183,119 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #70697E;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #98899C;
+            transform: translateY(-2px);
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #98899C;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
         .hero {
             max-width: 1200px;
             margin: 4rem auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
-            color: white;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #FFE4E1;
+            border-radius: 50%;
+            top: 30px;
+            right: 50px;
+            opacity: 0.5;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #B3E5FC;
+            border-radius: 50%;
+            bottom: 30px;
+            left: 60px;
+            opacity: 0.5;
+            animation: float 4s infinite ease-in-out;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
+            color: #70697E;
             animation: fadeInUp 0.8s ease-out;
+            position: relative;
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 0.8;
+            }
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            opacity: 0.95;
+            color: #98899C;
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: white;
-            color: #667eea;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
+            transition: all 0.3s;
             animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .features {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        .feature-card:nth-child(1) { animation-delay: 0.5s; }
-        .feature-card:nth-child(2) { animation-delay: 0.6s; }
-        .feature-card:nth-child(3) { animation-delay: 0.7s; }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .stats {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 1rem;
-            margin-top: 0.5rem;
+            box-shadow: 0 6px 25px rgba(112, 105, 126, 0.4);
         }
 
         @keyframes fadeInUp {
@@ -185,6 +307,425 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+            transition: all 0.3s;
+            animation: fadeInUp 0.8s ease-out both;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.5s; }
+        .feature-card:nth-child(2) { animation-delay: 0.6s; }
+        .feature-card:nth-child(3) { animation-delay: 0.7s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #BDB2BC;
+            box-shadow: 0 8px 30px rgba(112, 105, 126, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            animation: bounce 2s infinite;
+            position: relative;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #B3E5FC;
+            border-radius: 50%;
+            top: -5px;
+            right: -5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.4;
+            }
+        }
+
+        .icon-chart {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(to top, #70697E 60%, transparent 60%);
+            clip-path: polygon(0% 100%, 20% 80%, 20% 100%, 40% 100%, 40% 60%, 60% 100%, 80% 100%, 80% 40%, 100% 100%, 100% 100%, 0% 100%);
+        }
+
+        .icon-people {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .icon-people::before,
+        .icon-people::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #70697E;
+        }
+
+        .icon-people::before {
+            left: 5px;
+            top: 0;
+        }
+
+        .icon-people::after {
+            right: 5px;
+            top: 0;
+        }
+
+        .icon-sparkle {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid #70697E;
+            position: relative;
+        }
+
+        .icon-sparkle::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 35px solid #70697E;
+            position: absolute;
+            top: 18px;
+            left: -20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .feature-card:hover .feature-icon {
+            animation: spin 0.5s ease;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg) scale(1);
+            }
+            to {
+                transform: rotate(360deg) scale(1.2);
+            }
+        }
+
+        .feature-card h3 {
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #98899C;
+            line-height: 1.6;
+        }
+
+        /* Chatbot Section */
+        .chatbot-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(112, 105, 126, 0.15);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chatbot-section h2 {
+            text-align: center;
+            color: #70697E;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .chat-box {
+            background: #F8F5F8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .chat-message.bot {
+            background: linear-gradient(135deg, #E0D8E0 0%, #BDB2BC 100%);
+            color: #70697E;
+            margin-right: 20%;
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            margin-left: 20%;
+            text-align: right;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #BDB2BC;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: #98899C;
+            box-shadow: 0 0 10px rgba(152, 137, 156, 0.2);
+        }
+
+        .chat-send-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
+        }
+
+        /* STEM News Section */
+        .news-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            color: #70697E;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+            transition: all 0.3s;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .news-card:nth-child(1) { animation-delay: 0.2s; }
+        .news-card:nth-child(2) { animation-delay: 0.3s; }
+        .news-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(112, 105, 126, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-card:nth-child(1) .news-image {
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+        }
+
+        .news-card:nth-child(2) .news-image {
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+        }
+
+        .news-card:nth-child(3) .news-image {
+            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+        }
+
+        .news-image::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(112, 105, 126, 0.1);
+            border-radius: 50%;
+            top: 20%;
+            left: 20%;
+        }
+
+        .news-image::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(189, 178, 188, 0.1);
+            border-radius: 50%;
+            bottom: 20%;
+            right: 20%;
+        }
+
+        .news-icon-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #70697E;
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            color: #70697E;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .news-description {
+            color: #98899C;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .news-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #E0D8E0;
+            color: #70697E;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+            transition: all 0.3s;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.2s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.4s; }
+        .stat-card:nth-child(4) { animation-delay: 0.5s; }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(112, 105, 126, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #98899C;
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
         @media (max-width: 768px) {
@@ -200,13 +741,32 @@
                 gap: 1rem;
                 font-size: 0.9rem;
             }
+
+            .chat-message.bot {
+                margin-right: 10%;
+            }
+
+            .chat-message.user {
+                margin-left: 10%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-circle shape-1"></div>
+        <div class="shape shape-blob shape-2"></div>
+        <div class="shape shape-ring shape-3"></div>
+        <div class="shape shape-circle shape-4"></div>
+        <div class="shape shape-blob shape-5"></div>
+        <div class="shape shape-dots shape-6"></div>
+    </div>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">🚀 STEM Explorer</div>
+            <div class="logo">✨ STEM Career Explorer</div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/careers">Careers</a></li>
@@ -216,39 +776,107 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <div class="hero">
         <h1>Discover Your STEM Future</h1>
         <p>AI-powered career matching connecting your interests to exciting STEM paths — with role models who look like you</p>
-        <a href="/quiz" class="cta-button">Start Your Journey</a>
+        <a href="/quiz" class="cta-button">Start Your Journey →</a>
     </div>
 
+    <!-- Features Section -->
     <div class="features">
         <div class="feature-card">
-            <div class="feature-icon">🎯</div>
+            <div class="feature-icon">
+                <div class="icon-chart"></div>
+            </div>
             <h3>Personalized Matching</h3>
-            <p>Our AI analyzes your interests, skills, and goals to recommend STEM careers perfectly suited for you.</p>
+            <p>Our smart quiz analyzes your interests, skills, and goals to recommend STEM careers perfectly suited for you.</p>
         </div>
 
         <div class="feature-card">
-            <div class="feature-icon">👥</div>
+            <div class="feature-icon">
+                <div class="icon-people"></div>
+            </div>
             <h3>Diverse Role Models</h3>
-            <p>Meet inspiring STEM professionals from all backgrounds who've walked the path you're considering.</p>
+            <p>Meet inspiring STEM professionals from all backgrounds who've walked the path you're considering. See yourself in their stories!</p>
         </div>
 
         <div class="feature-card">
-            <div class="feature-icon">📚</div>
-            <h3>Comprehensive Info</h3>
-            <p>Explore detailed career paths, salary ranges, education requirements, and growth opportunities.</p>
+            <div class="feature-icon">
+                <div class="icon-sparkle"></div>
+            </div>
+            <h3>Future You Preview</h3>
+            <p>Get a glimpse of your future with personalized career insights, salary info, and real-world impact you could make!</p>
         </div>
     </div>
 
+    <!-- Chatbot Section -->
+    <div class="chatbot-section">
+        <h2>💬 Ask Your STEM Questions</h2>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-message bot">
+                Hi there! I'm your STEM Career Guide! Ask me anything about STEM careers, what classes to take, or how to get started!
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask me about STEM careers, classes, projects..." />
+            <button class="chat-send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- STEM News Section -->
+    <div class="news-section">
+        <h2>📰 STEM News & Inspiration</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-image">
+                    <div class="news-icon-placeholder"></div>
+                </div>
+                <div class="news-content">
+                    <div class="news-title">AI Breakthrough in Healthcare</div>
+                    <div class="news-description">
+                        New AI technology helps doctors detect diseases earlier and more accurately, saving countless lives.
+                    </div>
+                    <span class="news-tag">Artificial Intelligence</span>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <div class="news-icon-placeholder"></div>
+                </div>
+                <div class="news-content">
+                    <div class="news-title">Student Wins NASA Competition</div>
+                    <div class="news-description">
+                        A high school student's rocket design won NASA's student competition, earning a scholarship and internship!
+                    </div>
+                    <span class="news-tag">Aerospace</span>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <div class="news-icon-placeholder"></div>
+                </div>
+                <div class="news-content">
+                    <div class="news-title">Teen Invents Ocean Cleanup Device</div>
+                    <div class="news-description">
+                        A 17-year-old engineer created a device that removes microplastics from the ocean using solar power.
+                    </div>
+                    <span class="news-tag">Environmental Science</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
     <div class="stats">
         <div class="stat-card">
-            <div class="stat-number">8+</div>
+            <div class="stat-number">5</div>
             <div class="stat-label">STEM Career Paths</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">8+</div>
+            <div class="stat-number">12+</div>
             <div class="stat-label">Inspiring Role Models</div>
         </div>
         <div class="stat-card">
@@ -260,5 +888,65 @@
             <div class="stat-label">Free to Use</div>
         </div>
     </div>
+
+    <script>
+        // Chatbot functionality
+        const chatBox = document.getElementById('chatBox');
+        const chatInput = document.getElementById('chatInput');
+
+        // Allow Enter key to send message
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chat-message user';
+            userMessage.textContent = message;
+            chatBox.appendChild(userMessage);
+
+            // Clear input
+            chatInput.value = '';
+
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Send to API
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+
+                // Add bot response to chat
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chat-message bot';
+                botMessage.textContent = data.response;
+                chatBox.appendChild(botMessage);
+
+                // Scroll to bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'chat-message bot';
+                errorMessage.textContent = 'Oops! Something went wrong. Please try again!';
+                chatBox.appendChild(errorMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
 </body>
 </html>

@@ -13,18 +13,58 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
             min-height: 100vh;
             padding: 2rem;
+            color: #70697E;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #FFE5D9 0%, #FFF8E7 100%);
+            border-radius: 50%;
+            top: 50px;
+            right: -50px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #D4F1F4 0%, #E8F8F5 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            bottom: 100px;
+            left: -40px;
+            opacity: 0.2;
+            z-index: 0;
         }
 
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 25px;
             margin-bottom: 2rem;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav-container {
@@ -38,7 +78,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -52,57 +92,33 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #70697E;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #98899C;
+            transform: translateY(-2px);
         }
 
         .page-header {
             text-align: center;
-            color: white;
             margin-bottom: 3rem;
         }
 
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: #70697E;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .page-header p {
             font-size: 1.3rem;
-            opacity: 0.95;
+            color: #98899C;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
-
-        .careers-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .career-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            animation: fadeInUp 0.5s ease-out both;
-        }
-
-        .career-card:nth-child(1) { animation-delay: 0.1s; }
-        .career-card:nth-child(2) { animation-delay: 0.2s; }
-        .career-card:nth-child(3) { animation-delay: 0.3s; }
-        .career-card:nth-child(4) { animation-delay: 0.4s; }
-        .career-card:nth-child(5) { animation-delay: 0.5s; }
-        .career-card:nth-child(6) { animation-delay: 0.6s; }
-        .career-card:nth-child(7) { animation-delay: 0.7s; }
-        .career-card:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from {
@@ -115,23 +131,72 @@
             }
         }
 
+        .careers-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .career-card {
+            background: white;
+            border-radius: 35px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.5s ease-out both;
+            border: 3px solid #E0D8E0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .career-card::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            border-radius: 50%;
+            top: 25px;
+            right: 25px;
+            opacity: 0.25;
+            z-index: 0;
+            transition: all 0.3s;
+        }
+
+        .career-card:nth-child(1) { animation-delay: 0.1s; }
+        .career-card:nth-child(2) { animation-delay: 0.2s; }
+        .career-card:nth-child(3) { animation-delay: 0.3s; }
+        .career-card:nth-child(4) { animation-delay: 0.4s; }
+        .career-card:nth-child(5) { animation-delay: 0.5s; }
+
         .career-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(112, 105, 126, 0.2);
+            border-color: #98899C;
+        }
+
+        .career-card:hover::before {
+            opacity: 0.5;
+            transform: scale(1.3);
+        }
+
+        .career-card.expanded {
+            grid-column: 1 / -1;
+            border-color: #98899C;
         }
 
         .career-title {
             font-size: 1.8rem;
-            color: #333;
+            color: #70697E;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: bold;
         }
 
         .career-description {
-            color: #666;
+            color: #98899C;
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -159,12 +224,12 @@
 
         .info-label {
             font-weight: bold;
-            color: #667eea;
+            color: #70697E;
             font-size: 0.9rem;
         }
 
         .info-text {
-            color: #555;
+            color: #98899C;
             font-size: 0.95rem;
         }
 
@@ -176,12 +241,73 @@
         }
 
         .skill-tag {
-            background: #f0f7ff;
-            color: #667eea;
+            background: linear-gradient(135deg, #E0D8E0 0%, #BDB2BC 100%);
+            color: #70697E;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.85rem;
             font-weight: 500;
+        }
+
+        /* Expanded Content */
+        .expanded-details {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #E0D8E0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .career-card.expanded .expanded-details {
+            display: block;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-box {
+            background: #F8F5F8;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #E0D8E0;
+        }
+
+        .detail-box h4 {
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-box p, .detail-box ul {
+            color: #98899C;
+            line-height: 1.6;
+        }
+
+        .detail-box ul {
+            margin-left: 1.5rem;
+        }
+
+        .expand-btn {
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .expand-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
         }
 
         .cta-section {
@@ -191,16 +317,17 @@
             border-radius: 20px;
             padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.15);
+            animation: fadeInUp 1s ease-out;
         }
 
         .cta-section h2 {
-            color: #333;
+            color: #70697E;
             margin-bottom: 1rem;
         }
 
         .cta-section p {
-            color: #666;
+            color: #98899C;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
@@ -208,18 +335,18 @@
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -229,6 +356,10 @@
 
             .careers-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .career-card.expanded {
+                grid-column: 1;
             }
 
             .nav-links {
@@ -241,7 +372,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">🚀 STEM Explorer</div>
+            <div class="logo">✨ STEM Career Explorer</div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/careers">Careers</a></li>
@@ -258,7 +389,7 @@
 
     <div class="careers-grid">
         {% for career_id, career in careers.items() %}
-        <div class="career-card">
+        <div class="career-card" id="card-{{ career_id }}">
             <h2 class="career-title">{{ career.title }}</h2>
             <p class="career-description">{{ career.description }}</p>
 
@@ -280,7 +411,7 @@
                 </div>
 
                 <div class="info-row">
-                    <div class="info-icon">🎓</div>
+                    <div class="info-icon"><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" style="width: 100%; height: 100%; object-fit: contain;"></div>
                     <div class="info-content">
                         <div class="info-label">Education</div>
                         <div class="info-text">{{ career.education }}</div>
@@ -299,14 +430,85 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Expanded Details -->
+            <div class="expanded-details">
+                <div class="detail-grid">
+                    {% if career.impact %}
+                    <div class="detail-box">
+                        <h4>🌍 Possible Impact</h4>
+                        <p>{{ career.impact }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if career.day_in_life %}
+                    <div class="detail-box">
+                        <h4>📅 A Day in This Career</h4>
+                        <p>{{ career.day_in_life }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if career.beginner_projects %}
+                <div class="detail-box">
+                    <h4>🛠️ Beginner-Friendly Projects to Try</h4>
+                    <ul>
+                        {% for project in career.beginner_projects %}
+                        <li>{{ project }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if career.next_steps %}
+                <div class="detail-box" style="margin-top: 1.5rem;">
+                    <h4><img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> How to Get Started</h4>
+                    <ul>
+                        {% for step in career.next_steps %}
+                        <li>{{ step }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            <button class="expand-btn" onclick="toggleCard('{{ career_id }}')">
+                <span id="btn-text-{{ career_id }}">📋 Learn More & See Projects</span>
+            </button>
         </div>
         {% endfor %}
     </div>
 
     <div class="cta-section">
-        <h2>Ready to Find Your Match?</h2>
+        <h2>Ready to Find Your Match? <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 30px; height: 30px; vertical-align: middle; border: 3px solid #98899C; border-radius: 8px; padding: 5px; background: white;"></h2>
         <p>Take our personalized quiz to discover which STEM careers are perfect for you!</p>
-        <a href="/quiz" class="btn">Take the Career Quiz</a>
+        <a href="/quiz" class="btn">Take the Career Quiz <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 25px; height: 25px; vertical-align: middle; border: 2px solid white; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></a>
     </div>
+
+    <script>
+        function toggleCard(careerId) {
+            const card = document.getElementById(`card-${careerId}`);
+            const btnText = document.getElementById(`btn-text-${careerId}`);
+
+            // Close all other cards
+            document.querySelectorAll('.career-card').forEach(c => {
+                if (c.id !== `card-${careerId}`) {
+                    c.classList.remove('expanded');
+                    const btn = c.querySelector('.expand-btn span');
+                    if (btn) btn.textContent = '📋 Learn More & See Projects';
+                }
+            });
+
+            // Toggle current card
+            card.classList.toggle('expanded');
+
+            if (card.classList.contains('expanded')) {
+                btnText.textContent = '❌ Close Details';
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                btnText.textContent = '📋 Learn More & See Projects';
+            }
+        }
+    </script>
 </body>
 </html>

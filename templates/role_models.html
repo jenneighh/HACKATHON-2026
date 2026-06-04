@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Role Models - STEM Explorer</title>
+    <title>STEM Role Models - STEM Explorer</title>
     <style>
         * {
             margin: 0;
@@ -13,18 +13,58 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
             min-height: 100vh;
             padding: 2rem;
+            color: #70697E;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #FFE5D9 0%, #FFF8E7 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            top: 80px;
+            right: -40px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #D4F1F4 0%, #E8F8F5 100%);
+            border-radius: 50%;
+            bottom: 50px;
+            left: -60px;
+            opacity: 0.2;
+            z-index: 0;
         }
 
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 25px;
             margin-bottom: 2rem;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav-container {
@@ -38,7 +78,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -52,71 +92,33 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #70697E;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #98899C;
+            transform: translateY(-2px);
         }
 
         .page-header {
             text-align: center;
-            color: white;
             margin-bottom: 3rem;
         }
 
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: #70697E;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .page-header p {
             font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
+            color: #98899C;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
-
-        .role-models-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .role-model-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 0.5s ease-out both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .role-model-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .role-model-card:nth-child(1) { animation-delay: 0.1s; }
-        .role-model-card:nth-child(2) { animation-delay: 0.2s; }
-        .role-model-card:nth-child(3) { animation-delay: 0.3s; }
-        .role-model-card:nth-child(4) { animation-delay: 0.4s; }
-        .role-model-card:nth-child(5) { animation-delay: 0.5s; }
-        .role-model-card:nth-child(6) { animation-delay: 0.6s; }
-        .role-model-card:nth-child(7) { animation-delay: 0.7s; }
-        .role-model-card:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from {
@@ -129,102 +131,253 @@
             }
         }
 
-        .role-model-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        /* Filter Section */
+        .filter-section {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            text-align: center;
         }
 
-        .role-model-icon {
-            font-size: 4rem;
-            text-align: center;
-            margin-bottom: 1rem;
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: #70697E;
+            border: 2px solid #BDB2BC;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border-color: #70697E;
+            transform: scale(1.05);
+        }
+
+        /* Role Models Grid */
+        .role-models-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .role-model-card {
+            background: white;
+            border-radius: 35px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.15);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out both;
+            border: 3px solid #E0D8E0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .role-model-card::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            border-radius: 50%;
+            top: 20px;
+            right: 20px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .role-model-card:nth-child(1) { animation-delay: 0.1s; }
+        .role-model-card:nth-child(2) { animation-delay: 0.2s; }
+        .role-model-card:nth-child(3) { animation-delay: 0.3s; }
+        .role-model-card:nth-child(4) { animation-delay: 0.4s; }
+        .role-model-card:nth-child(5) { animation-delay: 0.5s; }
+        .role-model-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .role-model-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(112, 105, 126, 0.2);
+            border-color: #98899C;
+        }
+
+        .role-model-card:hover::before {
+            opacity: 0.6;
+            transform: scale(1.2);
+        }
+
+        .role-model-header {
+            margin-bottom: 1.5rem;
         }
 
         .role-model-name {
             font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 0.5rem;
+            color: #70697E;
             font-weight: bold;
+            margin-bottom: 0.5rem;
         }
 
         .role-model-title {
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
             font-size: 1.1rem;
+            color: #98899C;
+            margin-bottom: 0.8rem;
         }
 
-        .role-model-background {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .role-model-quote {
-            background: #f0f7ff;
-            border-left: 4px solid #667eea;
-            padding: 1rem;
-            border-radius: 8px;
-            font-style: italic;
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .role-model-tags {
+        .tags {
             display: flex;
-            gap: 0.5rem;
             flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.4rem 0.9rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.85rem;
             font-weight: 500;
         }
 
-        .inspiration-section {
+        .tag-gender {
+            background: linear-gradient(135deg, #E0D8E0 0%, #BDB2BC 100%);
+            color: #70697E;
+        }
+
+        .tag-ethnicity {
+            background: linear-gradient(135deg, #BDB2BC 0%, #98899C 100%);
+            color: white;
+        }
+
+        .tag-career {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+        }
+
+        .role-model-background {
+            color: #98899C;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #E0D8E0 0%, #F8F5F8 100%);
+            padding: 1rem;
+            border-left: 4px solid #98899C;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-text {
+            color: #70697E;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .detail-section {
+            margin-bottom: 1rem;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #70697E;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-text {
+            color: #98899C;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .shadow-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .shadow-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
+        }
+
+        .connect-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: white;
+            color: #70697E;
+            border: 2px solid #BDB2BC;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .connect-btn:hover {
+            background: #F8F5F8;
+            transform: scale(1.05);
+        }
+
+        .cta-section {
             max-width: 800px;
             margin: 3rem auto 0;
             background: white;
             border-radius: 20px;
             padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.15);
+            animation: fadeInUp 1s ease-out;
         }
 
-        .inspiration-section h2 {
-            color: #333;
+        .cta-section h2 {
+            color: #70697E;
             margin-bottom: 1rem;
-            font-size: 2rem;
         }
 
-        .inspiration-section p {
-            color: #666;
+        .cta-section p {
+            color: #98899C;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
-            line-height: 1.6;
         }
 
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -240,13 +393,22 @@
                 gap: 1rem;
                 font-size: 0.9rem;
             }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">🚀 STEM Explorer</div>
+            <div class="logo">✨ STEM Career Explorer</div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/careers">Careers</a></li>
@@ -257,41 +419,111 @@
     </nav>
 
     <div class="page-header">
-        <h1>Inspiring STEM Role Models 🌟</h1>
-        <p>Meet diverse pioneers and trailblazers who have made incredible contributions to science, technology, engineering, and mathematics. Their stories prove that with passion and dedication, you can achieve anything!</p>
+        <h1>Meet Inspiring STEM Role Models ⭐</h1>
+        <p>Discover professionals from diverse backgrounds who've made incredible contributions to STEM</p>
     </div>
 
-    <div class="role-models-grid">
+    <div class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterRoleModels('all')">All Role Models</button>
+            <button class="filter-btn" onclick="filterRoleModels('Female')">Women in STEM <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #70697E; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></button>
+            <button class="filter-btn" onclick="filterRoleModels('Hispanic')">Hispanic/Latino <img src="https://cdn-icons-png.flaticon.com/512/740/740878.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #70697E; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></button>
+            <button class="filter-btn" onclick="filterRoleModels('African American')">African American <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #70697E; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></button>
+            <button class="filter-btn" onclick="filterRoleModels('Asian')">Asian American <img src="https://cdn-icons-png.flaticon.com/512/740/740878.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #70697E; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></button>
+        </div>
+    </div>
+
+    <div class="role-models-grid" id="roleModelsGrid">
         {% for role_model in role_models %}
-        <div class="role-model-card">
-            <div class="role-model-icon">
-                {% if role_model.gender == 'Female' %}
-                    👩‍🔬
-                {% else %}
-                    👨‍🔬
-                {% endif %}
+        <div class="role-model-card" data-gender="{{ role_model.gender }}" data-ethnicity="{{ role_model.ethnicity }}">
+            <div class="role-model-header">
+                <div class="role-model-name">{{ role_model.name }}</div>
+                <div class="role-model-title">{{ role_model.title }}</div>
+                <div class="tags">
+                    <span class="tag tag-gender">{{ role_model.gender }}</span>
+                    <span class="tag tag-ethnicity">{{ role_model.ethnicity }}</span>
+                    <span class="tag tag-career">{{ role_model.career.replace('_', ' ').title() }}</span>
+                </div>
             </div>
 
-            <h2 class="role-model-name">{{ role_model.name }}</h2>
-            <div class="role-model-title">{{ role_model.title }}</div>
             <p class="role-model-background">{{ role_model.background }}</p>
 
-            <div class="role-model-quote">
-                "{{ role_model.quote }}"
+            <div class="quote-box">
+                <p class="quote-text">"{{ role_model.quote }}"</p>
             </div>
 
-            <div class="role-model-tags">
-                <span class="tag">{{ role_model.ethnicity }}</span>
-                <span class="tag">{{ role_model.gender }}</span>
+            {% if role_model.challenges %}
+            <div class="detail-section">
+                <div class="detail-label"><img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" style="width: 18px; height: 18px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Challenges Faced:</div>
+                <div class="detail-text">{{ role_model.challenges }}</div>
+            </div>
+            {% endif %}
+
+            {% if role_model.advice %}
+            <div class="detail-section">
+                <div class="detail-label"><img src="https://cdn-icons-png.flaticon.com/512/2089/2089139.png" style="width: 18px; height: 18px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> Advice for Students:</div>
+                <div class="detail-text">{{ role_model.advice }}</div>
+            </div>
+            {% endif %}
+
+            {% if role_model.what_students_learn %}
+            <div class="detail-section">
+                <div class="detail-label"><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" style="width: 18px; height: 18px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> What You Can Learn:</div>
+                <div class="detail-text">{{ role_model.what_students_learn }}</div>
+            </div>
+            {% endif %}
+
+            <div class="action-buttons">
+                <button class="shadow-btn" onclick="requestShadow('{{ role_model.name }}', '{{ role_model.title }}')">
+                    Shadow This Person <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 18px; height: 18px; vertical-align: middle; border: 2px solid white; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;">
+                </button>
+                <button class="connect-btn" onclick="connectMentor('{{ role_model.name }}')">
+                    Connect with Mentor
+                </button>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <div class="inspiration-section">
-        <h2>You Can Be Next! 🚀</h2>
-        <p>These role models started just like you — curious, ambitious, and ready to make a difference. Take our quiz to discover which STEM career path aligns with your unique interests and talents.</p>
-        <a href="/quiz" class="btn">Discover Your Path</a>
+    <div class="cta-section">
+        <h2>Find Your STEM Path <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 30px; height: 30px; vertical-align: middle; border: 3px solid #98899C; border-radius: 8px; padding: 5px; background: white;"></h2>
+        <p>Take our quiz to discover which STEM career matches your interests and meet role models in that field!</p>
+        <a href="/quiz" class="btn">Take the Career Quiz <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 25px; height: 25px; vertical-align: middle; border: 2px solid white; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></a>
     </div>
+
+    <script>
+        function filterRoleModels(filterType) {
+            const cards = document.querySelectorAll('.role-model-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            cards.forEach(card => {
+                if (filterType === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const gender = card.dataset.gender;
+                    const ethnicity = card.dataset.ethnicity;
+
+                    if (gender === filterType || ethnicity === filterType) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function requestShadow(name, title) {
+            alert(`Awesome! You've expressed interest in shadowing ${name}, ${title}!\n\nIn a full version of this app, this would:\n\n- Send a shadow opportunity request\n- Connect you with similar professionals in your area\n- Provide information about virtual shadowing options\n- Match you with mentorship programs\n\nFor this hackathon demo, explore more role models and take the quiz to find careers that match you!`);
+        }
+
+        function connectMentor(name) {
+            alert(`Great choice! You want to connect with ${name} as a mentor!\n\nIn a full version, this feature would:\n\n- Match you with mentors in your field of interest\n- Set up virtual coffee chats or Q&A sessions\n- Connect you to mentorship networks\n- Provide resources from this role model\n\nFor now, check out their story and advice above to learn from their journey!`);
+        }
+    </script>
 </body>
 </html>
