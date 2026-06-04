@@ -29,3 +29,13 @@ Press CTRL+C to quit
 127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /quiz HTTP/1.1" 200 -
 127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /static/manifest.json HTTP/1.1" 304 -
 127.0.0.1 - - [04/Jun/2026 11:49:44] "GET /static/icon-192.png HTTP/1.1" 304 -
+ * Detected change in 'C:\\Users\\jenny\\hackathon\\Hackathon-2026\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 126-289-242
+ * Detected change in 'C:\\Users\\jenny\\hackathon\\Hackathon-2026\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 126-289-242
+127.0.0.1 - - [04/Jun/2026 11:56:47] "POST /api/mentor HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 11:56:50] "POST /api/mentor HTTP/1.1" 200 -

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#70697E">
+    <meta name="theme-color" content="#5A4A3A">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="SeeMe STEM">
@@ -20,10 +20,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8DCC8 50%, #F0E5D8 100%);
             min-height: 100vh;
             padding: 2rem;
-            color: #70697E;
+            color: #5A4A3A;
             position: relative;
         }
 
@@ -32,7 +32,7 @@
             position: fixed;
             width: 250px;
             height: 250px;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCDD 100%);
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             top: 100px;
             right: -80px;
@@ -45,7 +45,7 @@
             position: fixed;
             width: 180px;
             height: 180px;
-            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            background: linear-gradient(135deg, #BAEAFF 0%, #C7F0FF 100%);
             border-radius: 50%;
             bottom: 100px;
             left: -60px;
@@ -54,12 +54,13 @@
         }
 
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 248, 240, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            box-shadow: 0 2px 15px rgba(90, 74, 58, 0.1);
             border-radius: 25px;
             margin-bottom: 2rem;
+            border: 3px solid #FF10F0;
         }
 
         .nav-container {
@@ -73,7 +74,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            background: linear-gradient(135deg, #FF10F0 0%, #00D9FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -87,13 +88,13 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #70697E;
+            color: #5A4A3A;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #98899C;
+            color: #FF10F0;
         }
 
         /* Mobile Menu Toggle */
@@ -107,7 +108,7 @@
         .menu-toggle span {
             width: 25px;
             height: 3px;
-            background: #70697E;
+            background: #5A4A3A;
             margin: 3px 0;
             transition: 0.3s;
             border-radius: 3px;
@@ -119,15 +120,17 @@
         }
 
         .results-header {
-            background: white;
+            background: #FFFBF5;
             border-radius: 40px;
             padding: 3rem;
             margin-bottom: 2.5rem;
             text-align: center;
-            box-shadow: 0 15px 60px rgba(112, 105, 126, 0.15);
+            box-shadow: 0 15px 60px rgba(90, 74, 58, 0.15);
             animation: fadeInUp 0.5s ease-out;
             position: relative;
             z-index: 1;
+            border: 4px solid;
+            border-image: linear-gradient(135deg, #FF10F0, #00D9FF, #39FF14, #FFFF00) 1;
         }
 
         @keyframes fadeInUp {
@@ -142,29 +145,33 @@
         }
 
         .results-header h1 {
-            color: #70697E;
+            background: linear-gradient(135deg, #FF10F0 0%, #00D9FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
             font-size: 2.8rem;
         }
 
         .overall-message {
-            color: #98899C;
+            color: #5A4A3A;
             font-size: 1.25rem;
             line-height: 1.7;
         }
 
         /* Future You Dashboard Section */
         .future-you-dashboard {
-            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
-            color: #70697E;
+            background: linear-gradient(135deg, #BAEAFF 0%, #C7F0FF 100%);
+            color: #5A4A3A;
             border-radius: 40px;
             padding: 3.5rem;
             margin-bottom: 2.5rem;
-            box-shadow: 0 20px 70px rgba(112, 105, 126, 0.2);
+            box-shadow: 0 20px 70px rgba(90, 74, 58, 0.2);
             animation: revealCard 1s ease-out;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: 4px solid #00D9FF;
         }
 
         @keyframes revealCard {
@@ -189,7 +196,7 @@
         .future-you-dashboard::before {
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCDD 100%);
             top: 30px;
             right: 40px;
         }
@@ -197,7 +204,7 @@
         .future-you-dashboard::after {
             width: 90px;
             height: 90px;
-            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+            background: linear-gradient(135deg, #BAFFC9 0%, #D4FFD8 100%);
             bottom: 40px;
             left: 50px;
         }
@@ -263,7 +270,7 @@
 
         .mini-bar {
             flex: 1;
-            background: linear-gradient(to top, #70697E 0%, #98899C 100%);
+            background: linear-gradient(to top, #5A4A3A 0%, #6B5B4B 100%);
             border-radius: 4px 4px 0 0;
             animation: barGrow 1s ease-out backwards;
         }
@@ -300,7 +307,7 @@
         }
 
         .progress-ring-fill {
-            stroke: #70697E;
+            stroke: #5A4A3A;
             stroke-linecap: round;
             stroke-dasharray: 157;
             stroke-dashoffset: 157;
@@ -338,7 +345,7 @@
 
         /* Career Passport */
         .career-passport {
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCDD 100%);
             border-radius: 35px;
             padding: 3rem;
             margin-bottom: 2.5rem;
@@ -355,12 +362,12 @@
 
         .passport-header h2 {
             font-size: 2.2rem;
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.5rem;
         }
 
         .passport-subtitle {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 1.1rem;
         }
 
@@ -375,7 +382,7 @@
             padding: 1.8rem 1.2rem;
             border-radius: 20px;
             text-align: center;
-            border: 3px dashed #98899C;
+            border: 3px dashed #6B5B4B;
             transition: all 0.3s;
             animation: stampAppear 0.6s ease-out backwards;
         }
@@ -398,14 +405,14 @@
 
         .stamp-card:hover {
             transform: scale(1.05) rotate(2deg);
-            border-color: #70697E;
+            border-color: #5A4A3A;
         }
 
         .stamp-icon {
             width: 50px;
             height: 50px;
             margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
+            background: linear-gradient(135deg, #BAEAFF 0%, #C7F0FF 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -414,7 +421,7 @@
 
         .stamp-label {
             font-weight: bold;
-            color: #70697E;
+            color: #5A4A3A;
             font-size: 1rem;
         }
 
@@ -424,7 +431,7 @@
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-bottom: 20px solid #70697E;
+            border-bottom: 20px solid #5A4A3A;
             position: relative;
         }
 
@@ -434,7 +441,7 @@
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-top: 20px solid #70697E;
+            border-top: 20px solid #5A4A3A;
             position: absolute;
             top: 10px;
             left: -12px;
@@ -442,7 +449,7 @@
 
         /* Day in My Future Life Timeline */
         .day-timeline {
-            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+            background: linear-gradient(135deg, #BAFFC9 0%, #D4FFD8 100%);
             border-radius: 35px;
             padding: 3rem;
             margin-bottom: 2.5rem;
@@ -459,7 +466,7 @@
 
         .timeline-header h2 {
             font-size: 2.2rem;
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.5rem;
         }
 
@@ -500,7 +507,7 @@
             border-radius: 20px;
             font-weight: bold;
             text-align: center;
-            color: #70697E;
+            color: #5A4A3A;
         }
 
         .timeline-content {
@@ -512,18 +519,18 @@
         }
 
         .timeline-content h4 {
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.5rem;
         }
 
         .timeline-content p {
-            color: #98899C;
+            color: #6B5B4B;
             line-height: 1.6;
         }
 
         /* STEM Starter Kit */
         .starter-kit {
-            background: linear-gradient(135deg, #FFF9C4 0%, #FFF8E1 100%);
+            background: linear-gradient(135deg, #FFFFBA 0%, #FFFFD4 100%);
             border-radius: 35px;
             padding: 3rem;
             margin-bottom: 2.5rem;
@@ -540,7 +547,7 @@
 
         .kit-header h2 {
             font-size: 2.2rem;
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.5rem;
         }
 
@@ -558,7 +565,7 @@
         }
 
         .kit-section h3 {
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 1.2rem;
             font-size: 1.3rem;
         }
@@ -584,7 +591,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
+            background: linear-gradient(135deg, #BAFFC9 0%, #D4FFD8 100%);
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -593,7 +600,7 @@
 
         .kit-checkmark::after {
             content: '✓';
-            color: #70697E;
+            color: #5A4A3A;
             font-weight: bold;
             font-size: 0.85rem;
         }
@@ -606,14 +613,14 @@
             margin-bottom: 2.5rem;
             box-shadow: 0 15px 50px rgba(112, 105, 126, 0.15);
             animation: slideIn 0.5s ease-out both;
-            border: 3px solid #E0D8E0;
+            border: 3px solid #D4C4B4;
             transition: all 0.3s ease;
             position: relative;
             z-index: 1;
         }
 
         .match-card:hover {
-            border-color: #98899C;
+            border-color: #6B5B4B;
             transform: translateY(-8px);
             box-shadow: 0 20px 60px rgba(112, 105, 126, 0.2);
         }
@@ -643,12 +650,12 @@
         }
 
         .match-title {
-            color: #70697E;
+            color: #5A4A3A;
             font-size: 2.2rem;
         }
 
         .match-score {
-            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            background: linear-gradient(135deg, #5A4A3A 0%, #6B5B4B 100%);
             color: white;
             padding: 0.8rem 1.8rem;
             border-radius: 50px;
@@ -657,7 +664,7 @@
         }
 
         .match-description {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 1.15rem;
             margin-bottom: 2rem;
             line-height: 1.7;
@@ -674,18 +681,18 @@
             background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 100%);
             padding: 1.5rem;
             border-radius: 20px;
-            border: 2px solid #E0D8E0;
+            border: 2px solid #D4C4B4;
         }
 
         .info-label {
             font-weight: bold;
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.8rem;
             font-size: 1rem;
         }
 
         .info-value {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 1.05rem;
         }
 
@@ -710,7 +717,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            background: linear-gradient(135deg, #5A4A3A 0%, #6B5B4B 100%);
             color: white;
         }
 
@@ -721,18 +728,18 @@
 
         .btn-secondary {
             background: white;
-            color: #70697E;
-            border: 3px solid #BDB2BC;
+            color: #5A4A3A;
+            border: 3px solid #8B7B6B;
         }
 
         .btn-secondary:hover {
-            background: #F8F5F8;
+            background: #FFF8F0;
             transform: translateY(-3px);
         }
 
         /* Career Pathway Map */
         .pathway-section {
-            background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 100%);
+            background: linear-gradient(135deg, #C7F0FF 0%, #BAEAFF 100%);
             border-radius: 30px;
             padding: 2.5rem;
             margin-top: 2rem;
@@ -741,7 +748,7 @@
 
         .pathway-title {
             text-align: center;
-            color: #70697E;
+            color: #5A4A3A;
             font-size: 2rem;
             margin-bottom: 2rem;
             font-weight: bold;
@@ -777,27 +784,27 @@
         }
 
         .step-label {
-            color: #70697E;
+            color: #5A4A3A;
             font-weight: bold;
             font-size: 0.95rem;
             margin-bottom: 0.5rem;
         }
 
         .step-detail {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 0.85rem;
             line-height: 1.4;
         }
 
         .pathway-arrow {
             font-size: 2rem;
-            color: #BDB2BC;
+            color: #8B7B6B;
             flex-shrink: 0;
         }
 
         /* Mini Projects Section */
         .projects-section {
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%);
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCDD 100%);
             border-radius: 30px;
             padding: 2.5rem;
             margin-top: 2rem;
@@ -805,7 +812,7 @@
 
         .projects-title {
             text-align: center;
-            color: #70697E;
+            color: #5A4A3A;
             font-size: 2rem;
             margin-bottom: 1rem;
             font-weight: bold;
@@ -813,7 +820,7 @@
 
         .projects-subtitle {
             text-align: center;
-            color: #98899C;
+            color: #6B5B4B;
             margin-bottom: 2rem;
             font-size: 1.1rem;
         }
@@ -835,7 +842,7 @@
 
         .project-card:hover {
             transform: translateY(-8px);
-            border-color: #98899C;
+            border-color: #6B5B4B;
         }
 
         .project-header {
@@ -846,7 +853,7 @@
         }
 
         .project-title {
-            color: #70697E;
+            color: #5A4A3A;
             font-size: 1.2rem;
             font-weight: bold;
             flex: 1;
@@ -861,17 +868,17 @@
         }
 
         .difficulty-beginner {
-            background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%);
-            color: #70697E;
+            background: linear-gradient(135deg, #BAFFC9 0%, #D4FFD8 100%);
+            color: #5A4A3A;
         }
 
         .difficulty-easy {
-            background: linear-gradient(135deg, #B3E5FC 0%, #E0F7FA 100%);
-            color: #70697E;
+            background: linear-gradient(135deg, #BAEAFF 0%, #C7F0FF 100%);
+            color: #5A4A3A;
         }
 
         .project-description {
-            color: #98899C;
+            color: #6B5B4B;
             line-height: 1.6;
             margin-bottom: 1rem;
             font-size: 0.95rem;
@@ -890,7 +897,7 @@
         }
 
         .meta-icon {
-            color: #BDB2BC;
+            color: #8B7B6B;
             font-size: 1.1rem;
             margin-top: 0.1rem;
         }
@@ -900,14 +907,14 @@
         }
 
         .meta-label {
-            color: #70697E;
+            color: #5A4A3A;
             font-weight: 600;
             font-size: 0.85rem;
             margin-bottom: 0.25rem;
         }
 
         .meta-text {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 0.85rem;
             line-height: 1.5;
         }
@@ -920,8 +927,8 @@
         }
 
         .skill-mini-tag {
-            background: #E0D8E0;
-            color: #70697E;
+            background: #D4C4B4;
+            color: #5A4A3A;
             padding: 0.25rem 0.6rem;
             border-radius: 10px;
             font-size: 0.75rem;
@@ -947,12 +954,12 @@
 
         .mentor-header h2 {
             font-size: 2.2rem;
-            color: #70697E;
+            color: #5A4A3A;
             margin-bottom: 0.5rem;
         }
 
         .mentor-subtitle {
-            color: #98899C;
+            color: #6B5B4B;
             font-size: 1.1rem;
         }
 
@@ -987,13 +994,13 @@
 
         .mentor-message.mentor {
             background: linear-gradient(135deg, #E0D8F0 0%, #F0E8F5 100%);
-            color: #70697E;
+            color: #5A4A3A;
             margin-right: 15%;
-            border-left: 4px solid #98899C;
+            border-left: 4px solid #6B5B4B;
         }
 
         .mentor-message.student {
-            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            background: linear-gradient(135deg, #5A4A3A 0%, #6B5B4B 100%);
             color: white;
             margin-left: 15%;
             text-align: right;
@@ -1020,7 +1027,7 @@
         .mentor-input {
             flex: 1;
             padding: 1.2rem;
-            border: 3px solid #E0D8E0;
+            border: 3px solid #D4C4B4;
             border-radius: 25px;
             font-size: 1rem;
             outline: none;
@@ -1031,13 +1038,13 @@
         }
 
         .mentor-input:focus {
-            border-color: #98899C;
+            border-color: #6B5B4B;
             box-shadow: 0 0 15px rgba(152, 137, 156, 0.2);
         }
 
         .mentor-send-btn {
             padding: 1.2rem 2.2rem;
-            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            background: linear-gradient(135deg, #5A4A3A 0%, #6B5B4B 100%);
             color: white;
             border: none;
             border-radius: 25px;
@@ -1069,8 +1076,8 @@
         .quick-question-btn {
             padding: 0.7rem 1.3rem;
             background: white;
-            color: #70697E;
-            border: 2px solid #E0D8E0;
+            color: #5A4A3A;
+            border: 2px solid #D4C4B4;
             border-radius: 20px;
             font-size: 0.95rem;
             cursor: pointer;
@@ -1079,8 +1086,8 @@
         }
 
         .quick-question-btn:hover {
-            border-color: #98899C;
-            background: #F8F5F8;
+            border-color: #6B5B4B;
+            background: #FFF8F0;
             transform: translateY(-2px);
         }
 
@@ -1116,7 +1123,7 @@
 
             .nav-links li {
                 padding: 0.75rem 0;
-                border-bottom: 1px solid #E0D8E0;
+                border-bottom: 1px solid #D4C4B4;
             }
 
             .nav-links li:last-child {
