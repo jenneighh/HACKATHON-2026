@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python *)",
-      "Bash(py *)"
+      "Bash(py *)",
+      "Bash(start *)",
+      "Bash(git add *)"
     ]
   }
 }

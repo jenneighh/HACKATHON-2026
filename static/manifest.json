@@ -1,0 +1,26 @@
+{
+  "name": "SeeMe in STEM - Career Explorer",
+  "short_name": "SeeMe STEM",
+  "description": "AI-powered career matching connecting your interests to exciting STEM paths",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#70697E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "lifestyle"],
+  "screenshots": []
+}
