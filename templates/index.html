@@ -194,6 +194,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
@@ -1554,7 +1562,10 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">✨ SeeMe in STEM</div>
+            <div class="logo">
+                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                SeeMe in STEM
+            </div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>

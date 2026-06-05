@@ -1,0 +1,63 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#786F85" opacity="0.1"/>
+
+  <!-- Outer ring representing diversity -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#786F85" stroke-width="3" stroke-dasharray="5,5"/>
+
+  <!-- Eye shape representing "See Me" -->
+  <ellipse cx="100" cy="100" rx="70" ry="40" fill="none" stroke="#786F85" stroke-width="4"/>
+
+  <!-- Inner iris - multiple colors representing diversity -->
+  <circle cx="100" cy="100" r="30" fill="url(#gradient1)"/>
+
+  <!-- Pupil with sparkle -->
+  <circle cx="100" cy="100" r="20" fill="#5A4A3A"/>
+  <circle cx="95" cy="95" r="5" fill="white" opacity="0.8"/>
+
+  <!-- STEM elements arranged around the eye -->
+  <!-- Science: Atom symbol (top) -->
+  <g transform="translate(100, 35)">
+    <circle cx="0" cy="0" r="3" fill="#C3BBC5"/>
+    <ellipse cx="0" cy="0" rx="12" ry="5" fill="none" stroke="#C3BBC5" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="5" ry="12" fill="none" stroke="#C3BBC5" stroke-width="1.5"/>
+  </g>
+
+  <!-- Technology: Circuit (right) -->
+  <g transform="translate(165, 100)">
+    <rect x="-3" y="-3" width="6" height="6" fill="#857A8D"/>
+    <line x1="-10" y1="0" x2="-3" y2="0" stroke="#857A8D" stroke-width="2"/>
+    <line x1="3" y1="0" x2="10" y2="0" stroke="#857A8D" stroke-width="2"/>
+    <circle cx="-10" cy="0" r="2" fill="#857A8D"/>
+    <circle cx="10" cy="0" r="2" fill="#857A8D"/>
+  </g>
+
+  <!-- Engineering: Gear (bottom) -->
+  <g transform="translate(100, 165)">
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#786F85" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3" fill="#786F85"/>
+    <rect x="-2" y="-10" width="4" height="4" fill="#786F85"/>
+    <rect x="-2" y="6" width="4" height="4" fill="#786F85"/>
+    <rect x="-10" y="-2" width="4" height="4" fill="#786F85"/>
+    <rect x="6" y="-2" width="4" height="4" fill="#786F85"/>
+  </g>
+
+  <!-- Math: Pi symbol (left) -->
+  <g transform="translate(35, 100)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#C3BBC5" text-anchor="middle" dominant-baseline="middle">π</text>
+  </g>
+
+  <!-- Stars representing aspiration -->
+  <path d="M 100,25 L 102,31 L 108,31 L 103,35 L 105,41 L 100,37 L 95,41 L 97,35 L 92,31 L 98,31 Z" fill="#F6EEEE" opacity="0.8"/>
+  <path d="M 175,80 L 177,83 L 180,83 L 178,85 L 179,88 L 175,86 L 171,88 L 172,85 L 170,83 L 173,83 Z" fill="#F6EEEE" opacity="0.8"/>
+  <path d="M 25,120 L 27,123 L 30,123 L 28,125 L 29,128 L 25,126 L 21,128 L 22,125 L 20,123 L 23,123 Z" fill="#F6EEEE" opacity="0.8"/>
+
+  <!-- Gradient definition for iris -->
+  <defs>
+    <radialGradient id="gradient1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#857A8D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C3BBC5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#786F85;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+</svg>
