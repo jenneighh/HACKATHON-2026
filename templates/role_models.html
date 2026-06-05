@@ -522,6 +522,137 @@
             box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
         }
 
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #70697E;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #E0D8E0;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #70697E;
+            box-shadow: 0 0 0 3px rgba(112, 105, 126, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
+        }
+
+        .modal-cancel-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: white;
+            color: #70697E;
+            border: 2px solid #E0D8E0;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-cancel-btn:hover {
+            background: #F8F5F8;
+        }
+
+        /* Success View Styles */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1.5rem;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            font-size: 1.3rem;
+            color: #70697E;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .success-details {
+            color: #98899C;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-details ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .success-details li {
+            position: relative;
+            padding: 0.3rem 0;
+        }
+
+        .success-details li::before {
+            content: '→';
+            position: absolute;
+            left: -1.5rem;
+            color: #70697E;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 0;
@@ -690,16 +821,58 @@
     <!-- Modal for Shadow/Connect Features -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-header" id="modalHeader">🌟 Feature Coming Soon!</div>
-            <div class="modal-subtitle" id="modalSubtitle"></div>
-            <div class="modal-features">
-                <h4>In the full version, this would:</h4>
-                <ul id="modalFeatures"></ul>
+            <div class="modal-header" id="modalHeader">🌟 Request Sent!</div>
+
+            <!-- Form View -->
+            <div id="formView">
+                <div class="modal-subtitle" id="modalSubtitle"></div>
+
+                <form id="requestForm" onsubmit="submitRequest(event)">
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="studentName" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email *</label>
+                        <input type="email" id="studentEmail" required placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group" id="shadowSpecific" style="display: none;">
+                        <label>Why do you want to shadow this professional? *</label>
+                        <textarea id="shadowReason" rows="3" placeholder="Tell us what you hope to learn..."></textarea>
+                    </div>
+
+                    <div class="form-group" id="mentorSpecific" style="display: none;">
+                        <label>What would you like to learn from this mentor? *</label>
+                        <textarea id="mentorGoals" rows="3" placeholder="Share your goals and questions..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tell us about yourself (Optional)</label>
+                        <textarea id="aboutStudent" rows="2" placeholder="Grade level, interests, experience..."></textarea>
+                    </div>
+
+                    <button type="submit" class="modal-submit-btn">Send Request ✉️</button>
+                    <button type="button" class="modal-cancel-btn" onclick="closeModal()">Cancel</button>
+                </form>
             </div>
-            <div class="modal-footer" id="modalFooter">
-                <strong>For this hackathon demo:</strong> Explore the role models' stories and advice above, or take our career quiz to find your perfect STEM match!
+
+            <!-- Success View -->
+            <div id="successView" style="display: none;">
+                <div class="success-icon">✓</div>
+                <div class="success-message" id="successMessage"></div>
+                <div class="success-details">
+                    <p>We'll notify you when there's a match!</p>
+                    <p style="margin-top: 1rem;"><strong>What's next?</strong></p>
+                    <ul style="text-align: left; margin-top: 0.5rem;">
+                        <li>Check your email for confirmation</li>
+                        <li>Explore more role models</li>
+                        <li>Take our career quiz to find your perfect match</li>
+                    </ul>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal()">Done</button>
             </div>
-            <button class="modal-close-btn" onclick="closeModal()">Got It!</button>
         </div>
     </div>
 
@@ -729,49 +902,99 @@
             });
         }
 
+        let currentRequestType = '';
+        let currentRoleModel = '';
+
         function requestShadow(name, title) {
+            currentRequestType = 'shadow';
+            currentRoleModel = name;
+
             const modal = document.getElementById('modalOverlay');
             const header = document.getElementById('modalHeader');
             const subtitle = document.getElementById('modalSubtitle');
-            const features = document.getElementById('modalFeatures');
+            const shadowSpecific = document.getElementById('shadowSpecific');
+            const mentorSpecific = document.getElementById('mentorSpecific');
+            const formView = document.getElementById('formView');
+            const successView = document.getElementById('successView');
 
-            header.textContent = '👀 Shadow Opportunity!';
-            subtitle.textContent = `You want to shadow ${name}, ${title}`;
+            // Reset views
+            formView.style.display = 'block';
+            successView.style.display = 'none';
+            document.getElementById('requestForm').reset();
 
-            features.innerHTML = `
-                <li>Send a shadow opportunity request</li>
-                <li>Connect you with similar professionals in your area</li>
-                <li>Provide information about virtual shadowing options</li>
-                <li>Match you with mentorship programs</li>
-                <li>Schedule a "day in the life" experience</li>
-            `;
+            header.textContent = '👀 Request Shadow Opportunity';
+            subtitle.textContent = `Shadow ${name}, ${title}`;
+
+            shadowSpecific.style.display = 'block';
+            mentorSpecific.style.display = 'none';
+            document.getElementById('shadowReason').required = true;
+            document.getElementById('mentorGoals').required = false;
 
             modal.classList.add('active');
         }
 
         function connectMentor(name) {
+            currentRequestType = 'mentor';
+            currentRoleModel = name;
+
             const modal = document.getElementById('modalOverlay');
             const header = document.getElementById('modalHeader');
             const subtitle = document.getElementById('modalSubtitle');
-            const features = document.getElementById('modalFeatures');
+            const shadowSpecific = document.getElementById('shadowSpecific');
+            const mentorSpecific = document.getElementById('mentorSpecific');
+            const formView = document.getElementById('formView');
+            const successView = document.getElementById('successView');
 
-            header.textContent = '🤝 Connect as Mentor!';
-            subtitle.textContent = `Great choice! Connect with ${name}`;
+            // Reset views
+            formView.style.display = 'block';
+            successView.style.display = 'none';
+            document.getElementById('requestForm').reset();
 
-            features.innerHTML = `
-                <li>Match you with mentors in your field of interest</li>
-                <li>Set up virtual coffee chats or Q&A sessions</li>
-                <li>Connect you to mentorship networks and communities</li>
-                <li>Provide exclusive resources from this role model</li>
-                <li>Get personalized career guidance and support</li>
-            `;
+            header.textContent = '🤝 Connect as Mentor';
+            subtitle.textContent = `Request mentorship from ${name}`;
+
+            shadowSpecific.style.display = 'none';
+            mentorSpecific.style.display = 'block';
+            document.getElementById('shadowReason').required = false;
+            document.getElementById('mentorGoals').required = true;
 
             modal.classList.add('active');
+        }
+
+        function submitRequest(event) {
+            event.preventDefault();
+
+            const formView = document.getElementById('formView');
+            const successView = document.getElementById('successView');
+            const successMessage = document.getElementById('successMessage');
+            const header = document.getElementById('modalHeader');
+
+            // Simulate submission
+            if (currentRequestType === 'shadow') {
+                header.textContent = '✓ Shadow Request Sent!';
+                successMessage.textContent = `Your request to shadow ${currentRoleModel} has been submitted!`;
+            } else {
+                header.textContent = '✓ Mentor Request Sent!';
+                successMessage.textContent = `Your mentorship request to ${currentRoleModel} has been submitted!`;
+            }
+
+            // Show success view
+            formView.style.display = 'none';
+            successView.style.display = 'block';
         }
 
         function closeModal() {
             const modal = document.getElementById('modalOverlay');
             modal.classList.remove('active');
+
+            // Reset after animation
+            setTimeout(() => {
+                const formView = document.getElementById('formView');
+                const successView = document.getElementById('successView');
+                formView.style.display = 'block';
+                successView.style.display = 'none';
+                document.getElementById('requestForm').reset();
+            }, 300);
         }
 
         // Mobile menu toggle
