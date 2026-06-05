@@ -21,8 +21,8 @@
             --border: #BBB8C2;
             --soft-pink: #F6EEEE;
             --pale-lavender: #C3BBC5;
-            --gold: #E3B835;
-            --gold-light: #EFC735;
+            --gold: #786F85;
+            --gold-light: #857A8D;
         }
 
         * {
@@ -61,7 +61,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #786F85 0%, #E3B835 100%);
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
         }
 
         .shape-blob {
@@ -290,7 +290,7 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #786F85 0%, #E3B835 100%);
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -324,7 +324,7 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #786F85 0%, #E3B835 100%);
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -350,6 +350,91 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card);
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(110, 102, 123, 0.15);
+            border: 4px solid var(--primary);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about-content h2 {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--bg) 100%);
+            border-radius: 20px;
+            border: 3px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .about-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(120, 111, 133, 0.2);
+        }
+
+        .stat-highlight {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat p {
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .about-story {
+            background: var(--bg);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 3px solid var(--pale-lavender);
+        }
+
+        .about-story h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-story h3:first-child {
+            margin-top: 0;
+        }
+
+        .about-story p {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         /* Features Section */
@@ -588,7 +673,7 @@
         }
 
         .chat-message.user {
-            background: linear-gradient(135deg, #E3B835 0%, #857A8D 100%);
+            background: linear-gradient(135deg, #786F85 0%, #857A8D 100%);
             color: white;
             margin-left: 20%;
             text-align: right;
@@ -613,7 +698,7 @@
 
         .chat-input:focus {
             border-color: #786F85;
-            box-shadow: 0 0 10px rgba(159, 161, 255, 0.3), 0 0 20px #E3B835;
+            box-shadow: 0 0 10px rgba(159, 161, 255, 0.3), 0 0 20px #786F85;
         }
 
         .chat-send-btn {
@@ -741,9 +826,14 @@
         .news-icon-placeholder {
             width: 80px;
             height: 80px;
-            background: #5A4A3A;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            backdrop-filter: blur(10px);
         }
 
         .news-content {
@@ -809,7 +899,7 @@
         }
         .stat-card:nth-child(4) {
             animation-delay: 0.5s;
-            border: 4px solid #E3B835;
+            border: 4px solid #786F85;
         }
 
         .stat-card:hover {
@@ -887,7 +977,7 @@
 
         .concern-card {
             background: #F7F0EA;
-            border: 4px solid #E3B835;
+            border: 4px solid #786F85;
             border-radius: 25px;
             padding: 2rem 1.5rem;
             cursor: pointer;
@@ -965,7 +1055,7 @@
 
         .myth-buster-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #786F85 0%, #E3B835 100%);
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1004,7 +1094,7 @@
         }
         .myth-card:nth-child(4) {
             animation-delay: 0.4s;
-            border-color: #E3B835;
+            border-color: #786F85;
         }
 
         .myth-card:hover {
@@ -1024,7 +1114,7 @@
         }
 
         .myth-card:nth-child(4):hover {
-            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #E3B835;
+            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #786F85;
         }
 
         .myth-header, .truth-header {
@@ -1078,12 +1168,12 @@
             position: relative;
             z-index: 1;
             animation: fadeInUp 0.8s ease-out;
-            border: 5px solid #E3B835;
+            border: 5px solid #786F85;
         }
 
         .opportunities-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #786F85 0%, #E3B835 100%);
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1122,7 +1212,7 @@
         }
         .opportunity-category:nth-child(4) {
             animation-delay: 0.4s;
-            border-color: #E3B835;
+            border-color: #786F85;
         }
 
         .opportunity-category:hover {
@@ -1142,7 +1232,7 @@
         }
 
         .opportunity-category:nth-child(4):hover {
-            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #E3B835;
+            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #786F85;
         }
 
         .category-header {
@@ -1286,6 +1376,38 @@
             .hero::after {
                 width: 50px;
                 height: 50px;
+            }
+
+            .about-section {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+                border-radius: 25px;
+            }
+
+            .about-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .stat-highlight {
+                font-size: 2.5rem;
+            }
+
+            .about-story {
+                padding: 1.5rem;
+            }
+
+            .about-story h3 {
+                font-size: 1.25rem;
+            }
+
+            .about-story p {
+                font-size: 1rem;
             }
 
             .features {
@@ -1454,6 +1576,37 @@
         <a href="/quiz" class="cta-button">Start Your Journey →</a>
     </div>
 
+    <!-- About This Project Section -->
+    <div class="about-section">
+        <div class="about-content">
+            <h2>💡 Why SeeMe in STEM?</h2>
+            <div class="about-grid">
+                <div class="about-stat">
+                    <div class="stat-highlight">70%</div>
+                    <p>of girls lose interest in STEM by middle school</p>
+                </div>
+                <div class="about-stat">
+                    <div class="stat-highlight">Only 28%</div>
+                    <p>of STEM workforce are women</p>
+                </div>
+                <div class="about-stat">
+                    <div class="stat-highlight">5%</div>
+                    <p>of tech workers are Black or Latinx women</p>
+                </div>
+            </div>
+            <div class="about-story">
+                <h3>The Problem</h3>
+                <p>Too many talented students give up on STEM careers because they don't see people like themselves succeeding in these fields, don't know where to start, or face barriers that feel impossible to overcome.</p>
+
+                <h3>Our Solution</h3>
+                <p>SeeMe in STEM uses AI to match students with personalized STEM career paths based on their unique interests and skills. But we go beyond just career suggestions — we connect students with diverse role models, bust common myths, and provide actionable resources to turn dreams into reality.</p>
+
+                <h3>The Impact</h3>
+                <p>By helping students see themselves in STEM careers early, we can close the diversity gap, unlock untapped potential, and ensure the next generation of innovators reflects the world we live in.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Features Section -->
     <div class="features">
         <div class="feature-card">
@@ -1590,7 +1743,7 @@
         <div class="news-grid">
             <div class="news-card">
                 <div class="news-image">
-                    <div class="news-icon-placeholder"></div>
+                    <div class="news-icon-placeholder">🤖</div>
                 </div>
                 <div class="news-content">
                     <div class="news-title">AI Breakthrough in Healthcare</div>
@@ -1603,7 +1756,7 @@
 
             <div class="news-card">
                 <div class="news-image">
-                    <div class="news-icon-placeholder"></div>
+                    <div class="news-icon-placeholder">🚀</div>
                 </div>
                 <div class="news-content">
                     <div class="news-title">Student Wins NASA Competition</div>
@@ -1616,7 +1769,7 @@
 
             <div class="news-card">
                 <div class="news-image">
-                    <div class="news-icon-placeholder"></div>
+                    <div class="news-icon-placeholder">🌊</div>
                 </div>
                 <div class="news-content">
                     <div class="news-title">Teen Invents Ocean Cleanup Device</div>
