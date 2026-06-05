@@ -5,7 +5,11 @@
       "Bash(py *)",
       "Bash(start *)",
       "Bash(git add *)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/no_gold.sh)",
+      "Bash(/tmp/no_gold.sh \"/c/Users/jenny/hackathon/Hackathon-2026/templates/index.html\")",
+      "Bash(/tmp/no_gold.sh \"/c/Users/jenny/hackathon/Hackathon-2026/templates/results.html\")"
     ]
   }
 }
