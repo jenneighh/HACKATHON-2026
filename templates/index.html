@@ -20,10 +20,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #FBF3D1 0%, #F6FFDC 50%, #FFF8E8 100%);
+            background: #FFFFFF;
             min-height: 100vh;
             overflow-x: hidden;
-            color: #4A4A4A;
+            color: #1a1a1a;
         }
 
         /* Floating background shapes */
@@ -48,14 +48,14 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #F9B2D7 0%, #B5BAFF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
         }
 
         .shape-blob {
             width: 150px;
             height: 150px;
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            background: linear-gradient(135deg, #AEE2FF 0%, #CFECF3 100%);
+            background: linear-gradient(135deg, #4A90E2 0%, #7EC8E3 100%);
         }
 
         .shape-star {
@@ -73,7 +73,7 @@
             height: 0;
             border-left: 35px solid transparent;
             border-right: 35px solid transparent;
-            border-top: 60px solid #F6FFDC;
+            border-top: 60px solid #E8F4FF;
             position: absolute;
             top: 30px;
             left: -35px;
@@ -83,7 +83,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            border: 8px solid #D9F9DF;
+            border: 8px solid #00D4FF;
             background: transparent;
         }
 
@@ -148,7 +148,7 @@
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             box-shadow: 0 2px 15px rgba(74, 74, 74, 0.1);
-            border-bottom: 4px solid #9FA1FF;
+            border-bottom: 4px solid #00D4FF;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -177,7 +177,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #9FA1FF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #4A90E2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -191,14 +191,14 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #4A4A4A;
+            color: #1a1a1a;
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
         }
 
         .nav-links a:hover {
-            color: #9FA1FF;
+            color: #00D4FF;
             transform: translateY(-2px);
         }
 
@@ -209,7 +209,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #9FA1FF, #AEE2FF);
+            background: linear-gradient(90deg, #00D4FF, #4A90E2);
             transition: width 0.3s;
         }
 
@@ -246,7 +246,7 @@
             border-radius: 40px;
             box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
             border: 5px solid;
-            border-image: linear-gradient(135deg, #9FA1FF, #AEE2FF, #F9B2D7, #B5BAFF) 1;
+            border-image: linear-gradient(135deg, #00D4FF, #4A90E2, #00D4FF, #0099FF) 1;
         }
 
         .hero::before {
@@ -254,7 +254,7 @@
             position: absolute;
             width: 80px;
             height: 80px;
-            background: #F9B2D7;
+            background: #00D4FF;
             border-radius: 50%;
             top: 30px;
             right: 50px;
@@ -267,7 +267,7 @@
             position: absolute;
             width: 60px;
             height: 60px;
-            background: #AEE2FF;
+            background: #4A90E2;
             border-radius: 50%;
             bottom: 30px;
             left: 60px;
@@ -278,7 +278,7 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #9FA1FF 0%, #B5BAFF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -305,14 +305,14 @@
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: #4A4A4A;
+            color: #1a1a1a;
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #9FA1FF 0%, #B5BAFF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -321,12 +321,12 @@
             box-shadow: 0 4px 15px rgba(159, 161, 255, 0.3);
             transition: all 0.3s;
             animation: fadeInUp 0.8s ease-out 0.4s both;
-            border: 2px solid #D9F9DF;
+            border: 2px solid #00D4FF;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(159, 161, 255, 0.5), 0 0 20px #D9F9DF;
+            box-shadow: 0 6px 25px rgba(159, 161, 255, 0.5), 0 0 20px #00D4FF;
         }
 
         @keyframes fadeInUp {
@@ -364,15 +364,15 @@
 
         .feature-card:nth-child(1) {
             animation-delay: 0.5s;
-            border-color: #9FA1FF;
+            border-color: #00D4FF;
         }
         .feature-card:nth-child(2) {
             animation-delay: 0.6s;
-            border-color: #AEE2FF;
+            border-color: #4A90E2;
         }
         .feature-card:nth-child(3) {
             animation-delay: 0.7s;
-            border-color: #F9B2D7;
+            border-color: #00D4FF;
         }
 
         .feature-card:hover {
@@ -381,15 +381,15 @@
         }
 
         .feature-card:nth-child(1):hover {
-            box-shadow: 0 8px 30px rgba(159, 161, 255, 0.4), 0 0 20px #9FA1FF;
+            box-shadow: 0 8px 30px rgba(159, 161, 255, 0.4), 0 0 20px #00D4FF;
         }
 
         .feature-card:nth-child(2):hover {
-            box-shadow: 0 8px 30px rgba(174, 226, 255, 0.4), 0 0 20px #AEE2FF;
+            box-shadow: 0 8px 30px rgba(174, 226, 255, 0.4), 0 0 20px #4A90E2;
         }
 
         .feature-card:nth-child(3):hover {
-            box-shadow: 0 8px 30px rgba(249, 178, 215, 0.4), 0 0 20px #F9B2D7;
+            box-shadow: 0 8px 30px rgba(249, 178, 215, 0.4), 0 0 20px #00D4FF;
         }
 
         .feature-icon {
@@ -400,7 +400,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 25px;
-            background: linear-gradient(135deg, #CFECF3 0%, #DAF9DE 100%);
+            background: linear-gradient(135deg, #7EC8E3 0%, #E8F4FF 100%);
             animation: bounce 2s infinite;
             position: relative;
         }
@@ -410,7 +410,7 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: #F6FFDC;
+            background: #E8F4FF;
             border-radius: 50%;
             top: -5px;
             right: -5px;
@@ -431,7 +431,7 @@
         .icon-chart {
             width: 40px;
             height: 40px;
-            background: linear-gradient(to top, #9FA1FF 60%, transparent 60%);
+            background: linear-gradient(to top, #00D4FF 60%, transparent 60%);
             clip-path: polygon(0% 100%, 20% 80%, 20% 100%, 40% 100%, 40% 60%, 60% 100%, 80% 100%, 80% 40%, 100% 100%, 100% 100%, 0% 100%);
         }
 
@@ -448,7 +448,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #AEE2FF;
+            background: #4A90E2;
         }
 
         .icon-people::before {
@@ -466,7 +466,7 @@
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-bottom: 35px solid #F9B2D7;
+            border-bottom: 35px solid #00D4FF;
             position: relative;
         }
 
@@ -476,7 +476,7 @@
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-top: 35px solid #F9B2D7;
+            border-top: 35px solid #00D4FF;
             position: absolute;
             top: 18px;
             left: -20px;
@@ -505,13 +505,13 @@
         }
 
         .feature-card h3 {
-            color: #4A4A4A;
+            color: #1a1a1a;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
         .feature-card p {
-            color: #6A6A6A;
+            color: #333333;
             line-height: 1.6;
         }
 
@@ -526,12 +526,12 @@
             animation: fadeInUp 1s ease-out;
             position: relative;
             z-index: 1;
-            border: 4px solid #9FA1FF;
+            border: 4px solid #00D4FF;
         }
 
         .chatbot-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #9FA1FF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #4A90E2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -569,18 +569,18 @@
         }
 
         .chat-message.bot {
-            background: linear-gradient(135deg, #CFECF3 0%, #DAF9DE 100%);
-            color: #4A4A4A;
+            background: linear-gradient(135deg, #7EC8E3 0%, #E8F4FF 100%);
+            color: #1a1a1a;
             margin-right: 20%;
             border-left: 4px solid #96A78D;
         }
 
         .chat-message.user {
-            background: linear-gradient(135deg, #B5BAFF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #0099FF 0%, #4A90E2 100%);
             color: white;
             margin-left: 20%;
             text-align: right;
-            border-right: 4px solid #9FA1FF;
+            border-right: 4px solid #00D4FF;
         }
 
         .chat-input-area {
@@ -591,7 +591,7 @@
         .chat-input {
             flex: 1;
             padding: 1rem;
-            border: 3px solid #AEE2FF;
+            border: 3px solid #4A90E2;
             border-radius: 50px;
             font-size: 1rem;
             outline: none;
@@ -600,15 +600,15 @@
         }
 
         .chat-input:focus {
-            border-color: #9FA1FF;
-            box-shadow: 0 0 10px rgba(159, 161, 255, 0.3), 0 0 20px #B5BAFF;
+            border-color: #00D4FF;
+            box-shadow: 0 0 10px rgba(159, 161, 255, 0.3), 0 0 20px #0099FF;
         }
 
         .chat-send-btn {
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #9FA1FF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #4A90E2 100%);
             color: white;
-            border: 2px solid #D9F9DF;
+            border: 2px solid #00D4FF;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: bold;
@@ -618,7 +618,7 @@
 
         .chat-send-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(159, 161, 255, 0.5), 0 0 20px #D9F9DF;
+            box-shadow: 0 4px 15px rgba(159, 161, 255, 0.5), 0 0 20px #00D4FF;
         }
 
         /* STEM News Section */
@@ -632,7 +632,7 @@
 
         .news-section h2 {
             text-align: center;
-            color: #5A4A3A;
+            color: #1a1a1a;
             margin-bottom: 2rem;
             font-size: 2.5rem;
         }
@@ -655,15 +655,15 @@
 
         .news-card:nth-child(1) {
             animation-delay: 0.2s;
-            border-color: #9FA1FF;
+            border-color: #00D4FF;
         }
         .news-card:nth-child(2) {
             animation-delay: 0.3s;
-            border-color: #AEE2FF;
+            border-color: #4A90E2;
         }
         .news-card:nth-child(3) {
             animation-delay: 0.4s;
-            border-color: #F9B2D7;
+            border-color: #00D4FF;
         }
 
         .news-card:hover {
@@ -671,15 +671,15 @@
         }
 
         .news-card:nth-child(1):hover {
-            box-shadow: 0 8px 30px rgba(159, 161, 255, 0.4), 0 0 20px #9FA1FF;
+            box-shadow: 0 8px 30px rgba(159, 161, 255, 0.4), 0 0 20px #00D4FF;
         }
 
         .news-card:nth-child(2):hover {
-            box-shadow: 0 8px 30px rgba(174, 226, 255, 0.4), 0 0 20px #AEE2FF;
+            box-shadow: 0 8px 30px rgba(174, 226, 255, 0.4), 0 0 20px #4A90E2;
         }
 
         .news-card:nth-child(3):hover {
-            box-shadow: 0 8px 30px rgba(249, 178, 215, 0.4), 0 0 20px #F9B2D7;
+            box-shadow: 0 8px 30px rgba(249, 178, 215, 0.4), 0 0 20px #00D4FF;
         }
 
         .news-image {
@@ -740,7 +740,7 @@
 
         .news-title {
             font-size: 1.3rem;
-            color: #5A4A3A;
+            color: #1a1a1a;
             margin-bottom: 0.5rem;
             font-weight: bold;
         }
@@ -755,7 +755,7 @@
             display: inline-block;
             padding: 0.3rem 0.8rem;
             background: #D4C4B4;
-            color: #5A4A3A;
+            color: #1a1a1a;
             border-radius: 15px;
             font-size: 0.85rem;
             font-weight: 500;
@@ -785,19 +785,19 @@
 
         .stat-card:nth-child(1) {
             animation-delay: 0.2s;
-            border: 4px solid #9FA1FF;
+            border: 4px solid #00D4FF;
         }
         .stat-card:nth-child(2) {
             animation-delay: 0.3s;
-            border: 4px solid #AEE2FF;
+            border: 4px solid #4A90E2;
         }
         .stat-card:nth-child(3) {
             animation-delay: 0.4s;
-            border: 4px solid #F9B2D7;
+            border: 4px solid #00D4FF;
         }
         .stat-card:nth-child(4) {
             animation-delay: 0.5s;
-            border: 4px solid #B5BAFF;
+            border: 4px solid #0099FF;
         }
 
         .stat-card:hover {
@@ -805,32 +805,32 @@
         }
 
         .stat-card:nth-child(1):hover {
-            box-shadow: 0 6px 25px rgba(159, 161, 255, 0.5), 0 0 20px #9FA1FF;
+            box-shadow: 0 6px 25px rgba(159, 161, 255, 0.5), 0 0 20px #00D4FF;
         }
 
         .stat-card:nth-child(2):hover {
-            box-shadow: 0 6px 25px rgba(174, 226, 255, 0.5), 0 0 20px #AEE2FF;
+            box-shadow: 0 6px 25px rgba(174, 226, 255, 0.5), 0 0 20px #4A90E2;
         }
 
         .stat-card:nth-child(3):hover {
-            box-shadow: 0 6px 25px rgba(249, 178, 215, 0.5), 0 0 20px #F9B2D7;
+            box-shadow: 0 6px 25px rgba(249, 178, 215, 0.5), 0 0 20px #00D4FF;
         }
 
         .stat-card:nth-child(4):hover {
-            box-shadow: 0 6px 25px rgba(217, 249, 223, 0.5), 0 0 20px #D9F9DF;
+            box-shadow: 0 6px 25px rgba(217, 249, 223, 0.5), 0 0 20px #00D4FF;
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #9FA1FF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #4A90E2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .stat-label {
-            color: #4A4A4A;
+            color: #1a1a1a;
             font-size: 1rem;
             margin-top: 0.5rem;
         }
@@ -846,12 +846,12 @@
             position: relative;
             z-index: 1;
             animation: fadeInUp 0.8s ease-out;
-            border: 5px solid #AEE2FF;
+            border: 5px solid #4A90E2;
         }
 
         .confidence-check-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #9FA1FF 0%, #AEE2FF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #4A90E2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -875,7 +875,7 @@
 
         .concern-card {
             background: #FFFFFF;
-            border: 4px solid #B5BAFF;
+            border: 4px solid #0099FF;
             border-radius: 25px;
             padding: 2rem 1.5rem;
             cursor: pointer;
@@ -890,8 +890,8 @@
 
         .concern-card:hover {
             transform: translateY(-8px);
-            border-color: #9FA1FF;
-            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #9FA1FF;
+            border-color: #00D4FF;
+            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #00D4FF;
         }
 
         .concern-icon {
@@ -900,7 +900,7 @@
         }
 
         .concern-text {
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-size: 1.05rem;
             font-weight: 600;
             line-height: 1.4;
@@ -913,17 +913,17 @@
             margin-top: 2rem;
             box-shadow: 0 8px 30px rgba(74, 74, 74, 0.15);
             animation: slideIn 0.5s ease-out;
-            border: 3px solid #CFECF3;
+            border: 3px solid #7EC8E3;
         }
 
         .response-content {
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-size: 1.15rem;
             line-height: 1.8;
         }
 
         .response-content h3 {
-            color: #5A4A3A;
+            color: #1a1a1a;
             margin-bottom: 1rem;
             font-size: 1.8rem;
         }
@@ -934,7 +934,7 @@
         }
 
         .response-content strong {
-            color: #5A4A3A;
+            color: #1a1a1a;
         }
 
         /* Myth Buster Section */
@@ -948,12 +948,12 @@
             position: relative;
             z-index: 1;
             animation: fadeInUp 0.8s ease-out;
-            border: 5px solid #F9B2D7;
+            border: 5px solid #00D4FF;
         }
 
         .myth-buster-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #F9B2D7 0%, #B5BAFF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -980,19 +980,19 @@
 
         .myth-card:nth-child(1) {
             animation-delay: 0.1s;
-            border-color: #9FA1FF;
+            border-color: #00D4FF;
         }
         .myth-card:nth-child(2) {
             animation-delay: 0.2s;
-            border-color: #AEE2FF;
+            border-color: #4A90E2;
         }
         .myth-card:nth-child(3) {
             animation-delay: 0.3s;
-            border-color: #F9B2D7;
+            border-color: #00D4FF;
         }
         .myth-card:nth-child(4) {
             animation-delay: 0.4s;
-            border-color: #B5BAFF;
+            border-color: #0099FF;
         }
 
         .myth-card:hover {
@@ -1000,19 +1000,19 @@
         }
 
         .myth-card:nth-child(1):hover {
-            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #9FA1FF;
+            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #00D4FF;
         }
 
         .myth-card:nth-child(2):hover {
-            box-shadow: 0 12px 35px rgba(174, 226, 255, 0.4), 0 0 20px #AEE2FF;
+            box-shadow: 0 12px 35px rgba(174, 226, 255, 0.4), 0 0 20px #4A90E2;
         }
 
         .myth-card:nth-child(3):hover {
-            box-shadow: 0 12px 35px rgba(249, 178, 215, 0.4), 0 0 20px #F9B2D7;
+            box-shadow: 0 12px 35px rgba(249, 178, 215, 0.4), 0 0 20px #00D4FF;
         }
 
         .myth-card:nth-child(4):hover {
-            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #B5BAFF;
+            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #0099FF;
         }
 
         .myth-header, .truth-header {
@@ -1022,7 +1022,7 @@
         .myth-label {
             display: inline-block;
             background: linear-gradient(135deg, #FFB3BA 0%, #FFCCCB 100%);
-            color: #5A4A3A;
+            color: #1a1a1a;
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-weight: bold;
@@ -1033,7 +1033,7 @@
         .truth-label {
             display: inline-block;
             background: linear-gradient(135deg, #BAEAFF 0%, #BAFFC9 100%);
-            color: #5A4A3A;
+            color: #1a1a1a;
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-weight: bold;
@@ -1042,7 +1042,7 @@
         }
 
         .myth-text {
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-size: 1.05rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
@@ -1066,12 +1066,12 @@
             position: relative;
             z-index: 1;
             animation: fadeInUp 0.8s ease-out;
-            border: 5px solid #B5BAFF;
+            border: 5px solid #0099FF;
         }
 
         .opportunities-section h2 {
             text-align: center;
-            background: linear-gradient(135deg, #9FA1FF 0%, #B5BAFF 100%);
+            background: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1098,19 +1098,19 @@
 
         .opportunity-category:nth-child(1) {
             animation-delay: 0.1s;
-            border-color: #9FA1FF;
+            border-color: #00D4FF;
         }
         .opportunity-category:nth-child(2) {
             animation-delay: 0.2s;
-            border-color: #AEE2FF;
+            border-color: #4A90E2;
         }
         .opportunity-category:nth-child(3) {
             animation-delay: 0.3s;
-            border-color: #F9B2D7;
+            border-color: #00D4FF;
         }
         .opportunity-category:nth-child(4) {
             animation-delay: 0.4s;
-            border-color: #B5BAFF;
+            border-color: #0099FF;
         }
 
         .opportunity-category:hover {
@@ -1118,19 +1118,19 @@
         }
 
         .opportunity-category:nth-child(1):hover {
-            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #9FA1FF;
+            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #00D4FF;
         }
 
         .opportunity-category:nth-child(2):hover {
-            box-shadow: 0 12px 35px rgba(174, 226, 255, 0.4), 0 0 20px #AEE2FF;
+            box-shadow: 0 12px 35px rgba(174, 226, 255, 0.4), 0 0 20px #4A90E2;
         }
 
         .opportunity-category:nth-child(3):hover {
-            box-shadow: 0 12px 35px rgba(249, 178, 215, 0.4), 0 0 20px #F9B2D7;
+            box-shadow: 0 12px 35px rgba(249, 178, 215, 0.4), 0 0 20px #00D4FF;
         }
 
         .opportunity-category:nth-child(4):hover {
-            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #B5BAFF;
+            box-shadow: 0 12px 35px rgba(181, 186, 255, 0.4), 0 0 20px #0099FF;
         }
 
         .category-header {
@@ -1148,7 +1148,7 @@
         }
 
         .category-header h3 {
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-size: 1.4rem;
             margin: 0;
         }
@@ -1169,12 +1169,12 @@
 
         .opportunity-item:hover {
             transform: translateX(5px);
-            border-left-color: #5A4A3A;
+            border-left-color: #1a1a1a;
             box-shadow: 0 4px 15px rgba(112, 105, 126, 0.15);
         }
 
         .opportunity-item h4 {
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
@@ -1188,7 +1188,7 @@
 
         .opportunity-link {
             display: inline-block;
-            color: #5A4A3A;
+            color: #1a1a1a;
             font-weight: 600;
             text-decoration: none;
             font-size: 0.9rem;
