@@ -404,6 +404,124 @@
             box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
         }
 
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(112, 105, 126, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 500px;
+            margin: 2rem;
+            box-shadow: 0 20px 60px rgba(112, 105, 126, 0.3);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 2rem;
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: #98899C;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-features {
+            background: linear-gradient(135deg, #F8F5F8 0%, #FFF 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-features h4 {
+            color: #70697E;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-features li {
+            color: #98899C;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .modal-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #70697E;
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            color: #98899C;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .modal-close-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .modal-close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.4);
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 0;
@@ -569,6 +687,22 @@
         <a href="/quiz" class="btn">Take the Career Quiz <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 25px; height: 25px; vertical-align: middle; border: 2px solid white; border-radius: 5px; padding: 2px; background: white; margin-left: 5px;"></a>
     </div>
 
+    <!-- Modal for Shadow/Connect Features -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header" id="modalHeader">🌟 Feature Coming Soon!</div>
+            <div class="modal-subtitle" id="modalSubtitle"></div>
+            <div class="modal-features">
+                <h4>In the full version, this would:</h4>
+                <ul id="modalFeatures"></ul>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <strong>For this hackathon demo:</strong> Explore the role models' stories and advice above, or take our career quiz to find your perfect STEM match!
+            </div>
+            <button class="modal-close-btn" onclick="closeModal()">Got It!</button>
+        </div>
+    </div>
+
     <script>
         function filterRoleModels(filterType) {
             const cards = document.querySelectorAll('.role-model-card');
@@ -596,11 +730,48 @@
         }
 
         function requestShadow(name, title) {
-            alert(`Awesome! You've expressed interest in shadowing ${name}, ${title}!\n\nIn a full version of this app, this would:\n\n- Send a shadow opportunity request\n- Connect you with similar professionals in your area\n- Provide information about virtual shadowing options\n- Match you with mentorship programs\n\nFor this hackathon demo, explore more role models and take the quiz to find careers that match you!`);
+            const modal = document.getElementById('modalOverlay');
+            const header = document.getElementById('modalHeader');
+            const subtitle = document.getElementById('modalSubtitle');
+            const features = document.getElementById('modalFeatures');
+
+            header.textContent = '👀 Shadow Opportunity!';
+            subtitle.textContent = `You want to shadow ${name}, ${title}`;
+
+            features.innerHTML = `
+                <li>Send a shadow opportunity request</li>
+                <li>Connect you with similar professionals in your area</li>
+                <li>Provide information about virtual shadowing options</li>
+                <li>Match you with mentorship programs</li>
+                <li>Schedule a "day in the life" experience</li>
+            `;
+
+            modal.classList.add('active');
         }
 
         function connectMentor(name) {
-            alert(`Great choice! You want to connect with ${name} as a mentor!\n\nIn a full version, this feature would:\n\n- Match you with mentors in your field of interest\n- Set up virtual coffee chats or Q&A sessions\n- Connect you to mentorship networks\n- Provide resources from this role model\n\nFor now, check out their story and advice above to learn from their journey!`);
+            const modal = document.getElementById('modalOverlay');
+            const header = document.getElementById('modalHeader');
+            const subtitle = document.getElementById('modalSubtitle');
+            const features = document.getElementById('modalFeatures');
+
+            header.textContent = '🤝 Connect as Mentor!';
+            subtitle.textContent = `Great choice! Connect with ${name}`;
+
+            features.innerHTML = `
+                <li>Match you with mentors in your field of interest</li>
+                <li>Set up virtual coffee chats or Q&A sessions</li>
+                <li>Connect you to mentorship networks and communities</li>
+                <li>Provide exclusive resources from this role model</li>
+                <li>Get personalized career guidance and support</li>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('active');
         }
 
         // Mobile menu toggle
