@@ -39,3 +39,45 @@ Press CTRL+C to quit
  * Debugger PIN: 126-289-242
 127.0.0.1 - - [04/Jun/2026 11:56:47] "POST /api/mentor HTTP/1.1" 200 -
 127.0.0.1 - - [04/Jun/2026 11:56:50] "POST /api/mentor HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/icon-192.png HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /careers HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /quiz HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /role-models HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:40:56] "GET /static/icon-512.png HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:48:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:48:31] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:48:31] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:48:39] "GET /quiz HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:48:39] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:48:39] "GET /static/icon-192.png HTTP/1.1" 304 -
+C:\Users\jenny\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\werkzeug\sansio\response.py:232: UserWarning: The 'session' cookie is too large: the value was 4748 bytes but the header required 26 extra bytes. The final size was 4774 bytes but the limit is 4093 bytes. Browsers may silently ignore cookies larger than this.
+  dump_cookie(
+127.0.0.1 - - [04/Jun/2026 23:48:47] "POST /api/match-careers HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:48:47] "GET /results HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:48:47] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:48:47] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:48:52] "POST /api/mentor HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:49:01] "GET /role-models HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2026 23:49:01] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [04/Jun/2026 23:49:01] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:11:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 00:11:30] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:11:30] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:11:34] "GET /quiz HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 00:11:34] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:11:34] "GET /static/icon-192.png HTTP/1.1" 304 -
+C:\Users\jenny\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\werkzeug\sansio\response.py:232: UserWarning: The 'session' cookie is too large: the value was 4247 bytes but the header required 26 extra bytes. The final size was 4273 bytes but the limit is 4093 bytes. Browsers may silently ignore cookies larger than this.
+  dump_cookie(
+127.0.0.1 - - [05/Jun/2026 00:11:50] "POST /api/match-careers HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 00:11:50] "GET /results HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 00:11:50] "GET /static/manifest.json HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:11:50] "GET /static/icon-192.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Jun/2026 00:12:07] "POST /api/mentor HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 00:12:27] "POST /api/mentor HTTP/1.1" 200 -
