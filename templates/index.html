@@ -1,8 +1,30 @@
+<!--
+=============================================================================
+SEEME IN STEM - HOME PAGE
+=============================================================================
+Purpose: Main landing page for the SeeMe in STEM platform
+Features:
+- Hero section with call-to-action
+- About section (Why SeeMe in STEM?)
+- Feature highlights
+- Statistics showcase
+- STEM Confidence Check (interactive)
+- Myth Busters section
+- Interactive chatbot for STEM questions
+- STEM News & Inspiration
+
+Target Audience: Middle and high school students interested in STEM
+Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
+=============================================================================
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+    <!-- PWA (Progressive Web App) Configuration -->
     <meta name="theme-color" content="#5A4A3A">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -10,8 +32,13 @@
     <link rel="manifest" href="/static/manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192.png">
     <link rel="apple-touch-icon" href="/static/icon-192.png">
+
     <title>SeeMe in STEM - Find Your Future ✨</title>
+
     <style>
+        /* =================================================================
+           CSS STYLES
+           ================================================================= */
         :root {
             --bg: #F7F0EA;
             --card: #FEFDFC;
@@ -945,6 +972,63 @@
             margin-top: 0.5rem;
         }
 
+        /* Section Navigator */
+        .section-nav {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 1.5rem 2rem;
+            background: var(--card);
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(110, 102, 123, 0.15);
+            position: sticky;
+            top: 90px;
+            z-index: 50;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+            padding-top: 2rem;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--soft-pink) 100%);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(120, 111, 133, 0.3);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            color: white;
+            border-color: var(--gold);
+        }
+
+
         /* STEM Confidence Check Section */
         .confidence-check-section {
             max-width: 1200px;
@@ -1327,6 +1411,21 @@
         }
 
         @media (max-width: 768px) {
+            .section-nav {
+                top: 75px;
+                padding: 1rem;
+                margin: 1rem auto 0;
+            }
+
+            .nav-tabs {
+                gap: 0.5rem;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
             .navbar {
                 padding: 1rem;
             }
@@ -1575,6 +1674,8 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/careers">Careers</a></li>
                 <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/opportunities">Resources</a></li>
+                <li><a href="/confidence">Support</a></li>
                 <li><a href="/quiz">Take Quiz</a></li>
             </ul>
         </div>
@@ -1645,6 +1746,25 @@
         </div>
     </div>
 
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">17+</div>
+            <div class="stat-label">STEM Career Paths</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">Inspiring Role Models</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">AI</div>
+            <div class="stat-label">Powered Matching</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Free to Use</div>
+        </div>
+    </div>
     <!-- STEM Confidence Check Section -->
     <div class="confidence-check-section">
         <h2>💭 Feeling Unsure About STEM?</h2>
@@ -1792,173 +1912,25 @@
             </div>
         </div>
     </div>
-
-    <!-- Stats Section -->
-    <div class="stats">
-        <div class="stat-card">
-            <div class="stat-number">5</div>
-            <div class="stat-label">STEM Career Paths</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">12+</div>
-            <div class="stat-label">Inspiring Role Models</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">AI</div>
-            <div class="stat-label">Powered Matching</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Free to Use</div>
-        </div>
-    </div>
-
-    <!-- Opportunities Section -->
-    <div class="opportunities-section">
-        <h2>🚀 Take Action: Opportunities For You!</h2>
-        <p class="section-subtitle">Get started with summer camps, competitions, scholarships, and more!</p>
-
-        <div class="opportunities-grid">
-            <!-- Summer Camps -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">⛺</div>
-                    <h3>Summer Camps & Programs</h3>
-                </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>🎓 Girls Who Code Summer Immersion</h4>
-                        <p>Free 2-week coding program for high school girls</p>
-                        <a href="https://girlswhocode.com/programs/summer-immersion-program" target="_blank" class="opportunity-link">Learn More →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 STEM Summer Camps by State</h4>
-                        <p>Find local STEM camps near you across the US</p>
-                        <a href="https://www.engineeringforkids.com/locations/" target="_blank" class="opportunity-link">Find Camps →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🚀 NASA STEM Programs</h4>
-                        <p>Virtual and in-person programs from NASA</p>
-                        <a href="https://www.nasa.gov/learning-resources/for-kids-and-students/" target="_blank" class="opportunity-link">Explore →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 AI4ALL Summer Programs</h4>
-                        <p>AI education for underrepresented students</p>
-                        <a href="https://ai-4-all.org/" target="_blank" class="opportunity-link">Apply →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Competitions -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">🏆</div>
-                    <h3>Competitions & Challenges</h3>
-                </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>💡 Google Science Fair</h4>
-                        <p>Global online science competition for ages 13-18</p>
-                        <a href="https://www.googlesciencefair.com/" target="_blank" class="opportunity-link">Enter →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🤖 FIRST Robotics Competition</h4>
-                        <p>Build robots and compete with teams worldwide</p>
-                        <a href="https://www.firstinspires.org/robotics/frc" target="_blank" class="opportunity-link">Join Team →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🧮 MATHCOUNTS Competition</h4>
-                        <p>National math competition for middle schoolers</p>
-                        <a href="https://www.mathcounts.org/" target="_blank" class="opportunity-link">Register →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 Congressional App Challenge</h4>
-                        <p>Create an app and compete in your district</p>
-                        <a href="https://www.congressionalappchallenge.us/" target="_blank" class="opportunity-link">Submit App →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 Regeneron Science Talent Search</h4>
-                        <p>Prestigious national science research competition</p>
-                        <a href="https://www.societyforscience.org/regeneron-sts/" target="_blank" class="opportunity-link">Apply →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scholarships -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">💰</div>
-                    <h3>Scholarships & Financial Aid</h3>
-                </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>🎓 Society of Women Engineers (SWE)</h4>
-                        <p>Scholarships for women pursuing engineering</p>
-                        <a href="https://swe.org/scholarships/" target="_blank" class="opportunity-link">Apply →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🌟 National Society of Black Engineers</h4>
-                        <p>Scholarships and support for Black STEM students</p>
-                        <a href="https://www.nsbe.org/Programs/Scholarships.aspx" target="_blank" class="opportunity-link">Learn More →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🚀 Hispanic Scholarship Fund (HSF)</h4>
-                        <p>Scholarships for Hispanic students in all majors</p>
-                        <a href="https://www.hsf.net/scholarship" target="_blank" class="opportunity-link">Apply →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 Generation Google Scholarship</h4>
-                        <p>For students passionate about computer science</p>
-                        <a href="https://buildyourfuture.withgoogle.com/scholarships" target="_blank" class="opportunity-link">Details →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 STEM Scholarships Database</h4>
-                        <p>Search thousands of STEM-specific scholarships</p>
-                        <a href="https://www.scholarships.com/financial-aid/college-scholarships/scholarships-by-type/stem-scholarships/" target="_blank" class="opportunity-link">Search →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Free Online Resources -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">📚</div>
-                    <h3>Free Learning Resources</h3>
-                </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>💻 Khan Academy</h4>
-                        <p>Free courses in math, science, and coding</p>
-                        <a href="https://www.khanacademy.org/" target="_blank" class="opportunity-link">Start Learning →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🎓 Coursera for Teens</h4>
-                        <p>Free college-level courses in STEM subjects</p>
-                        <a href="https://www.coursera.org/" target="_blank" class="opportunity-link">Browse →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🤖 Code.org</h4>
-                        <p>Learn computer science for free</p>
-                        <a href="https://code.org/" target="_blank" class="opportunity-link">Code Now →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 MIT OpenCourseWare</h4>
-                        <p>Free MIT courses online for everyone</p>
-                        <a href="https://ocw.mit.edu/" target="_blank" class="opportunity-link">Explore →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Mobile menu toggle
+        // =================================================================
+        // JAVASCRIPT FUNCTIONS FOR INTERACTIVITY
+        // =================================================================
+
+        /**
+         * Toggle mobile navigation menu
+         * Shows/hides the navigation links on mobile devices
+         */
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // STEM Confidence Check responses
+        /**
+         * Show confidence-building responses
+         * Displays encouraging messages for different STEM concerns
+         * @param {string} concern - The type of concern (start, math, network, smart, impact)
+         */
         function showConfidenceResponse(concern) {
             const responseDiv = document.getElementById('confidenceResponse');
             const contentDiv = document.getElementById('responseContent');
@@ -2040,35 +2012,43 @@
             responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Chatbot functionality
+        // =================================================================
+        // CHATBOT FUNCTIONALITY
+        // =================================================================
+
+        // Get chatbot elements
         const chatBox = document.getElementById('chatBox');
         const chatInput = document.getElementById('chatInput');
 
-        // Allow Enter key to send message
+        // Allow pressing Enter key to send message (in addition to clicking Send button)
         chatInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
 
+        /**
+         * Send user message to chatbot and display response
+         * Handles the chat interaction with the backend API
+         */
         async function sendMessage() {
             const message = chatInput.value.trim();
-            if (!message) return;
+            if (!message) return; // Don't send empty messages
 
-            // Add user message to chat
+            // Display user's message in chat
             const userMessage = document.createElement('div');
             userMessage.className = 'chat-message user';
             userMessage.textContent = message;
             chatBox.appendChild(userMessage);
 
-            // Clear input
+            // Clear input field
             chatInput.value = '';
 
-            // Scroll to bottom
+            // Auto-scroll to show newest messages
             chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
-                // Send to API
+                // Send message to backend API
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: {
@@ -2079,17 +2059,17 @@
 
                 const data = await response.json();
 
-                // Add bot response to chat
+                // Display bot's response
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                // Handle both successful responses and error responses
                 botMessage.textContent = data.response || data.error || 'Oops! Something went wrong. Please try again!';
                 chatBox.appendChild(botMessage);
 
-                // Scroll to bottom
+                // Auto-scroll to show newest messages
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             } catch (error) {
+                // Handle network or server errors
                 console.error('Error:', error);
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'chat-message bot';
@@ -2099,7 +2079,10 @@
             }
         }
 
-        // Service Worker Registration for PWA
+        // =================================================================
+        // PROGRESSIVE WEB APP (PWA) SETUP
+        // =================================================================
+        // Registers service worker to enable offline functionality
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/static/sw.js')

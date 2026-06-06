@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities - SeeMe in STEM</title>
+    <link rel="stylesheet" href="/static/common-styles.css">
+    <style>
+        :root {
+            --bg: #F7F0EA;
+            --card: #FEFDFC;
+            --text: #6E667B;
+            --primary: #786F85;
+            --secondary: #857A8D;
+            --border: #E8E3E8;
+            --gold: #786F85;
+            --lavender: #C3BBC5;
+            --cream: #FFF8F0;
+            --soft-shadow: rgba(120, 111, 133, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #FFF5EB 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .navbar {
+            background: rgba(254, 253, 252, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px var(--soft-shadow);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon { width: 40px; height: 40px; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 4rem auto 3rem;
+            padding: 0 2rem;
+            max-width: 800px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text);
+            line-height: 1.6;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .opportunities-section {
+            max-width: 1300px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .opportunity-category {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px var(--soft-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .opportunity-category:nth-child(1) { animation-delay: 0.1s; }
+        .opportunity-category:nth-child(2) { animation-delay: 0.2s; }
+        .opportunity-category:nth-child(3) { animation-delay: 0.3s; }
+        .opportunity-category:nth-child(4) { animation-delay: 0.4s; }
+
+        .opportunity-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(120, 111, 133, 0.15);
+            border-color: var(--lavender);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .category-icon {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 2px 4px rgba(120, 111, 133, 0.1));
+        }
+
+        .category-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .opportunity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .opportunity-item {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFFFFF 100%);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opportunity-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .opportunity-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(120, 111, 133, 0.12);
+            border-color: var(--lavender);
+        }
+
+        .opportunity-item:hover::before {
+            opacity: 1;
+        }
+
+        .opportunity-item h4 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .opportunity-item p {
+            color: var(--text);
+            opacity: 0.85;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .opportunity-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .opportunity-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .opportunity-link:hover {
+            color: var(--secondary);
+        }
+
+        .opportunity-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .opportunity-category {
+                padding: 2rem;
+            }
+
+            .category-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .category-icon {
+                font-size: 2.3rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .page-header {
+                margin: 2rem auto 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .opportunity-category {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            .opportunity-item {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                SeeMe in STEM
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/opportunities">Resources</a></li>
+                <li><a href="/confidence">Support</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>🚀 Opportunities For You!</h1>
+        <p>Summer camps, competitions, scholarships, and free resources to jumpstart your STEM journey</p>
+    </div>
+
+    <div class="opportunities-section">
+        <div class="opportunities-grid">
+            <!-- Summer Camps -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">⛺</div>
+                    <h3>Summer Camps & Programs</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>🎓 Girls Who Code Summer Immersion</h4>
+                        <p>Free 2-week coding program for high school girls</p>
+                        <a href="https://girlswhocode.com/programs/summer-immersion-program" target="_blank" class="opportunity-link">Learn More</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 STEM Summer Camps by State</h4>
+                        <p>Find local STEM camps near you across the US</p>
+                        <a href="https://www.engineeringforkids.com/locations/" target="_blank" class="opportunity-link">Find Camps</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🚀 NASA STEM Programs</h4>
+                        <p>Virtual and in-person programs from NASA</p>
+                        <a href="https://www.nasa.gov/learning-resources/for-kids-and-students/" target="_blank" class="opportunity-link">Explore</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 AI4ALL Summer Programs</h4>
+                        <p>AI education for underrepresented students</p>
+                        <a href="https://ai-4-all.org/" target="_blank" class="opportunity-link">Apply</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitions -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">🏆</div>
+                    <h3>Competitions & Challenges</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>💡 Google Science Fair</h4>
+                        <p>Global online science competition for ages 13-18</p>
+                        <a href="https://www.googlesciencefair.com/" target="_blank" class="opportunity-link">Enter</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🤖 FIRST Robotics Competition</h4>
+                        <p>Build robots and compete with teams worldwide</p>
+                        <a href="https://www.firstinspires.org/robotics/frc" target="_blank" class="opportunity-link">Join Team</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🧮 MATHCOUNTS Competition</h4>
+                        <p>National math competition for middle schoolers</p>
+                        <a href="https://www.mathcounts.org/" target="_blank" class="opportunity-link">Register</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 Congressional App Challenge</h4>
+                        <p>Create an app and compete in your district</p>
+                        <a href="https://www.congressionalappchallenge.us/" target="_blank" class="opportunity-link">Submit App</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scholarships -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">💰</div>
+                    <h3>Scholarships & Financial Aid</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>🎓 Society of Women Engineers (SWE)</h4>
+                        <p>Scholarships for women pursuing engineering</p>
+                        <a href="https://swe.org/scholarships/" target="_blank" class="opportunity-link">Apply</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🌟 National Society of Black Engineers</h4>
+                        <p>Scholarships and support for Black STEM students</p>
+                        <a href="https://www.nsbe.org/Programs/Scholarships.aspx" target="_blank" class="opportunity-link">Learn More →</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🚀 Hispanic Scholarship Fund (HSF)</h4>
+                        <p>Scholarships for Hispanic students in all majors</p>
+                        <a href="https://www.hsf.net/scholarship" target="_blank" class="opportunity-link">Apply</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>💻 Generation Google Scholarship</h4>
+                        <p>For students passionate about computer science</p>
+                        <a href="https://buildyourfuture.withgoogle.com/scholarships" target="_blank" class="opportunity-link">Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Resources -->
+            <div class="opportunity-category">
+                <div class="category-header">
+                    <div class="category-icon">📚</div>
+                    <h3>Free Learning Resources</h3>
+                </div>
+                <div class="opportunity-list">
+                    <div class="opportunity-item">
+                        <h4>💻 Khan Academy</h4>
+                        <p>Free courses in math, science, and coding</p>
+                        <a href="https://www.khanacademy.org/" target="_blank" class="opportunity-link">Start Learning</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🎓 Free Online Courses</h4>
+                        <p>Free college-level courses in STEM subjects</p>
+                        <a href="https://www.coursera.org/" target="_blank" class="opportunity-link">Browse</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🤖 Code.org</h4>
+                        <p>Learn computer science for free</p>
+                        <a href="https://code.org/" target="_blank" class="opportunity-link">Code Now</a>
+                    </div>
+                    <div class="opportunity-item">
+                        <h4>🔬 MIT OpenCourseWare</h4>
+                        <p>Free MIT courses online for everyone</p>
+                        <a href="https://ocw.mit.edu/" target="_blank" class="opportunity-link">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

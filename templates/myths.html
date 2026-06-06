@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Myths - SeeMe in STEM</title>
+    <style>
+        :root {
+            --bg: #F7F0EA;
+            --card: #FEFDFC;
+            --text: #6E667B;
+            --primary: #786F85;
+            --border: #BBB8C2;
+            --gold: #786F85;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .navbar {
+            background: var(--card);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(110, 102, 123, 0.1);
+            border-bottom: 3px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon { width: 40px; height: 40px; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .myth-buster-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: #F7F0EA;
+            border-radius: 40px;
+            box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
+            border: 5px solid #786F85;
+        }
+
+        .myth-buster-section h2 {
+            text-align: center;
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6B5B4B;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .myth-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .myth-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .myth-card {
+            background: #F7F0EA;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(74, 74, 74, 0.12);
+            transition: transform 0.3s ease;
+            border: 3px solid #786F85;
+        }
+
+        .myth-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #786F85;
+        }
+
+        .myth-header, .truth-header {
+            margin-bottom: 1rem;
+        }
+
+        .myth-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFB3BA 0%, #FFCCCB 100%);
+            color: #6E667B;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .truth-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #BAEAFF 0%, #BAFFC9 100%);
+            color: #6E667B;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .myth-text {
+            color: #6E667B;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .truth-text {
+            color: #6B5B4B;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                SeeMe in STEM
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/role-models">Role Models</a></li>
+                <li><a href="/opportunities">Resources</a></li>
+                <li><a href="/confidence">Support</a></li>
+                <li><a href="/quiz">Take Quiz</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="myth-buster-section">
+        <h2>🚫 STEM Myths vs. ✨ Reality</h2>
+        <p class="section-subtitle">Let's bust some common myths that might be holding you back!</p>
+
+        <div class="myth-cards-grid">
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">STEM is only for people who are naturally good at math.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">Math is a skill you build with practice! STEM also needs creativity, teamwork, communication, and curiosity. Many successful STEM professionals weren't "math whizzes" at first.</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">I need to know coding before college.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">Most students learn coding for the first time in high school or college! Everyone starts somewhere, and there are tons of free resources to help you learn at your own pace.</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">I don't see people like me in STEM.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">STEM needs more diverse voices like yours! Role models from many backgrounds are already changing the field, and the industry is actively working to become more inclusive. You belong here!</p>
+            </div>
+
+            <div class="myth-card">
+                <div class="myth-header">
+                    <span class="myth-label">MYTH</span>
+                </div>
+                <p class="myth-text">STEM careers are boring and isolating.</p>
+                <div class="truth-header">
+                    <span class="truth-label">TRUTH</span>
+                </div>
+                <p class="truth-text">STEM is incredibly collaborative! You'll work on teams, solve real-world problems, create amazing things, and make a positive impact. Plus, STEM jobs offer flexibility and creativity!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

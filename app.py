@@ -1,3 +1,14 @@
+"""
+SeeMe in STEM - Flask Web Application
+======================================
+This application helps students discover STEM careers through:
+- AI-powered career matching based on interests and skills
+- Diverse role models from various backgrounds
+- Interactive chatbot for STEM questions
+- Resources for summer camps, scholarships, and competitions
+"""
+
+# Import required libraries
 from flask import Flask, render_template, request, jsonify, session
 import os
 import json
@@ -5,18 +16,27 @@ from dotenv import load_dotenv
 from datetime import timedelta
 import anthropic
 
+# Load environment variables from .env file
 load_dotenv()
 
+# Initialize Flask application
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key-change-in-production")
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)  # Sessions last 2 hours
 
-# Initialize Anthropic client
+# Initialize Anthropic AI client for chatbot functionality
 client = anthropic.Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY")
 )
 
-# STEM Career Database with detailed information
+# =============================================================================
+# STEM CAREERS DATABASE
+# =============================================================================
+# Contains 17+ STEM careers with detailed information including:
+# - Job descriptions, salary ranges, and growth projections
+# - Required skills and education
+# - Day-in-the-life examples
+# - Beginner projects and next steps
 STEM_CAREERS = {
     "software_engineer": {
         "title": "Software Engineer",
@@ -87,10 +107,182 @@ STEM_CAREERS = {
         "day_in_life": "Design aircraft components, run simulations, test prototypes, work with NASA or aerospace companies",
         "beginner_projects": ["Build and launch model rockets", "Design paper airplanes and test aerodynamics", "Use flight simulators"],
         "next_steps": ["Excel in physics and calculus", "Join rocketry or aviation clubs", "Learn CAD software for design"]
+    },
+    "data_scientist": {
+        "title": "Data Scientist",
+        "description": "Analyze complex data to help organizations make better decisions and predictions",
+        "skills": ["statistics", "programming", "critical thinking", "communication"],
+        "subjects": ["mathematics", "statistics", "computer science"],
+        "salary_range": "$85,000 - $160,000+",
+        "avg_salary": "$120,000",
+        "growth": "Very High (36% projected growth)",
+        "education": "Bachelor's in Data Science, Statistics, or Computer Science",
+        "impact": "Help solve real-world problems in healthcare, climate change, education, and social justice",
+        "day_in_life": "Clean and analyze data, create visualizations, build predictive models, present findings to stakeholders",
+        "beginner_projects": ["Analyze a dataset from Kaggle", "Create data visualizations", "Build a simple prediction model"],
+        "next_steps": ["Learn Python and SQL", "Study statistics and probability", "Practice with real datasets online"]
+    },
+    "environmental_scientist": {
+        "title": "Environmental Scientist",
+        "description": "Protect the planet by studying environmental problems and developing solutions",
+        "skills": ["research", "problem-solving", "passion for nature", "communication"],
+        "subjects": ["biology", "chemistry", "earth science", "environmental studies"],
+        "salary_range": "$50,000 - $95,000",
+        "avg_salary": "$73,000",
+        "growth": "High (8% projected growth)",
+        "education": "Bachelor's in Environmental Science or related field",
+        "impact": "Fight climate change, protect ecosystems, and create a sustainable future",
+        "day_in_life": "Collect environmental samples, analyze pollution levels, research conservation methods, advise policymakers",
+        "beginner_projects": ["Test water quality in local streams", "Start a recycling program", "Create a school garden"],
+        "next_steps": ["Join environmental clubs", "Study ecology and earth science", "Volunteer for conservation projects"]
+    },
+    "mechanical_engineer": {
+        "title": "Mechanical Engineer",
+        "description": "Design and build machines, robots, engines, and mechanical systems",
+        "skills": ["design", "problem-solving", "mathematics", "hands-on skills"],
+        "subjects": ["physics", "mathematics", "engineering"],
+        "salary_range": "$70,000 - $125,000",
+        "avg_salary": "$92,000",
+        "growth": "Moderate (10% projected growth)",
+        "education": "Bachelor's in Mechanical Engineering",
+        "impact": "Create innovative machines that improve daily life, from medical devices to renewable energy systems",
+        "day_in_life": "Design mechanical systems, run simulations, test prototypes, work on manufacturing processes",
+        "beginner_projects": ["Build a simple robot", "Design 3D-printed objects", "Create a Rube Goldberg machine"],
+        "next_steps": ["Learn CAD software", "Join robotics or engineering clubs", "Experiment with building and tinkering"]
+    },
+    "ux_designer": {
+        "title": "UX/UI Designer (Tech)",
+        "description": "Design user-friendly apps, websites, and digital experiences that people love",
+        "skills": ["creativity", "empathy", "problem-solving", "visual design"],
+        "subjects": ["design", "psychology", "computer science"],
+        "salary_range": "$70,000 - $140,000+",
+        "avg_salary": "$95,000",
+        "growth": "Very High (23% projected growth)",
+        "education": "Bachelor's in UX Design, Graphic Design, or Computer Science",
+        "impact": "Make technology accessible and enjoyable for everyone, from apps to websites",
+        "day_in_life": "Research user needs, create wireframes and prototypes, test designs, collaborate with developers",
+        "beginner_projects": ["Redesign your favorite app", "Create website mockups", "Conduct user interviews"],
+        "next_steps": ["Learn design tools like Figma", "Study user psychology", "Build a design portfolio"]
+    },
+    "chemical_engineer": {
+        "title": "Chemical Engineer",
+        "description": "Use chemistry to solve problems and create new products, from medicines to clean energy",
+        "skills": ["chemistry", "problem-solving", "mathematics", "attention to detail"],
+        "subjects": ["chemistry", "mathematics", "physics", "biology"],
+        "salary_range": "$75,000 - $135,000",
+        "avg_salary": "$105,000",
+        "growth": "Moderate (9% projected growth)",
+        "education": "Bachelor's in Chemical Engineering",
+        "impact": "Develop life-saving medicines, sustainable materials, and clean energy solutions",
+        "day_in_life": "Design chemical processes, test new materials, optimize production, ensure safety standards",
+        "beginner_projects": ["Conduct chemistry experiments", "Research sustainable materials", "Create eco-friendly products"],
+        "next_steps": ["Excel in chemistry and math", "Join science clubs", "Learn about chemical processes"]
+    },
+    "robotics_engineer": {
+        "title": "Robotics Engineer",
+        "description": "Design and build robots that can help people, explore dangerous places, or automate tasks",
+        "skills": ["engineering", "programming", "creativity", "problem-solving"],
+        "subjects": ["computer science", "mathematics", "physics", "engineering"],
+        "salary_range": "$75,000 - $150,000+",
+        "avg_salary": "$100,000",
+        "growth": "Very High (28% projected growth)",
+        "education": "Bachelor's in Robotics, Mechanical, or Electrical Engineering",
+        "impact": "Create robots for healthcare, disaster response, space exploration, and everyday assistance",
+        "day_in_life": "Design robot mechanics, program AI behaviors, test prototypes, integrate sensors and systems",
+        "beginner_projects": ["Build a line-following robot", "Program a robot arm", "Join FIRST Robotics"],
+        "next_steps": ["Learn Arduino or Raspberry Pi", "Join robotics clubs", "Study programming and mechanics"]
+    },
+    "network_engineer": {
+        "title": "Network/Cloud Engineer",
+        "description": "Build and maintain the internet infrastructure and cloud systems that connect the world",
+        "skills": ["technical skills", "problem-solving", "attention to detail", "communication"],
+        "subjects": ["computer science", "networking", "mathematics"],
+        "salary_range": "$70,000 - $145,000+",
+        "avg_salary": "$105,000",
+        "growth": "High (15% projected growth)",
+        "education": "Bachelor's in Computer Science, IT, or related field",
+        "impact": "Keep the internet running and help businesses scale their digital infrastructure",
+        "day_in_life": "Design network systems, troubleshoot connectivity issues, implement security, manage cloud infrastructure",
+        "beginner_projects": ["Set up a home network", "Learn about cloud platforms", "Build a simple server"],
+        "next_steps": ["Learn networking basics", "Study cloud platforms like AWS", "Get certifications like CompTIA Network+"]
+    },
+    "bioinformatics_specialist": {
+        "title": "Bioinformatics Specialist",
+        "description": "Combine biology, computer science, and data analysis to solve medical mysteries",
+        "skills": ["biology", "programming", "data analysis", "research"],
+        "subjects": ["biology", "computer science", "mathematics", "chemistry"],
+        "salary_range": "$70,000 - $130,000",
+        "avg_salary": "$95,000",
+        "growth": "Very High (20% projected growth)",
+        "education": "Bachelor's in Bioinformatics, Biology, or Computer Science",
+        "impact": "Advance personalized medicine, fight diseases, and decode the mysteries of DNA",
+        "day_in_life": "Analyze genetic data, develop algorithms for DNA sequencing, collaborate with biologists and doctors",
+        "beginner_projects": ["Explore DNA databases", "Learn Python for biology", "Analyze genetic data"],
+        "next_steps": ["Study biology and programming", "Learn about genetics", "Explore bioinformatics tools"]
+    },
+    "game_developer": {
+        "title": "Game Developer",
+        "description": "Create video games that entertain, educate, and inspire millions of players",
+        "skills": ["programming", "creativity", "storytelling", "problem-solving"],
+        "subjects": ["computer science", "mathematics", "design"],
+        "salary_range": "$60,000 - $140,000+",
+        "avg_salary": "$90,000",
+        "growth": "High (16% projected growth)",
+        "education": "Bachelor's in Computer Science, Game Design, or related field",
+        "impact": "Create immersive experiences, educational games, and entertainment for people worldwide",
+        "day_in_life": "Write game code, design game mechanics, create graphics and animations, test gameplay",
+        "beginner_projects": ["Make a simple game in Unity", "Create a text-based adventure", "Design game levels"],
+        "next_steps": ["Learn game engines like Unity or Unreal", "Study programming and game design", "Join game jams"]
+    },
+    "electrical_engineer": {
+        "title": "Electrical Engineer",
+        "description": "Design electrical systems, circuits, and devices that power our modern world",
+        "skills": ["mathematics", "problem-solving", "technical skills", "innovation"],
+        "subjects": ["physics", "mathematics", "engineering"],
+        "salary_range": "$70,000 - $135,000",
+        "avg_salary": "$100,000",
+        "growth": "Moderate (7% projected growth)",
+        "education": "Bachelor's in Electrical Engineering",
+        "impact": "Develop renewable energy systems, smart devices, and electrical innovations",
+        "day_in_life": "Design circuits, test electrical systems, develop power solutions, work on electronics",
+        "beginner_projects": ["Build simple circuits", "Create LED projects", "Experiment with Arduino"],
+        "next_steps": ["Learn about circuits and electricity", "Join engineering clubs", "Experiment with electronics kits"]
+    },
+    "marine_biologist": {
+        "title": "Marine Biologist",
+        "description": "Study ocean life and ecosystems to protect our seas and discover new species",
+        "skills": ["biology", "research", "passion for nature", "diving/swimming"],
+        "subjects": ["biology", "chemistry", "environmental science"],
+        "salary_range": "$45,000 - $90,000",
+        "avg_salary": "$65,000",
+        "growth": "Moderate (5% projected growth)",
+        "education": "Bachelor's in Marine Biology or Biology",
+        "impact": "Protect ocean ecosystems, discover new species, and fight climate change",
+        "day_in_life": "Conduct underwater research, study marine species, analyze ocean data, advocate for conservation",
+        "beginner_projects": ["Visit aquariums and ask questions", "Research ocean conservation", "Join beach cleanup efforts"],
+        "next_steps": ["Study biology and ecology", "Learn to scuba dive", "Join marine conservation groups"]
+    },
+    "ai_ml_engineer": {
+        "title": "AI/Machine Learning Engineer",
+        "description": "Build intelligent systems that can learn, adapt, and solve complex problems",
+        "skills": ["programming", "mathematics", "problem-solving", "creativity"],
+        "subjects": ["computer science", "mathematics", "statistics"],
+        "salary_range": "$100,000 - $200,000+",
+        "avg_salary": "$145,000",
+        "growth": "Very High (40% projected growth)",
+        "education": "Bachelor's in Computer Science, AI, or related field",
+        "impact": "Create AI that can diagnose diseases, fight climate change, and improve daily life",
+        "day_in_life": "Train machine learning models, develop AI algorithms, analyze data, deploy intelligent systems",
+        "beginner_projects": ["Build a chatbot", "Train a simple neural network", "Create an image classifier"],
+        "next_steps": ["Learn Python and TensorFlow", "Study machine learning basics", "Practice on Kaggle competitions"]
     }
 }
 
-# Role Models Database - diverse STEM professionals
+# =============================================================================
+# ROLE MODELS DATABASE
+# =============================================================================
+# Features 12+ inspiring STEM professionals from diverse backgrounds
+# Each role model includes their story, challenges overcome, and advice for students
 ROLE_MODELS = [
     {
         "name": "Dr. Mae Jemison",
@@ -238,32 +430,83 @@ ROLE_MODELS = [
     }
 ]
 
+# =============================================================================
+# PAGE ROUTES
+# =============================================================================
+# These routes handle displaying different pages of the website
+
 @app.route("/")
 def home():
+    """Home page with hero, about section, features, and chatbot"""
     return render_template("index.html")
 
 @app.route("/quiz")
 def quiz():
+    """Interactive quiz to match students with STEM careers"""
     return render_template("quiz.html")
 
 @app.route("/results")
 def results():
+    """Display quiz results with matched careers and role models"""
     return render_template("results.html")
 
 @app.route("/careers")
 def careers():
+    """Browse all 17+ STEM career paths with detailed information"""
     return render_template("careers.html", careers=STEM_CAREERS)
 
 @app.route("/role-models")
 def role_models():
+    """Meet inspiring STEM professionals from diverse backgrounds"""
     return render_template("role_models.html", role_models=ROLE_MODELS)
+
+@app.route("/about")
+def about():
+    """Learn about the SeeMe in STEM project"""
+    return render_template("about.html")
+
+@app.route("/features")
+def features():
+    """Explore key features of the platform"""
+    return render_template("features.html")
+
+@app.route("/confidence")
+def confidence():
+    """Address common concerns and build confidence in STEM"""
+    return render_template("confidence.html")
+
+@app.route("/myths")
+def myths():
+    """Bust common STEM myths"""
+    return render_template("myths.html")
+
+@app.route("/opportunities")
+def opportunities():
+    """Find summer camps, scholarships, competitions, and resources"""
+    return render_template("opportunities.html")
+
+@app.route("/chat")
+def chat_page():
+    """Chatbot page for asking STEM questions"""
+    return render_template("chat.html")
+
+# =============================================================================
+# API ENDPOINTS
+# =============================================================================
+# These routes handle data processing and AI interactions
 
 @app.route("/api/match-careers", methods=["POST"])
 def match_careers():
+    """
+    AI-powered career matching endpoint
+    Takes student quiz responses and returns top 3 matching STEM careers
+    Uses Claude AI for intelligent matching or falls back to rule-based matching
+    """
     try:
+        # Get quiz data from request
         data = request.get_json()
 
-        # Check if API key is available
+        # Check if Anthropic API key is available for AI matching
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         use_ai = api_key and api_key != "your_api_key_here"
 
@@ -359,7 +602,11 @@ Be enthusiastic, encouraging, and specific. Remember this is for a student explo
         return jsonify({"error": str(e)}), 500
 
 def rule_based_matching(data):
-    """Simple rule-based career matching when AI is not available"""
+    """
+    Simple rule-based career matching when AI is not available
+    Scores each career based on matching interests, subjects, and skills
+    Returns top 3 careers with explanations
+    """
     interests = data.get('interests', [])
     subjects = data.get('subjects', [])
     skills = data.get('skills', [])
@@ -432,7 +679,13 @@ def rule_based_matching(data):
 
 @app.route("/api/mentor", methods=["POST"])
 def mentor():
+    """
+    Career mentor chatbot endpoint
+    Provides detailed answers about specific STEM careers
+    Includes information about classes, difficulty, skills, salary, and advice
+    """
     try:
+        # Get user's message and career context
         data = request.get_json()
         if not data or "message" not in data:
             return jsonify({"response": "Please send a message!"}), 400
@@ -613,14 +866,20 @@ Try asking one of these, or rephrase your question! I'm here to help you succeed
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
+    """
+    General STEM chatbot endpoint
+    Responds to common questions about STEM careers, resources, and getting started
+    Uses keyword matching to provide helpful responses
+    """
     try:
+        # Get user's chat message
         data = request.get_json()
         if not data or "message" not in data:
             return jsonify({"response": "Please send a message!"}), 400
 
         user_message = data["message"].lower()
 
-        # Simple demo chatbot responses (no AI needed for now)
+        # Keyword-based responses for common STEM questions
         responses = {
             "hello": "Hi there! 👋 I'm your STEM Career Guide! Ask me anything about STEM careers, what classes to take, or how to get started!",
             "hi": "Hello! 👋 I'm here to help you explore STEM careers! What would you like to know?",
@@ -659,5 +918,10 @@ def chat():
         traceback.print_exc()
         return jsonify({"response": "Oops! Something went wrong. Please try again!"}), 500
 
+# =============================================================================
+# RUN THE APPLICATION
+# =============================================================================
 if __name__ == "__main__":
+    # Run Flask development server
+    # Debug mode enabled for development (shows errors and auto-reloads)
     app.run(debug=True)
