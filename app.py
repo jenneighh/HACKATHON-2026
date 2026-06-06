@@ -499,6 +499,90 @@ ROLE_MODELS = [
         "challenges": "Rose through male-dominated semiconductor industry, turned around a struggling company",
         "advice": "Technical excellence combined with strategic vision creates opportunities. Never stop learning.",
         "what_students_learn": "Electrical engineering, semiconductor design, and tech leadership"
+    },
+    {
+        "name": "Emma González",
+        "career": "environmental_scientist",
+        "title": "Environmental Activist & Student Leader",
+        "background": "Cuban-American activist who became a leading voice for environmental and social justice after surviving the Parkland shooting.",
+        "quote": "Fight for your lives before it's someone else's job.",
+        "ethnicity": "Hispanic",
+        "gender": "Female",
+        "challenges": "Turned personal tragedy into activism, faced intense public scrutiny as a young leader",
+        "advice": "Your voice matters at any age. Use science and data to drive change.",
+        "what_students_learn": "Environmental science, activism, and using STEM to solve social problems"
+    },
+    {
+        "name": "Dr. Mario Molina",
+        "career": "environmental_scientist",
+        "title": "Nobel Prize-Winning Chemist",
+        "background": "Mexican-American chemist who discovered the ozone hole and won the Nobel Prize in Chemistry.",
+        "quote": "It is our responsibility to do what we can, to take action.",
+        "ethnicity": "Hispanic",
+        "gender": "Male",
+        "challenges": "Had to convince the world that CFCs were destroying the ozone layer despite industry opposition",
+        "advice": "Follow the science, even when it's unpopular. Environmental protection is everyone's responsibility.",
+        "what_students_learn": "Chemistry, atmospheric science, and the power of scientific research to change policy"
+    },
+    {
+        "name": "Francia Raisa",
+        "career": "biomedical_engineer",
+        "title": "Actress & Organ Donation Advocate",
+        "background": "Honduran-Mexican-American actress who donated her kidney and became an advocate for organ donation awareness.",
+        "quote": "I would do it again in a heartbeat.",
+        "ethnicity": "Hispanic",
+        "gender": "Female",
+        "challenges": "Used her platform to raise awareness about the shortage of organ donors in Latino communities",
+        "advice": "Science and medicine save lives. Consider how you can contribute to healthcare innovation.",
+        "what_students_learn": "Biomedical engineering, organ transplant technology, and healthcare advocacy"
+    },
+    {
+        "name": "Sally Ride",
+        "career": "aerospace_engineer",
+        "title": "First American Woman in Space",
+        "background": "Physicist and astronaut who became the first American woman to fly in space aboard the Space Shuttle Challenger.",
+        "quote": "You can't be what you can't see.",
+        "ethnicity": "Caucasian",
+        "gender": "Female",
+        "challenges": "Faced intense media scrutiny and sexism as the first American woman in space",
+        "advice": "Don't let anyone tell you that you can't do something because of your gender.",
+        "what_students_learn": "Physics, space exploration, and breaking barriers"
+    },
+    {
+        "name": "Bill Nye",
+        "career": "mechanical_engineer",
+        "title": "Science Educator & Engineer",
+        "background": "Mechanical engineer who became 'Bill Nye the Science Guy,' inspiring millions to love science.",
+        "quote": "Science is the key to our future.",
+        "ethnicity": "Caucasian",
+        "gender": "Male",
+        "challenges": "Made science accessible and fun for everyone, fought climate change denial",
+        "advice": "Never lose your curiosity. Science communication is just as important as science research.",
+        "what_students_learn": "Mechanical engineering, science communication, and making STEM accessible"
+    },
+    {
+        "name": "Jane Goodall",
+        "career": "environmental_scientist",
+        "title": "Primatologist & Conservationist",
+        "background": "World's foremost expert on chimpanzees and a tireless advocate for environmental conservation.",
+        "quote": "What you do makes a difference, and you have to decide what kind of difference you want to make.",
+        "ethnicity": "Caucasian",
+        "gender": "Female",
+        "challenges": "Faced skepticism as a woman without formal training, revolutionized animal behavior research",
+        "advice": "Passion and dedication can take you anywhere. You don't need to fit the traditional mold.",
+        "what_students_learn": "Biology, animal behavior, conservation, and fieldwork"
+    },
+    {
+        "name": "Alan Turing",
+        "career": "computer_science_engineer",
+        "title": "Father of Computer Science",
+        "background": "British mathematician who cracked the Enigma code in WWII and laid the foundations for modern computing and AI.",
+        "quote": "We can only see a short distance ahead, but we can see plenty there that needs to be done.",
+        "ethnicity": "Caucasian",
+        "gender": "Male",
+        "challenges": "Persecuted for being gay despite saving millions of lives, posthumously pardoned",
+        "advice": "Your personal identity doesn't diminish your contributions. Be true to yourself and your work.",
+        "what_students_learn": "Computer science, cryptography, artificial intelligence, and computational theory"
     }
 ]
 
