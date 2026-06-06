@@ -427,6 +427,78 @@ ROLE_MODELS = [
         "challenges": "Navigated medical school as a first-generation student from an immigrant family",
         "advice": "Your unique perspective is needed in medicine. Patients deserve doctors who understand them.",
         "what_students_learn": "Biomedical science, surgery, and compassionate healthcare"
+    },
+    {
+        "name": "Dr. Chien-Shiung Wu",
+        "career": "aerospace_engineer",
+        "title": "Experimental Physicist",
+        "background": "Chinese-American physicist who made major contributions to nuclear physics. Known as the 'First Lady of Physics' and 'Queen of Nuclear Research.'",
+        "quote": "It is the courage to continue that counts.",
+        "ethnicity": "Asian American",
+        "gender": "Female",
+        "challenges": "Faced gender and racial discrimination in 1940s-1960s science, was overlooked for Nobel Prize despite groundbreaking work",
+        "advice": "Excellence speaks for itself. Keep pushing forward even when recognition doesn't come immediately.",
+        "what_students_learn": "Experimental physics, persistence in research, and the importance of rigorous scientific method"
+    },
+    {
+        "name": "Jerry Yang",
+        "career": "software_engineer",
+        "title": "Co-founder of Yahoo!",
+        "background": "Taiwanese-American entrepreneur who co-founded Yahoo!, one of the pioneers of the early internet era.",
+        "quote": "The Internet is about giving people choice and control.",
+        "ethnicity": "Asian American",
+        "gender": "Male",
+        "challenges": "Immigrated to the US at age 10 speaking no English, built one of the world's largest tech companies",
+        "advice": "Innovation comes from seeing problems from a different angle. Your immigrant perspective is valuable.",
+        "what_students_learn": "Entrepreneurship, software engineering, and building products that millions use"
+    },
+    {
+        "name": "Dr. Shirley Ann Jackson",
+        "career": "computer_science_engineer",
+        "title": "Physicist & Former NRC Chair",
+        "background": "First African American woman to earn a PhD from MIT. Her research enabled caller ID, call waiting, and fiber optic cables.",
+        "quote": "The way to bring about change is to be proactive and not reactive.",
+        "ethnicity": "African American",
+        "gender": "Female",
+        "challenges": "One of very few Black students at MIT in the 1960s, faced isolation and discrimination",
+        "advice": "Excellence and preparation are your best tools. Your work will speak louder than prejudice.",
+        "what_students_learn": "Theoretical physics, telecommunications technology, and leadership in STEM policy"
+    },
+    {
+        "name": "Min Kao",
+        "career": "electrical_engineer",
+        "title": "Co-founder of Garmin",
+        "background": "Taiwanese-American electrical engineer who co-founded Garmin, revolutionizing GPS navigation technology.",
+        "quote": "Innovation requires taking risks and learning from failure.",
+        "ethnicity": "Asian American",
+        "gender": "Male",
+        "challenges": "Immigrated with limited resources, built a multi-billion dollar company from scratch",
+        "advice": "Combine technical skills with business acumen. Solve real problems people face every day.",
+        "what_students_learn": "Electrical engineering, GPS technology, and tech entrepreneurship"
+    },
+    {
+        "name": "Dr. Kizzmekia Corbett",
+        "career": "biomedical_engineer",
+        "title": "Viral Immunologist",
+        "background": "African American scientist who was one of the lead scientists developing the Moderna COVID-19 vaccine.",
+        "quote": "You can do anything you want to do. It's just about finding your purpose.",
+        "ethnicity": "African American",
+        "gender": "Female",
+        "challenges": "Grew up in a low-income area, became one of the world's leading vaccine researchers",
+        "advice": "Don't let where you come from limit where you're going. Science needs diverse voices.",
+        "what_students_learn": "Immunology, vaccine development, and how STEM directly saves lives"
+    },
+    {
+        "name": "Lisa Su",
+        "career": "electrical_engineer",
+        "title": "CEO of AMD",
+        "background": "Taiwanese-American engineer who became CEO of AMD and transformed the semiconductor industry.",
+        "quote": "It's about the challenge. It's about pushing the boundaries.",
+        "ethnicity": "Asian American",
+        "gender": "Female",
+        "challenges": "Rose through male-dominated semiconductor industry, turned around a struggling company",
+        "advice": "Technical excellence combined with strategic vision creates opportunities. Never stop learning.",
+        "what_students_learn": "Electrical engineering, semiconductor design, and tech leadership"
     }
 ]
 
