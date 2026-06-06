@@ -89,6 +89,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
@@ -730,7 +738,10 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">✨ SeeMe in STEM</div>
+            <div class="logo">
+                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                SeeMe in STEM
+            </div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -895,7 +906,11 @@
                     const gender = card.dataset.gender;
                     const ethnicity = card.dataset.ethnicity;
 
-                    if (gender === filterType || ethnicity === filterType) {
+                    // Match exact or partial ethnicity (e.g., "Asian" matches both "Asian" and "Asian American")
+                    const matchesGender = gender === filterType;
+                    const matchesEthnicity = ethnicity === filterType || ethnicity.includes(filterType);
+
+                    if (matchesGender || matchesEthnicity) {
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
