@@ -183,16 +183,22 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         /* Navbar */
+        /* Navbar Wrapper for spacing around rounded navbar */
+        .navbar-wrapper {
+            padding: 1.5rem 2rem 0;
+            background: transparent;
+            z-index: 100;
+        }
+
         .navbar {
-            background: var(--card);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 15px rgba(110, 102, 123, 0.1);
-            border-bottom: 3px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 25px;
             animation: slideDown 0.5s ease-out;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         @keyframes slideDown {
@@ -285,7 +291,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         /* Hero Section */
         .hero {
             max-width: 1200px;
-            margin: 4rem auto;
+            margin: 2rem auto 4rem;
             padding: 3rem 2rem;
             text-align: center;
             position: relative;
@@ -421,7 +427,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         .about-stat {
             text-align: center;
             padding: 1.5rem;
-            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--bg) 100%);
+            background: var(--card);
             border-radius: 20px;
             border: 3px solid var(--border);
             transition: all 0.3s;
@@ -449,7 +455,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .about-story {
-            background: var(--bg);
+            background: var(--card);
             padding: 2.5rem;
             border-radius: 25px;
             border: 3px solid var(--pale-lavender);
@@ -485,7 +491,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .feature-card {
-            background: #F7F0EA;
+            background: var(--card);
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 4px 15px rgba(74, 74, 74, 0.1);
@@ -652,7 +658,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             max-width: 800px;
             margin: 4rem auto;
             padding: 2rem;
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 25px;
             box-shadow: 0 4px 20px rgba(74, 74, 74, 0.15);
             animation: fadeInUp 1s ease-out;
@@ -672,7 +678,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .chat-box {
-            background: #F7F0EA;
+            background: var(--bg);
             border-radius: 15px;
             padding: 1.5rem;
             min-height: 200px;
@@ -705,6 +711,13 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             color: #6E667B;
             margin-right: 20%;
             border-left: 4px solid #96A78D;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .chat-message.bot strong {
+            color: #5A5168;
+            font-weight: 600;
         }
 
         .chat-message.user {
@@ -728,7 +741,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             font-size: 1rem;
             outline: none;
             transition: all 0.3s;
-            background: #F7F0EA;
+            background: white;
         }
 
         .chat-input:focus {
@@ -776,7 +789,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .news-card {
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(74, 74, 74, 0.1);
@@ -912,7 +925,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .stat-card {
-            background: #F7F0EA;
+            background: var(--card);
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 4px 15px rgba(74, 74, 74, 0.1);
@@ -980,8 +993,6 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             background: var(--card);
             border-radius: 25px;
             box-shadow: 0 4px 20px rgba(110, 102, 123, 0.15);
-            position: sticky;
-            top: 90px;
             z-index: 50;
             animation: fadeInUp 0.6s ease-out;
         }
@@ -1029,114 +1040,12 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
 
-        /* STEM Confidence Check Section */
-        .confidence-check-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 3rem 2rem;
-            background: #F7F0EA;
-            border-radius: 40px;
-            box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 0.8s ease-out;
-            border: 5px solid #857A8D;
-        }
-
-        .confidence-check-section h2 {
-            text-align: center;
-            background: linear-gradient(135deg, #786F85 0%, #857A8D 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #6B5B4B;
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .concerns-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .concern-card {
-            background: #F7F0EA;
-            border: 4px solid #786F85;
-            border-radius: 25px;
-            padding: 2rem 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-family: inherit;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .concern-card:hover {
-            transform: translateY(-8px);
-            border-color: #786F85;
-            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #786F85;
-        }
-
-        .concern-icon {
-            font-size: 3rem;
-            animation: bounce 2s infinite;
-        }
-
-        .concern-text {
-            color: #6E667B;
-            font-size: 1.05rem;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        .confidence-response {
-            background: #F7F0EA;
-            border-radius: 25px;
-            padding: 2.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 8px 30px rgba(74, 74, 74, 0.15);
-            animation: slideIn 0.5s ease-out;
-            border: 3px solid #C3BBC5;
-        }
-
-        .response-content {
-            color: #6E667B;
-            font-size: 1.15rem;
-            line-height: 1.8;
-        }
-
-        .response-content h3 {
-            color: #6E667B;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .response-content p {
-            margin-bottom: 1rem;
-            color: #6B5B4B;
-        }
-
-        .response-content strong {
-            color: #6E667B;
-        }
-
         /* Myth Buster Section */
         .myth-buster-section {
             max-width: 1200px;
             margin: 4rem auto;
             padding: 3rem 2rem;
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 40px;
             box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
             position: relative;
@@ -1163,7 +1072,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .myth-card {
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 25px;
             padding: 2rem;
             box-shadow: 0 8px 30px rgba(74, 74, 74, 0.12);
@@ -1254,7 +1163,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             max-width: 1200px;
             margin: 4rem auto;
             padding: 3rem 2rem;
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 40px;
             box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
             position: relative;
@@ -1281,7 +1190,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         }
 
         .opportunity-category {
-            background: #F7F0EA;
+            background: var(--card);
             border-radius: 25px;
             padding: 2rem;
             box-shadow: 0 8px 30px rgba(74, 74, 74, 0.12);
@@ -1412,7 +1321,6 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
 
         @media (max-width: 768px) {
             .section-nav {
-                top: 75px;
                 padding: 1rem;
                 margin: 1rem auto 0;
             }
@@ -1426,8 +1334,13 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
                 font-size: 0.85rem;
             }
 
+            .navbar-wrapper {
+                padding: 1rem 1rem 0;
+            }
+
             .navbar {
                 padding: 1rem;
+                border-radius: 20px;
             }
 
             .nav-container {
@@ -1575,20 +1488,13 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
                 font-size: 2.5rem;
             }
 
-            .confidence-check-section,
             .myth-buster-section {
                 margin: 2rem 1rem;
                 padding: 2rem 1.5rem;
             }
 
-            .confidence-check-section h2,
             .myth-buster-section h2 {
                 font-size: 1.75rem;
-            }
-
-            .concerns-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
             }
 
             .myth-cards-grid {
@@ -1658,28 +1564,30 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         <div class="shape shape-dots shape-6"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
-                SeeMe in STEM
+    <!-- Navbar Wrapper -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                    SeeMe in STEM
+                </div>
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/role-models">Role Models</a></li>
+                    <li><a href="/opportunities">Resources</a></li>
+                    <li><a href="/confidence">Support</a></li>
+                    <li><a href="/quiz">Take Quiz</a></li>
+                </ul>
             </div>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="/">Home</a></li>
-                <li><a href="/careers">Careers</a></li>
-                <li><a href="/role-models">Role Models</a></li>
-                <li><a href="/opportunities">Resources</a></li>
-                <li><a href="/confidence">Support</a></li>
-                <li><a href="/quiz">Take Quiz</a></li>
-            </ul>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <!-- Hero Section -->
     <div class="hero">
@@ -1694,27 +1602,27 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             <h2>💡 Why SeeMe in STEM?</h2>
             <div class="about-grid">
                 <div class="about-stat">
-                    <div class="stat-highlight">70%</div>
-                    <p>of girls lose interest in STEM by middle school</p>
+                    <div class="stat-highlight">1 in 5</div>
+                    <p>high school students can't picture themselves in STEM</p>
                 </div>
                 <div class="about-stat">
-                    <div class="stat-highlight">Only 28%</div>
-                    <p>of STEM workforce are women</p>
+                    <div class="stat-highlight">9%</div>
+                    <p>of STEM workers are Black or Hispanic, despite making up 30% of the population</p>
                 </div>
                 <div class="about-stat">
-                    <div class="stat-highlight">5%</div>
-                    <p>of tech workers are Black or Latina women</p>
+                    <div class="stat-highlight">3x</div>
+                    <p>more likely to pursue STEM with a relatable role model</p>
                 </div>
             </div>
             <div class="about-story">
                 <h3>The Problem</h3>
-                <p>Too many talented students give up on STEM careers because they don't see people like themselves succeeding in these fields, don't know where to start, or face barriers that feel impossible to overcome.</p>
+                <p>Too many talented students from underrepresented backgrounds give up on STEM careers because they don't see people like themselves succeeding in these fields, lack guidance on where to start, or face barriers that feel impossible to overcome. Without representation and clear pathways, potential is lost.</p>
 
                 <h3>Our Solution</h3>
-                <p>SeeMe in STEM uses AI to match students with personalized STEM career paths based on their unique interests and skills. But we go beyond just career suggestions — we connect students with diverse role models, bust common myths, and provide actionable resources to turn dreams into reality.</p>
+                <p>SeeMe in STEM uses AI to match students with personalized STEM career paths based on their unique interests and skills. We connect underrepresented students with relatable role models who share their backgrounds, bust common myths, and provide clear guidance on real STEM pathways — from the first step to career success.</p>
 
                 <h3>The Impact</h3>
-                <p>By helping students see themselves in STEM careers early, we can close the diversity gap, unlock untapped potential, and ensure the next generation of innovators reflects the world we live in.</p>
+                <p>By helping underrepresented students see themselves in STEM careers early and providing representation with actionable guidance, we can close the diversity gap, unlock untapped potential, and ensure the next generation of innovators reflects the world we live in.</p>
             </div>
         </div>
     </div>
@@ -1765,43 +1673,6 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             <div class="stat-label">Free to Use</div>
         </div>
     </div>
-    <!-- STEM Confidence Check Section -->
-    <div class="confidence-check-section">
-        <h2>💭 Feeling Unsure About STEM?</h2>
-        <p class="section-subtitle">You're not alone! Pick what's on your mind, and let's talk about it.</p>
-
-        <div class="concerns-grid">
-            <button class="concern-card" onclick="showConfidenceResponse('start')">
-                <div class="concern-icon">🤔</div>
-                <div class="concern-text">I don't know where to start</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('math')">
-                <div class="concern-icon">🧮</div>
-                <div class="concern-text">I'm bad at math</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('network')">
-                <div class="concern-icon">👥</div>
-                <div class="concern-text">I don't know anyone in STEM</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('smart')">
-                <div class="concern-icon">🧠</div>
-                <div class="concern-text">I'm scared I'm not smart enough</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('impact')">
-                <div class="concern-icon">❤️</div>
-                <div class="concern-text">I want a career that helps people</div>
-            </button>
-        </div>
-
-        <div class="confidence-response" id="confidenceResponse" style="display: none;">
-            <div class="response-content" id="responseContent"></div>
-        </div>
-    </div>
-
     <!-- Myth Buster Section -->
     <div class="myth-buster-section">
         <h2>🚫 STEM Myths vs. ✨ Reality</h2>
@@ -1926,92 +1797,6 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             navLinks.classList.toggle('active');
         }
 
-        /**
-         * Show confidence-building responses
-         * Displays encouraging messages for different STEM concerns
-         * @param {string} concern - The type of concern (start, math, network, smart, impact)
-         */
-        function showConfidenceResponse(concern) {
-            const responseDiv = document.getElementById('confidenceResponse');
-            const contentDiv = document.getElementById('responseContent');
-
-            const responses = {
-                start: `
-                    <h3>You're Already On the Right Track! 🌟</h3>
-                    <p><strong>Starting is the hardest part, and you're here!</strong> That takes courage.</p>
-                    <p>Here's the secret: <strong>nobody has it all figured out at first</strong>. Every scientist, engineer, and tech professional you admire started exactly where you are — curious but unsure.</p>
-                    <p><strong>Your next steps:</strong></p>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li>Take our quick quiz to find careers that match your interests</li>
-                        <li>Explore beginner-friendly projects (no experience needed!)</li>
-                        <li>Connect with role models who started just like you</li>
-                        <li>Join a STEM club or online community where you can learn together</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every expert was once a beginner. Your journey starts with one small step! 💪</p>
-                `,
-                math: `
-                    <h3>Math is a Skill, Not a Talent! 🧮✨</h3>
-                    <p><strong>Here's the truth:</strong> Being "bad at math" doesn't exist. You just haven't found the right way to learn it yet!</p>
-                    <p>Many successful STEM professionals struggled with math at first. The difference? <strong>They kept going</strong>, and they found learning methods that worked for them.</p>
-                    <p><strong>What actually matters in STEM:</strong></p>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li><strong>Curiosity</strong> — wanting to understand how things work</li>
-                        <li><strong>Problem-solving</strong> — breaking big problems into smaller pieces</li>
-                        <li><strong>Creativity</strong> — thinking of new ways to solve challenges</li>
-                        <li><strong>Persistence</strong> — not giving up when things get tough</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Plus:</strong> Many STEM careers use basic math, not complex calculus. Tools and computers do the heavy lifting — you provide the creativity and thinking! 🎨🤖</p>
-                `,
-                network: `
-                    <h3>You're Building Your Network Right Now! 👥💫</h3>
-                    <p><strong>Not knowing anyone in STEM is actually super common</strong> — and it's totally okay! Most STEM professionals didn't grow up with connections either.</p>
-                    <p><strong>The good news:</strong> The STEM community is full of people who want to help newcomers succeed. They remember when they were in your shoes!</p>
-                    <p><strong>Ways to start building your STEM network:</strong></p>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li><strong>Connect with our role models</strong> — real people who want to mentor students like you</li>
-                        <li><strong>Join online communities</strong> — Discord servers, Reddit forums, student groups</li>
-                        <li><strong>Attend STEM events</strong> — hackathons, science fairs, club meetings</li>
-                        <li><strong>Reach out to professionals</strong> — many are happy to answer questions or do virtual coffee chats</li>
-                        <li><strong>Shadow programs</strong> — spend a day seeing what a STEM career looks like</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every connection starts with a simple "hello." You've got this! 🚀</p>
-                `,
-                smart: `
-                    <h3>Stop Right There! You ARE Smart Enough! 🧠✨</h3>
-                    <p><strong>Let's get this straight:</strong> STEM isn't about being "smart" — it's about being <strong>curious, determined, and willing to learn</strong>.</p>
-                    <p><strong>The "genius myth" is totally false.</strong> Most people in STEM aren't child prodigies — they're regular people who worked hard and didn't give up.</p>
-                    <p><strong>What STEM really needs:</strong></p>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li><strong>People who ask questions</strong> — "why" and "how" are powerful</li>
-                        <li><strong>People who try things</strong> — even if they fail at first</li>
-                        <li><strong>People with different perspectives</strong> — YOUR unique viewpoint matters!</li>
-                        <li><strong>People who care about solving problems</strong> — passion beats "natural talent"</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Fun fact:</strong> Many famous scientists and engineers did poorly in school! Albert Einstein struggled with traditional education. Steve Jobs never finished college. What they had was <strong>passion and persistence</strong> — and so do you! 🌟</p>
-                    <p><strong>You belong in STEM. Period.</strong> 💪</p>
-                `,
-                impact: `
-                    <h3>STEM is ALL About Helping People! ❤️🌍</h3>
-                    <p><strong>If you want to make a difference, STEM is the perfect path!</strong> Every single STEM field exists to solve problems and improve lives.</p>
-                    <p><strong>How STEM careers help people:</strong></p>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li><strong>Biomedical Engineers</strong> — design prosthetics, medical devices, and life-saving technologies</li>
-                        <li><strong>Software Engineers</strong> — create apps for education, healthcare, accessibility, and connection</li>
-                        <li><strong>Environmental Scientists</strong> — protect our planet and fight climate change</li>
-                        <li><strong>Cybersecurity Analysts</strong> — protect people's data and privacy</li>
-                        <li><strong>Data Scientists</strong> — analyze information to improve healthcare, education, and social services</li>
-                        <li><strong>Aerospace Engineers</strong> — advance space exploration and develop technologies that save lives</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>The best part?</strong> STEM gives you the tools to create solutions for problems you care about. Want to help your community? Build healthcare access? Protect the environment? <strong>STEM is how you do it!</strong> 🚀</p>
-                    <p><strong>Your compassion + STEM skills = World-changing impact!</strong> 💫</p>
-                `
-            };
-
-            contentDiv.innerHTML = responses[concern];
-            responseDiv.style.display = 'block';
-            responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
         // =================================================================
         // CHATBOT FUNCTIONALITY
         // =================================================================
@@ -2026,6 +1811,16 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
                 sendMessage();
             }
         });
+
+        /**
+         * Format bot response text with proper line breaks and styling
+         * Converts markdown-style formatting to HTML
+         */
+        function formatBotResponse(text) {
+            return text
+                // Convert line breaks
+                .replace(/\n/g, '<br>');
+        }
 
         /**
          * Send user message to chatbot and display response
@@ -2059,10 +1854,11 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
 
                 const data = await response.json();
 
-                // Display bot's response
+                // Display bot's response with formatting
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                botMessage.textContent = data.response || data.error || 'Oops! Something went wrong. Please try again!';
+                const responseText = data.response || data.error || 'Oops! Something went wrong. Please try again!';
+                botMessage.innerHTML = formatBotResponse(responseText);
                 chatBox.appendChild(botMessage);
 
                 // Auto-scroll to show newest messages

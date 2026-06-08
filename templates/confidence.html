@@ -2,32 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Need Confidence? - SeeMe in STEM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#786F85">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SeeMe STEM">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192.png">
+    <link rel="apple-touch-icon" href="/static/icon-192.png">
+    <title>Support - SeeMe in STEM</title>
     <style>
         :root {
             --bg: #F7F0EA;
             --card: #FEFDFC;
             --text: #6E667B;
             --primary: #786F85;
+            --secondary: #857A8D;
             --border: #BBB8C2;
+            --soft-pink: #F6EEEE;
+            --pale-lavender: #C3BBC5;
             --gold: #786F85;
+            --gold-light: #857A8D;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg);
             min-height: 100vh;
+            overflow-x: hidden;
             color: var(--text);
         }
 
+        /* Floating background shapes */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #786F85 0%, #786F85 100%);
+        }
+
+        .shape-blob {
+            width: 150px;
+            height: 150px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background: linear-gradient(135deg, #857A8D 0%, #C3BBC5 100%);
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+                opacity: 0.25;
+            }
+        }
+
+        /* Navbar - Consistent with other pages */
+        .navbar-wrapper {
+            padding: 1.5rem 2rem 0;
+            background: transparent;
+            z-index: 100;
+        }
+
         .navbar {
-            background: var(--card);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 15px rgba(110, 102, 123, 0.1);
-            border-bottom: 3px solid var(--border);
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 25px;
+            animation: slideDown 0.5s ease-out;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav-container {
@@ -44,12 +143,16 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo-icon { width: 40px; height: 40px; }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
 
         .nav-links {
             display: flex;
@@ -62,257 +165,822 @@
             color: var(--text);
             font-weight: 500;
             transition: all 0.3s;
+            position: relative;
         }
 
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
 
-        .confidence-check-section {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #4A4A4A;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Page Container - Consistent spacing */
+        .page-container {
             max-width: 1200px;
-            margin: 4rem auto;
-            padding: 3rem 2rem;
-            background: #F7F0EA;
-            border-radius: 40px;
-            box-shadow: 0 15px 60px rgba(74, 74, 74, 0.15);
-            border: 5px solid #857A8D;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .confidence-check-section h2 {
+        /* Hero Section */
+        .hero-section {
             text-align: center;
-            background: linear-gradient(135deg, #786F85 0%, #857A8D 100%);
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+            background: var(--card);
+            border-radius: 40px;
+            padding: 3rem 2rem;
+            box-shadow: 0 15px 60px rgba(110, 102, 123, 0.15);
+            border: 4px solid var(--gold);
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
-            font-size: 2.5rem;
+            font-weight: 700;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: #6B5B4B;
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
+        .hero-section p {
+            font-size: 1.3rem;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .concerns-grid {
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Support Cards Grid */
+        .support-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .concern-card {
-            background: #F7F0EA;
-            border: 4px solid #786F85;
-            border-radius: 25px;
-            padding: 2rem 1.5rem;
+        .support-card {
+            background: var(--card);
+            border-radius: 30px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 8px 30px rgba(110, 102, 123, 0.12);
+            border: 4px solid transparent;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--pale-lavender) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .support-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .support-card:nth-child(1) {
+            animation-delay: 0.1s;
+            border-color: #FFB3D9;
+        }
+        .support-card:nth-child(2) {
+            animation-delay: 0.2s;
+            border-color: #B3D9FF;
+        }
+        .support-card:nth-child(3) {
+            animation-delay: 0.3s;
+            border-color: #D9B3FF;
+        }
+        .support-card:nth-child(4) {
+            animation-delay: 0.4s;
+            border-color: #FFD9B3;
+        }
+        .support-card:nth-child(5) {
+            animation-delay: 0.5s;
+            border-color: #B3FFD9;
+        }
+
+        .support-card:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        .support-card:nth-child(1):hover {
+            box-shadow: 0 15px 50px rgba(255, 179, 217, 0.4), 0 0 25px rgba(255, 179, 217, 0.3);
+        }
+
+        .support-card:nth-child(2):hover {
+            box-shadow: 0 15px 50px rgba(179, 217, 255, 0.4), 0 0 25px rgba(179, 217, 255, 0.3);
+        }
+
+        .support-card:nth-child(3):hover {
+            box-shadow: 0 15px 50px rgba(217, 179, 255, 0.4), 0 0 25px rgba(217, 179, 255, 0.3);
+        }
+
+        .support-card:nth-child(4):hover {
+            box-shadow: 0 15px 50px rgba(255, 217, 179, 0.4), 0 0 25px rgba(255, 217, 179, 0.3);
+        }
+
+        .support-card:nth-child(5):hover {
+            box-shadow: 0 15px 50px rgba(179, 255, 217, 0.4), 0 0 25px rgba(179, 255, 217, 0.3);
+        }
+
+        .support-icon-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--pale-lavender) 100%);
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(110, 102, 123, 0.15);
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
         }
 
-        .concern-card:hover {
-            transform: translateY(-8px);
-            border-color: #786F85;
-            box-shadow: 0 12px 35px rgba(159, 161, 255, 0.4), 0 0 20px #786F85;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
-        .concern-icon {
+        .support-card:hover .support-icon-container {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(110, 102, 123, 0.25);
+            animation: none;
+        }
+
+        .support-icon {
             font-size: 3rem;
         }
 
-        .concern-text {
-            color: #6E667B;
-            font-size: 1.05rem;
-            font-weight: 600;
+        .support-card h3 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
             line-height: 1.4;
         }
 
-        .confidence-response {
-            background: #F7F0EA;
-            border-radius: 25px;
-            padding: 2.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 8px 30px rgba(74, 74, 74, 0.15);
-            animation: slideIn 0.5s ease-out;
-            border: 3px solid #C3BBC5;
+        .support-description {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Response Section */
+        .response-section {
+            background: var(--card);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 15px 60px rgba(110, 102, 123, 0.15);
+            border: 4px solid var(--pale-lavender);
             display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .response-section.active {
+            display: block;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
-        .response-content {
-            color: #6E667B;
-            font-size: 1.15rem;
-            line-height: 1.8;
+        .response-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--border);
         }
 
-        .response-content h3 {
-            color: #6E667B;
-            margin-bottom: 1rem;
+        .response-icon {
+            font-size: 2.5rem;
+        }
+
+        .response-header h3 {
+            color: var(--primary);
             font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .response-content p {
+        .response-content {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .response-content h4 {
+            color: var(--primary);
+            margin-top: 1.5rem;
             margin-bottom: 1rem;
-            color: #6B5B4B;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         .response-content ul {
-            margin-left: 1.5rem;
-            line-height: 1.8;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .response-content li {
+            margin-bottom: 0.8rem;
+            color: var(--text);
         }
 
         .response-content strong {
-            color: #6E667B;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .response-content a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid var(--gold);
+            transition: all 0.3s;
+        }
+
+        .response-content a:hover {
+            color: var(--gold);
+            border-bottom-color: transparent;
+        }
+
+        .close-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(120, 111, 133, 0.3);
+        }
+
+        .close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(120, 111, 133, 0.5), 0 0 20px var(--gold);
+        }
+
+        /* Encouragement Banner */
+        .encouragement-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            color: white;
+            text-align: center;
+            padding: 3.5rem 3rem;
+            border-radius: 40px;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            box-shadow: 0 15px 60px rgba(120, 111, 133, 0.3);
+            border: 4px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .encouragement-banner::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -30px;
+            right: 50px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .encouragement-banner::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -20px;
+            left: 80px;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .encouragement-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .encouragement-banner p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            border: 3px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-wrapper {
+                padding: 1rem 1rem 0;
+            }
+
+            .navbar {
+                padding: 1rem;
+                border-radius: 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
+            .page-container {
+                padding: 3rem 1rem 2rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1.5rem;
+                border-radius: 25px;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .response-section {
+                padding: 2rem 1.5rem;
+                border-radius: 25px;
+            }
+
+            .encouragement-banner {
+                padding: 2.5rem 1.5rem;
+                border-radius: 25px;
+                margin-top: 3rem;
+            }
+
+            .encouragement-banner h2 {
+                font-size: 1.75rem;
+            }
+
+            .encouragement-banner p {
+                font-size: 1.1rem;
+            }
+
+            .cta-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .shape {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
-                SeeMe in STEM
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-circle shape-1"></div>
+        <div class="shape shape-blob shape-2"></div>
+        <div class="shape shape-circle shape-3"></div>
+    </div>
+
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                    SeeMe in STEM
+                </div>
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/role-models">Role Models</a></li>
+                    <li><a href="/opportunities">Resources</a></li>
+                    <li><a href="/confidence">Support</a></li>
+                    <li><a href="/quiz">Take Quiz</a></li>
+                </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/careers">Careers</a></li>
-                <li><a href="/role-models">Role Models</a></li>
-                <li><a href="/opportunities">Resources</a></li>
-                <li><a href="/confidence">Support</a></li>
-                <li><a href="/quiz">Take Quiz</a></li>
-            </ul>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
-    <div class="confidence-check-section">
-        <h2>💭 Feeling Unsure About STEM?</h2>
-        <p class="section-subtitle">You're not alone! Pick what's on your mind, and let's talk about it.</p>
-
-        <div class="concerns-grid">
-            <button class="concern-card" onclick="showConfidenceResponse('start')">
-                <div class="concern-icon">🤔</div>
-                <div class="concern-text">I don't know where to start</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('math')">
-                <div class="concern-icon">🧮</div>
-                <div class="concern-text">I'm bad at math</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('network')">
-                <div class="concern-icon">👥</div>
-                <div class="concern-text">I don't know anyone in STEM</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('smart')">
-                <div class="concern-icon">🧠</div>
-                <div class="concern-text">I'm scared I'm not smart enough</div>
-            </button>
-
-            <button class="concern-card" onclick="showConfidenceResponse('impact')">
-                <div class="concern-icon">❤️</div>
-                <div class="concern-text">I want a career that helps people</div>
-            </button>
+    <div class="page-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>Feeling Unsure About STEM?</h1>
+            <p>You're not alone! Pick what's on your mind, and let's talk about it. Every STEM professional started exactly where you are now.</p>
         </div>
 
-        <div class="confidence-response" id="confidenceResponse">
-            <div class="response-content" id="responseContent"></div>
+        <!-- Support Cards -->
+        <div class="support-grid">
+            <div class="support-card" onclick="showResponse('start')">
+                <div class="support-icon-container">
+                    <div class="support-icon">🤔</div>
+                </div>
+                <h3>I don't know where to start</h3>
+                <p class="support-description">Feeling lost is normal. Let's find your first step together!</p>
+            </div>
+
+            <div class="support-card" onclick="showResponse('math')">
+                <div class="support-icon-container">
+                    <div class="support-icon">🧮</div>
+                </div>
+                <h3>I'm bad at math</h3>
+                <p class="support-description">Math struggles don't define your STEM potential. Let's reframe this!</p>
+            </div>
+
+            <div class="support-card" onclick="showResponse('network')">
+                <div class="support-icon-container">
+                    <div class="support-icon">👥</div>
+                </div>
+                <h3>I don't know anyone in STEM</h3>
+                <p class="support-description">We'll help you build your network and find mentors.</p>
+            </div>
+
+            <div class="support-card" onclick="showResponse('smart')">
+                <div class="support-icon-container">
+                    <div class="support-icon">🧠</div>
+                </div>
+                <h3>I'm not smart enough</h3>
+                <p class="support-description">Intelligence isn't fixed. Let's talk about growth mindset!</p>
+            </div>
+
+            <div class="support-card" onclick="showResponse('help')">
+                <div class="support-icon-container">
+                    <div class="support-icon">❤️</div>
+                </div>
+                <h3>I want to help people</h3>
+                <p class="support-description">STEM careers can make incredible positive impact!</p>
+            </div>
+        </div>
+
+        <!-- Response Sections -->
+        <div id="response-start" class="response-section">
+            <div class="response-header">
+                <span class="response-icon">🤔</span>
+                <h3>I don't know where to start</h3>
+            </div>
+            <div class="response-content">
+                <p><strong>You're in the right place!</strong> Not knowing where to start is actually the perfect starting point. Here's your roadmap:</p>
+
+                <h4>Step 1: Explore What Interests You</h4>
+                <ul>
+                    <li>Take our <a href="/quiz" style="color: #70697E; font-weight: bold;">Career Quiz</a> to discover STEM fields that match your interests</li>
+                    <li>Browse our <a href="/careers" style="color: #70697E; font-weight: bold;">17+ Career Paths</a> to see what excites you</li>
+                    <li>Check out "A Day in the Life" sections to visualize yourself in different roles</li>
+                </ul>
+
+                <h4>Step 2: Start Small</h4>
+                <ul>
+                    <li>Pick ONE beginner project from any career that interests you</li>
+                    <li>Spend 30 minutes on a free online course (Khan Academy, Code.org)</li>
+                    <li>Join one club or online community</li>
+                </ul>
+
+                <h4>Step 3: Learn from Others</h4>
+                <ul>
+                    <li>Read stories from our <a href="/role-models" style="color: #70697E; font-weight: bold;">24+ Role Models</a></li>
+                    <li>See how they started - spoiler: most had no idea where to begin either!</li>
+                </ul>
+
+                <p><strong>Remember:</strong> Every expert was once a beginner. The fact that you're here, asking questions, means you've already started! 🚀</p>
+            </div>
+            <button class="close-btn" onclick="closeResponse()">Got it! ✨</button>
+        </div>
+
+        <div id="response-math" class="response-section">
+            <div class="response-header">
+                <span class="response-icon">🧮</span>
+                <h3>I'm bad at math</h3>
+            </div>
+            <div class="response-content">
+                <p><strong>Let's bust this myth right now:</strong> Being "bad at math" does NOT disqualify you from STEM!</p>
+
+                <h4>The Truth About Math in STEM</h4>
+                <ul>
+                    <li><strong>Math skills improve with practice</strong> - It's not a fixed ability you're born with</li>
+                    <li><strong>Different STEM fields use different levels of math</strong> - Some require less than you think!</li>
+                    <li><strong>Problem-solving matters more</strong> - Creativity and persistence often beat pure calculation skills</li>
+                    <li><strong>Tools exist to help</strong> - Calculators, software, and AI can handle complex math</li>
+                </ul>
+
+                <h4>STEM Careers with Less Heavy Math</h4>
+                <ul>
+                    <li>UX/UI Design (Tech) - Focus on user experience and design</li>
+                    <li>Bioinformatics - More about patterns than advanced calculus</li>
+                    <li>Environmental Science - Field work and data collection</li>
+                    <li>Technical Writing - Explaining complex concepts clearly</li>
+                </ul>
+
+                <h4>How to Get Better at Math</h4>
+                <ul>
+                    <li>Khan Academy - Free, self-paced, explains concepts clearly</li>
+                    <li>Find real-world applications that interest you</li>
+                    <li>Study groups or tutoring - learning with others helps!</li>
+                    <li>Practice regularly in small chunks (20 min/day beats 2 hours once a week)</li>
+                </ul>
+
+                <p><strong>Bottom line:</strong> Many successful STEM professionals struggled with math. What matters is persistence and finding the right learning approach for YOU! 💪</p>
+            </div>
+            <button class="close-btn" onclick="closeResponse()">I can do this! ✨</button>
+        </div>
+
+        <div id="response-network" class="response-section">
+            <div class="response-header">
+                <span class="response-icon">👥</span>
+                <h3>I don't know anyone in STEM</h3>
+            </div>
+            <div class="response-content">
+                <p><strong>Great news:</strong> You don't need family connections to succeed in STEM. Here's how to build your network from scratch:</p>
+
+                <h4>Find Mentors and Role Models</h4>
+                <ul>
+                    <li><strong>Our platform:</strong> Explore <a href="/role-models" style="color: #70697E; font-weight: bold;">24+ diverse role models</a> and their stories</li>
+                    <li><strong>Teachers:</strong> Ask your science or math teachers for guidance</li>
+                    <li><strong>School counselors:</strong> They can connect you with alumni in STEM</li>
+                    <li><strong>Local professionals:</strong> LinkedIn message or email people in your area (most are happy to help!)</li>
+                </ul>
+
+                <h4>Join STEM Communities</h4>
+                <ul>
+                    <li>School STEM clubs and coding clubs (free to join)</li>
+                    <li>FIRST Robotics teams</li>
+                    <li>Online communities: Reddit r/learnprogramming, Discord servers</li>
+                    <li>Summer programs like NASA STEM Engagement</li>
+                    <li>Local hackathons and science fairs</li>
+                </ul>
+
+                <h4>Create Opportunities</h4>
+                <ul>
+                    <li>Start a STEM club at your school</li>
+                    <li>Attend local tech meetups or conferences (many are free for students)</li>
+                    <li>Volunteer for science fairs or hackathons</li>
+                    <li>Shadow a STEM professional for a day (ask via email - many say yes!)</li>
+                </ul>
+
+                <h4>Online Resources</h4>
+                <ul>
+                    <li>LinkedIn - Connect with STEM professionals and ask thoughtful questions</li>
+                    <li>Twitter/X - Follow scientists and engineers who share their work</li>
+                    <li>Virtual office hours - Many universities offer free career chats</li>
+                </ul>
+
+                <p><strong>Remember:</strong> Every person in your future network was once a stranger. Building connections takes courage, but one conversation can change your entire path! 🌟</p>
+            </div>
+            <button class="close-btn" onclick="closeResponse()">Let's build my network! ✨</button>
+        </div>
+
+        <div id="response-smart" class="response-section">
+            <div class="response-header">
+                <span class="response-icon">🧠</span>
+                <h3>I'm scared I'm not smart enough</h3>
+            </div>
+            <div class="response-content">
+                <p><strong>Listen carefully:</strong> The fact that you're even asking this question shows you care about learning - that's the #1 trait of successful STEM professionals.</p>
+
+                <h4>What "Smart" Really Means in STEM</h4>
+                <ul>
+                    <li><strong>Persistence</strong> - Trying again when things get hard</li>
+                    <li><strong>Curiosity</strong> - Asking "why" and "how"</li>
+                    <li><strong>Problem-solving</strong> - Breaking big problems into small steps</li>
+                    <li><strong>Willingness to learn</strong> - Embracing mistakes as learning opportunities</li>
+                </ul>
+
+                <p>Notice what's NOT on that list? Being naturally gifted, having perfect grades, or understanding everything instantly.</p>
+
+                <h4>The Growth Mindset</h4>
+                <p>Research by Dr. Carol Dweck shows that intelligence isn't fixed - your brain literally grows when you learn! People who believe they can improve actually DO improve. Those who think "I'm just not a math person" create a self-fulfilling prophecy.</p>
+
+                <h4>Famous "Not Smart Enough" People</h4>
+                <ul>
+                    <li><strong>Albert Einstein</strong> - Failed his university entrance exam the first time</li>
+                    <li><strong>Thomas Edison</strong> - Teachers said he was "too stupid to learn anything"</li>
+                    <li><strong>Mae Jemison</strong> (First Black woman in space) - Faced constant doubt but proved them all wrong</li>
+                </ul>
+
+                <h4>What to Do When You Feel This Way</h4>
+                <ul>
+                    <li>Replace "I'm not smart enough" with "I haven't learned this YET"</li>
+                    <li>Focus on progress, not perfection</li>
+                    <li>Find communities where struggle is normalized (it's how everyone learns!)</li>
+                    <li>Celebrate small wins - you understand something today that confused you yesterday</li>
+                </ul>
+
+                <p><strong>The truth:</strong> STEM isn't about being the smartest person in the room. It's about being the person who doesn't give up when things get hard. And you've already proven you have that - you're here, seeking help, asking questions, and pushing forward. That's exactly what STEM professionals do every single day! 🚀</p>
+            </div>
+            <button class="close-btn" onclick="closeResponse()">I believe in myself! ✨</button>
+        </div>
+
+        <div id="response-help" class="response-section">
+            <div class="response-header">
+                <span class="response-icon">❤️</span>
+                <h3>I want a career that helps people</h3>
+            </div>
+            <div class="response-content">
+                <p><strong>Amazing news:</strong> STEM careers are some of the MOST impactful ways to help people! Let's explore how:</p>
+
+                <h4>Healthcare & Medicine</h4>
+                <ul>
+                    <li><strong>Biomedical Engineer</strong> - Design prosthetics, medical devices, and life-saving equipment</li>
+                    <li><strong>Bioinformatics Specialist</strong> - Use data to fight diseases and develop personalized medicine</li>
+                    <li><strong>Public Health Data Scientist</strong> - Track disease outbreaks and improve healthcare access</li>
+                </ul>
+
+                <h4>Environmental & Social Impact</h4>
+                <ul>
+                    <li><strong>Environmental Scientist</strong> - Fight climate change, protect ecosystems, ensure clean water</li>
+                    <li><strong>Civil Engineer</strong> - Build infrastructure for underserved communities</li>
+                    <li><strong>Data Scientist</strong> - Use data to solve poverty, education gaps, and social justice issues</li>
+                </ul>
+
+                <h4>Education & Accessibility</h4>
+                <ul>
+                    <li><strong>UX Designer</strong> - Make technology accessible for people with disabilities</li>
+                    <li><strong>Software Engineer</strong> - Build educational apps that help millions learn</li>
+                    <li><strong>Robotics Engineer</strong> - Create assistive robots for elderly care and rehabilitation</li>
+                </ul>
+
+                <h4>Community & Innovation</h4>
+                <ul>
+                    <li><strong>Cybersecurity Analyst</strong> - Protect people from scams, identity theft, and cyber attacks</li>
+                    <li><strong>AI/ML Engineer</strong> - Develop AI that diagnoses diseases or provides mental health support</li>
+                    <li><strong>Chemical Engineer</strong> - Create clean energy solutions and sustainable materials</li>
+                </ul>
+
+                <h4>Real Impact Examples</h4>
+                <ul>
+                    <li>Dr. Kizzmekia Corbett helped develop the COVID-19 vaccine, saving millions of lives</li>
+                    <li>Software engineers at Khan Academy provide free education to 100+ million students</li>
+                    <li>Environmental scientists discovered the ozone hole and helped fix it</li>
+                </ul>
+
+                <p><strong>The bottom line:</strong> If you want to help people, STEM gives you the tools to make MASSIVE positive impact. Technology, science, and engineering solve real human problems at scale. You could literally change millions of lives! 🌍💙</p>
+            </div>
+            <button class="close-btn" onclick="closeResponse()">Let's make an impact! ✨</button>
+        </div>
+
+        <!-- Encouragement Banner -->
+        <div class="encouragement-banner">
+            <h2>You've Got This! 💫</h2>
+            <p>Every question you ask, every doubt you face - these are all part of the journey. You belong in STEM.</p>
+            <a href="/quiz" class="cta-btn">Take the Career Quiz →</a>
         </div>
     </div>
 
     <script>
-        function showConfidenceResponse(concern) {
-            const responseDiv = document.getElementById('confidenceResponse');
-            const contentDiv = document.getElementById('responseContent');
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
 
-            const responses = {
-                start: `
-                    <h3>You're Already On the Right Track! 🌟</h3>
-                    <p><strong>Starting is the hardest part, and you're here!</strong> That takes courage.</p>
-                    <p>Here's the secret: <strong>nobody has it all figured out at first</strong>. Every scientist, engineer, and tech professional you admire started exactly where you are — curious but unsure.</p>
-                    <p><strong>Your next steps:</strong></p>
-                    <ul>
-                        <li>Take our quick quiz to find careers that match your interests</li>
-                        <li>Explore beginner-friendly projects (no experience needed!)</li>
-                        <li>Connect with role models who started just like you</li>
-                        <li>Join a STEM club or online community where you can learn together</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every expert was once a beginner. Your journey starts with one small step! 💪</p>
-                `,
-                math: `
-                    <h3>Math is a Skill, Not a Talent! 🧮✨</h3>
-                    <p><strong>Here's the truth:</strong> Being "bad at math" doesn't exist. You just haven't found the right way to learn it yet!</p>
-                    <p>Many successful STEM professionals struggled with math at first. The difference? <strong>They kept going</strong>, and they found learning methods that worked for them.</p>
-                    <p><strong>What actually matters in STEM:</strong></p>
-                    <ul>
-                        <li><strong>Curiosity</strong> — wanting to understand how things work</li>
-                        <li><strong>Problem-solving</strong> — breaking big problems into smaller pieces</li>
-                        <li><strong>Creativity</strong> — thinking of new ways to solve challenges</li>
-                        <li><strong>Persistence</strong> — not giving up when things get tough</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Plus:</strong> Many STEM careers use basic math, not complex calculus. Tools and computers do the heavy lifting — you provide the creativity and thinking! 🎨🤖</p>
-                `,
-                network: `
-                    <h3>You're Building Your Network Right Now! 👥💫</h3>
-                    <p><strong>Not knowing anyone in STEM is actually super common</strong> — and it's totally okay! Most STEM professionals didn't grow up with connections either.</p>
-                    <p><strong>The good news:</strong> The STEM community is full of people who want to help newcomers succeed. They remember when they were in your shoes!</p>
-                    <p><strong>Ways to start building your STEM network:</strong></p>
-                    <ul>
-                        <li><strong>Connect with our role models</strong> — real people who want to mentor students like you</li>
-                        <li><strong>Join online communities</strong> — Discord servers, Reddit forums, student groups</li>
-                        <li><strong>Attend STEM events</strong> — hackathons, science fairs, club meetings</li>
-                        <li><strong>Reach out to professionals</strong> — many are happy to answer questions or do virtual coffee chats</li>
-                        <li><strong>Shadow programs</strong> — spend a day seeing what a STEM career looks like</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Remember:</strong> Every connection starts with a simple "hello." You've got this! 🚀</p>
-                `,
-                smart: `
-                    <h3>Stop Right There! You ARE Smart Enough! 🧠✨</h3>
-                    <p><strong>Let's get this straight:</strong> STEM isn't about being "smart" — it's about being <strong>curious, determined, and willing to learn</strong>.</p>
-                    <p><strong>The "genius myth" is totally false.</strong> Most people in STEM aren't child prodigies — they're regular people who worked hard and didn't give up.</p>
-                    <p><strong>What STEM really needs:</strong></p>
-                    <ul>
-                        <li><strong>People who ask questions</strong> — "why" and "how" are powerful</li>
-                        <li><strong>People who try things</strong> — even if they fail at first</li>
-                        <li><strong>People with different perspectives</strong> — YOUR unique viewpoint matters!</li>
-                        <li><strong>People who care about solving problems</strong> — passion beats "natural talent"</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Fun fact:</strong> Many famous scientists and engineers did poorly in school! Albert Einstein struggled with traditional education. Steve Jobs never finished college. What they had was <strong>passion and persistence</strong> — and so do you! 🌟</p>
-                    <p><strong>You belong in STEM. Period.</strong> 💪</p>
-                `,
-                impact: `
-                    <h3>STEM is ALL About Helping People! ❤️🌍</h3>
-                    <p><strong>If you want to make a difference, STEM is the perfect path!</strong> Every single STEM field exists to solve problems and improve lives.</p>
-                    <p><strong>How STEM careers help people:</strong></p>
-                    <ul>
-                        <li><strong>Biomedical Engineers</strong> — design prosthetics, medical devices, and life-saving technologies</li>
-                        <li><strong>Software Engineers</strong> — create apps for education, healthcare, accessibility, and connection</li>
-                        <li><strong>Environmental Scientists</strong> — protect our planet and fight climate change</li>
-                        <li><strong>Cybersecurity Analysts</strong> — protect people's data and privacy</li>
-                        <li><strong>Data Scientists</strong> — analyze information to improve healthcare, education, and social services</li>
-                        <li><strong>Aerospace Engineers</strong> — advance space exploration and develop technologies that save lives</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>The best part?</strong> STEM gives you the tools to create solutions for problems you care about. Want to help your community? Build healthcare access? Protect the environment? <strong>STEM is how you do it!</strong> 🚀</p>
-                    <p><strong>Your compassion + STEM skills = World-changing impact!</strong> 💫</p>
-                `
-            };
+        function showResponse(type) {
+            // Close all responses
+            document.querySelectorAll('.response-section').forEach(section => {
+                section.classList.remove('active');
+            });
 
-            contentDiv.innerHTML = responses[concern];
-            responseDiv.style.display = 'block';
-            responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Show selected response
+            const responseId = 'response-' + type;
+            const responseSection = document.getElementById(responseId);
+            if (responseSection) {
+                responseSection.classList.add('active');
+                responseSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function closeResponse() {
+            document.querySelectorAll('.response-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
