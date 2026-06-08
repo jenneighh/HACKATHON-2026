@@ -1035,9 +1035,8 @@ Try asking one of these, or rephrase your question! I'm here to help you succeed
 @app.route("/api/chat", methods=["POST"])
 def chat():
     """
-    General STEM chatbot endpoint
-    Responds to common questions about STEM careers, resources, and getting started
-    Uses keyword matching to provide helpful responses
+    General STEM chatbot endpoint powered by Claude via AWS Bedrock
+    Responds to questions about STEM careers, resources, and getting started
     """
     try:
         # Get user's chat message
@@ -1045,38 +1044,60 @@ def chat():
         if not data or "message" not in data:
             return jsonify({"response": "Please send a message!"}), 400
 
-        user_message = data["message"].lower()
+        user_message = data["message"]
 
-        # Keyword-based responses for common STEM questions
-        responses = {
-            "hello": "Hi there! 👋 I'm your STEM Career Guide! Ask me anything about STEM careers, what classes to take, or how to get started!",
-            "hi": "Hello! 👋 I'm here to help you explore STEM careers! What would you like to know?",
-            "help": "I can help you with:\n• Finding STEM careers that fit you\n• What classes you should take\n• Whether you can do STEM (yes you can!)\n• Project ideas to get started\n• Summer camps, scholarships, and competitions\n\nWhat interests you?",
-            "camp": "Great question! 🏕️ There are tons of amazing STEM summer camps!\n• Girls Who Code - Free 2-week coding program\n• NASA STEM Programs - Virtual & in-person\n• AI4ALL - AI education for underrepresented students\n• Engineering For Kids - Find local camps by state\n\nCheck out the 'Opportunities' section on the homepage for more links!",
-            "summer": "Summer is a perfect time for STEM! ☀️ You can:\n• Join a summer coding camp (Girls Who Code is free!)\n• Participate in NASA programs\n• Work on personal projects\n• Enter science competitions\n• Take free online courses\n\nScroll down to see all our opportunities!",
-            "scholarship": "Yes! There are many STEM scholarships! 💰 Here are some great ones:\n• Society of Women Engineers (SWE)\n• National Society of Black Engineers (NSBE)\n• Hispanic Scholarship Fund (HSF)\n• Generation Google Scholarship\n• STEM Scholarships Database\n\nCheck the Opportunities section for direct links to apply!",
-            "competition": "STEM competitions are awesome for building skills! 🏆 Try:\n• Google Science Fair - Global online competition\n• FIRST Robotics - Build robots with teams\n• MATHCOUNTS - Math competition\n• Congressional App Challenge - Create an app\n• Regeneron Science Talent Search - Research competition\n\nFind more details in our Opportunities section!",
-            "free": "Tons of free STEM resources! 📚 Here are the best:\n• Khan Academy - Math, science, coding\n• Coursera - College-level courses\n• Code.org - Learn computer science\n• MIT OpenCourseWare - Free MIT courses\n\nAll completely free! Check our Opportunities section for links.",
-            "math": "Being 'bad at math' doesn't mean you can't do STEM! 💪 Many successful STEM professionals struggled with math at first. The key is practice and finding the right learning style. Plus, many STEM fields focus more on creativity and problem-solving than pure math. Would you like to know which STEM careers use less heavy math?",
-            "career": "Great question! There are so many exciting STEM careers! 🚀 Based on your interests, I'd recommend taking our quiz to find your perfect match. We have careers in:\n• Software Engineering\n• Biomedical Engineering\n• Cybersecurity\n• Aerospace Engineering\n• And more!\n\nWhat are you passionate about?",
-            "class": "For STEM careers, here are some key classes:\n📚 Essential: Math, Science, Computer Science\n💡 Helpful: Physics, Chemistry, Biology\n🎨 Bonus: Design, Statistics, Engineering\n\nStart with what interests you most! Which field are you curious about?",
-            "project": "Here are some beginner-friendly STEM projects:\n• Build a personal website 💻\n• Create a simple robot 🤖\n• Design a mobile app 📱\n• Build a model rocket 🚀\n• Make a heart rate monitor ❤️\n\nPick something that excites you and start small!",
-            "woman": "Absolutely! Women are making incredible contributions to STEM! 👩‍🔬 Check out our Role Models section to meet inspiring women like:\n• Dr. Mae Jemison (First Black woman in space)\n• Grace Hopper (Computer programming pioneer)\n• Ellen Ochoa (First Hispanic woman astronaut)\n\nYou belong in STEM!",
-            "hispanic": "Yes! Hispanic and Latino students are thriving in STEM! 🌟 Check out role models like Ellen Ochoa, José Hernández, and Dr. Jessica Esquivel. Your cultural perspective is valuable and needed in STEM fields!",
-            "first": "Being a first-generation college student in STEM is challenging but absolutely possible! 💪 Many successful STEM professionals were first-gen students. Look for mentors, join support groups, and remember: your unique perspective is an asset!",
-            "start": "Getting started in STEM is exciting! Here's what to do:\n1. Explore different fields (take our quiz!)\n2. Start a small project in your area of interest\n3. Join a club or online community\n4. Find a mentor or role model\n5. Keep learning and stay curious!\n\nWhat field interests you most?",
-        }
+        # Check if AWS credentials are available
+        aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        use_ai = aws_access_key and aws_access_key != "your_aws_access_key_id_here"
 
-        # Find matching response
-        response_text = None
-        for keyword, response in responses.items():
-            if keyword in user_message:
-                response_text = response
-                break
+        if use_ai:
+            # Use Claude AI for intelligent responses
+            prompt = f"""You are a friendly and enthusiastic STEM Career Guide chatbot helping students explore STEM careers and opportunities. Your goal is to inspire, encourage, and provide helpful information about STEM education and careers.
 
-        # Default response
-        if not response_text:
-            response_text = "That's a great question! 🤔 I'm here to help you explore STEM careers. Try asking about:\n• What STEM career fits me?\n• What classes should I take?\n• Can I do STEM if I'm bad at math?\n• What projects should I try?\n• Are there role models like me?\n\nOr take our quiz to find your perfect STEM career match!"
+Context about this platform:
+- We help students discover STEM careers through career matching quizzes
+- We feature 17+ STEM careers including Software Engineer, Biomedical Engineer, Cybersecurity Analyst, Aerospace Engineer, Data Scientist, Environmental Scientist, and more
+- We showcase diverse role models like Dr. Mae Jemison, Grace Hopper, Katherine Johnson, Ellen Ochoa, and others
+- We provide information about summer camps, scholarships, competitions, and free learning resources
+
+Available resources we offer:
+- Career Quiz: Matches students with ideal STEM careers
+- Role Models Section: Inspiring STEM professionals from diverse backgrounds
+- Opportunities Section: Summer camps (Girls Who Code, NASA programs, AI4ALL), scholarships (SWE, NSBE, HSF), competitions (FIRST Robotics, Google Science Fair)
+- Free Learning: Khan Academy, Coursera, Code.org, MIT OpenCourseWare
+
+User's message: {user_message}
+
+Respond in a friendly, encouraging tone. Keep responses concise (2-4 short paragraphs). Use emojis sparingly to add personality. Focus on:
+- Answering their specific question
+- Being encouraging and positive
+- Suggesting relevant resources from our platform when appropriate
+- Inspiring confidence that they CAN succeed in STEM
+
+If they ask about specific careers, classes, getting started, scholarships, camps, or role models, provide helpful specific information. Always be supportive and never dismissive."""
+
+            # Prepare request for AWS Bedrock
+            request_body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 1000,
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ]
+            })
+
+            # Call AWS Bedrock
+            response = bedrock_runtime.invoke_model(
+                modelId="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                body=request_body
+            )
+
+            # Parse response
+            response_body = json.loads(response['body'].read())
+            response_text = response_body['content'][0]['text']
+
+        else:
+            # Fallback response if no AI available
+            response_text = "Hi! 👋 I'm your STEM Career Guide! I can help you explore STEM careers, find resources, and answer your questions. Try asking about:\n• What STEM career fits me?\n• What classes should I take?\n• Are there scholarships available?\n• What summer camps can I join?\n• Can I do STEM if I'm bad at math?\n\nWhat would you like to know?"
 
         # Return response with streaming flag for frontend
         return jsonify({"response": response_text, "stream": True})
