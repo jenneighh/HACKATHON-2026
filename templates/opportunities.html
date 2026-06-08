@@ -3,22 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opportunities - SeeMe in STEM</title>
-    <link rel="stylesheet" href="/static/common-styles.css">
+    <title>STEM Opportunities - SeeMe in STEM</title>
     <style>
-        :root {
-            --bg: #F7F0EA;
-            --card: #FEFDFC;
-            --text: #6E667B;
-            --primary: #786F85;
-            --secondary: #857A8D;
-            --border: #E8E3E8;
-            --gold: #786F85;
-            --lavender: #C3BBC5;
-            --cream: #FFF8F0;
-            --soft-shadow: rgba(120, 111, 133, 0.08);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -27,20 +13,19 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg) 0%, #FFF5EB 100%);
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 50%, #F8F5FF 100%);
             min-height: 100vh;
-            color: var(--text);
+            padding: 2rem;
+            color: #70697E;
         }
 
         .navbar {
-            background: rgba(254, 253, 252, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 20px var(--soft-shadow);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            box-shadow: 0 2px 15px rgba(112, 105, 126, 0.1);
+            border-radius: 25px;
+            margin-bottom: 2rem;
         }
 
         .nav-container {
@@ -54,7 +39,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
@@ -72,258 +57,259 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text);
+            color: #70697E;
             font-weight: 500;
             transition: all 0.3s;
-            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: #98899C;
+            transform: translateY(-2px);
         }
 
         .page-header {
             text-align: center;
-            margin: 4rem auto 3rem;
-            padding: 0 2rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .page-header h1 {
             font-size: 3rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #70697E;
             margin-bottom: 1rem;
-            font-weight: 700;
-            animation: fadeInUp 0.6s ease-out;
         }
 
         .page-header p {
             font-size: 1.2rem;
-            color: var(--text);
-            line-height: 1.6;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+            color: #98899C;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Featured Opportunity */
+        .featured-section {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
         }
 
-        .opportunities-section {
-            max-width: 1300px;
-            margin: 0 auto 4rem;
-            padding: 0 2rem;
-        }
-
-        .opportunities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-        }
-
-        .opportunity-category {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
+        .featured-card {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
             border-radius: 30px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px var(--soft-shadow);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .opportunity-category:nth-child(1) { animation-delay: 0.1s; }
-        .opportunity-category:nth-child(2) { animation-delay: 0.2s; }
-        .opportunity-category:nth-child(3) { animation-delay: 0.3s; }
-        .opportunity-category:nth-child(4) { animation-delay: 0.4s; }
-
-        .opportunity-category:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(120, 111, 133, 0.15);
-            border-color: var(--lavender);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .category-icon {
-            font-size: 2.8rem;
-            filter: drop-shadow(0 2px 4px rgba(120, 111, 133, 0.1));
-        }
-
-        .category-header h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .opportunity-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .opportunity-item {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--cream) 0%, #FFFFFF 100%);
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            padding: 3rem;
+            color: white;
+            box-shadow: 0 15px 50px rgba(112, 105, 126, 0.25);
             position: relative;
             overflow: hidden;
         }
 
-        .opportunity-item::before {
+        .featured-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
         }
 
-        .opportunity-item:hover {
-            transform: translateX(8px);
-            box-shadow: 0 8px 25px rgba(120, 111, 133, 0.12);
-            border-color: var(--lavender);
-        }
-
-        .opportunity-item:hover::before {
-            opacity: 1;
-        }
-
-        .opportunity-item h4 {
-            color: var(--text);
-            font-size: 1.1rem;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .opportunity-item p {
-            color: var(--text);
-            opacity: 0.85;
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .featured-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
             margin-bottom: 1rem;
         }
 
-        .opportunity-link {
-            display: inline-flex;
+        .featured-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-card p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
             align-items: center;
-            gap: 0.4rem;
-            color: var(--primary);
-            font-weight: 600;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .featured-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #70697E;
             text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .featured-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Filters */
+        .filter-section {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #E0D8E0;
+            border-radius: 25px;
+            color: #70697E;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            border-color: #70697E;
+        }
+
+        /* Opportunities Grid */
+        .opportunities-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(112, 105, 126, 0.1);
+            border: 2px solid #E0D8E0;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(112, 105, 126, 0.2);
+            border-color: #98899C;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .category-camp { background: #FFE5D9; color: #D4680F; }
+        .category-scholarship { background: #FFE5B4; color: #B8860B; }
+        .category-competition { background: #D4F1F4; color: #2C7A7B; }
+        .category-course { background: #E0D8E0; color: #70697E; }
+        .category-internship { background: #C3E4C9; color: #2F855A; }
+        .category-news { background: #E6CCFF; color: #6B46C1; }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #70697E;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+        }
+
+        .card-description {
+            color: #98899C;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #F8F5F8;
+            border-radius: 15px;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
-            position: relative;
+            color: #70697E;
         }
 
-        .opportunity-link::after {
-            content: '→';
-            transition: transform 0.3s ease;
+        .meta-label {
+            font-weight: 600;
         }
 
-        .opportunity-link:hover {
-            color: var(--secondary);
+        .meta-value {
+            color: #98899C;
         }
 
-        .opportunity-link:hover::after {
-            transform: translateX(4px);
+        .card-btn {
+            display: block;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #70697E 0%, #98899C 100%);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .opportunities-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .page-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .page-header p {
-                font-size: 1rem;
-            }
-
-            .opportunity-category {
-                padding: 2rem;
-            }
-
-            .category-header h3 {
-                font-size: 1.3rem;
-            }
-
-            .category-icon {
-                font-size: 2.3rem;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 1rem;
-                justify-content: center;
-            }
+        .card-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.3);
         }
 
-        @media (max-width: 640px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .page-header {
-                margin: 2rem auto 2rem;
-            }
-
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .opportunity-category {
-                padding: 1.5rem;
-                border-radius: 20px;
-            }
-
-            .opportunity-item {
-                padding: 1.25rem;
-            }
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .page-header h1 { font-size: 2rem; }
+            .featured-card { padding: 2rem; }
+            .featured-card h2 { font-size: 1.8rem; }
+            .opportunities-grid { grid-template-columns: 1fr; }
+            .nav-links { flex-wrap: wrap; gap: 1rem; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -346,132 +332,403 @@
     </nav>
 
     <div class="page-header">
-        <h1>🚀 Opportunities For You!</h1>
-        <p>Summer camps, competitions, scholarships, and free resources to jumpstart your STEM journey</p>
+        <h1>Real STEM Opportunities</h1>
+        <p>Apply to camps, scholarships, competitions, and free courses. Click any card to explore!</p>
     </div>
 
-    <div class="opportunities-section">
-        <div class="opportunities-grid">
+    <!-- Featured Opportunity -->
+    <div class="featured-section">
+        <div class="featured-card">
+            <div class="featured-badge">FEATURED OPPORTUNITY</div>
+            <h2>Girls Who Code Summer Program</h2>
+            <p>Free 2-week intensive coding program for high school girls. Learn programming, meet mentors, and build projects with peers nationwide.</p>
+            <div class="featured-meta">
+                <div class="meta-item">📅 Application: January - March</div>
+                <div class="meta-item">🎓 Grades: 9-11</div>
+                <div class="meta-item">💰 Cost: FREE</div>
+            </div>
+            <a href="https://girlswhocode.com/programs/summer-immersion-program" target="_blank" class="featured-btn">Apply Now →</a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="camp">Camps</button>
+            <button class="filter-btn" data-filter="scholarship">Scholarships</button>
+            <button class="filter-btn" data-filter="competition">Competitions</button>
+            <button class="filter-btn" data-filter="course">Courses</button>
+            <button class="filter-btn" data-filter="internship">Internships</button>
+            <button class="filter-btn" data-filter="news">STEM News</button>
+        </div>
+    </div>
+
+    <!-- Opportunities Grid -->
+    <div class="opportunities-container">
+        <div class="opportunities-grid" id="opportunitiesGrid">
             <!-- Summer Camps -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">⛺</div>
-                    <h3>Summer Camps & Programs</h3>
+            <div class="opportunity-card" data-category="camp">
+                <div class="card-header">
+                    <span class="category-badge category-camp">Camp</span>
                 </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>🎓 Girls Who Code Summer Immersion</h4>
-                        <p>Free 2-week coding program for high school girls</p>
-                        <a href="https://girlswhocode.com/programs/summer-immersion-program" target="_blank" class="opportunity-link">Learn More</a>
+                <h3 class="card-title">NASA STEM Programs</h3>
+                <p class="card-description">Virtual and in-person programs including Space Camp, internships, and educational resources directly from NASA.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">K-12 & College</span>
                     </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 STEM Summer Camps by State</h4>
-                        <p>Find local STEM camps near you across the US</p>
-                        <a href="https://www.engineeringforkids.com/locations/" target="_blank" class="opportunity-link">Find Camps</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🚀 NASA STEM Programs</h4>
-                        <p>Virtual and in-person programs from NASA</p>
-                        <a href="https://www.nasa.gov/learning-resources/for-kids-and-students/" target="_blank" class="opportunity-link">Explore</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 AI4ALL Summer Programs</h4>
-                        <p>AI education for underrepresented students</p>
-                        <a href="https://ai-4-all.org/" target="_blank" class="opportunity-link">Apply</a>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Rolling</span>
                     </div>
                 </div>
+                <a href="https://www.nasa.gov/learning-resources/for-kids-and-students/" target="_blank" class="card-btn">Explore Programs →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="camp">
+                <div class="card-header">
+                    <span class="category-badge category-camp">Camp</span>
+                </div>
+                <h3 class="card-title">Kode With Klossy</h3>
+                <p class="card-description">Free coding camps for girls and gender-expansive youth. Learn web development, app design, and more in a supportive environment.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">13-18 years old</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">February</span>
+                    </div>
+                </div>
+                <a href="https://www.kodewithklossy.com/" target="_blank" class="card-btn">Learn More →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="camp">
+                <div class="card-header">
+                    <span class="category-badge category-camp">Camp</span>
+                </div>
+                <h3 class="card-title">MIT Summer Programs</h3>
+                <p class="card-description">STEM workshops, research opportunities, and summer courses taught by MIT faculty for high school students.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">9-12</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Varies</span>
+                    </div>
+                </div>
+                <a href="https://oeop.mit.edu/" target="_blank" class="card-btn">View Programs →</a>
             </div>
 
             <!-- Competitions -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">🏆</div>
-                    <h3>Competitions & Challenges</h3>
+            <div class="opportunity-card" data-category="competition">
+                <div class="card-header">
+                    <span class="category-badge category-competition">Competition</span>
                 </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>💡 Google Science Fair</h4>
-                        <p>Global online science competition for ages 13-18</p>
-                        <a href="https://www.googlesciencefair.com/" target="_blank" class="opportunity-link">Enter</a>
+                <h3 class="card-title">FIRST Robotics Competition</h3>
+                <p class="card-description">Build and program robots with your team, compete globally, and develop engineering skills through hands-on experience.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">9-12</span>
                     </div>
-                    <div class="opportunity-item">
-                        <h4>🤖 FIRST Robotics Competition</h4>
-                        <p>Build robots and compete with teams worldwide</p>
-                        <a href="https://www.firstinspires.org/robotics/frc" target="_blank" class="opportunity-link">Join Team</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🧮 MATHCOUNTS Competition</h4>
-                        <p>National math competition for middle schoolers</p>
-                        <a href="https://www.mathcounts.org/" target="_blank" class="opportunity-link">Register</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 Congressional App Challenge</h4>
-                        <p>Create an app and compete in your district</p>
-                        <a href="https://www.congressionalappchallenge.us/" target="_blank" class="opportunity-link">Submit App</a>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">September</span>
                     </div>
                 </div>
+                <a href="https://www.firstinspires.org/robotics/frc" target="_blank" class="card-btn">Join a Team →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="competition">
+                <div class="card-header">
+                    <span class="category-badge category-competition">Competition</span>
+                </div>
+                <h3 class="card-title">Regeneron Science Talent Search</h3>
+                <p class="card-description">The nation's oldest and most prestigious science research competition for high school seniors.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">12th Grade</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">November</span>
+                    </div>
+                </div>
+                <a href="https://www.societyforscience.org/regeneron-sts/" target="_blank" class="card-btn">Submit Project →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="competition">
+                <div class="card-header">
+                    <span class="category-badge category-competition">Competition</span>
+                </div>
+                <h3 class="card-title">Congressional App Challenge</h3>
+                <p class="card-description">Create an app for your district. Winners are recognized by Congress and displayed in the Capitol.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">K-12</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">October</span>
+                    </div>
+                </div>
+                <a href="https://www.congressionalappchallenge.us/" target="_blank" class="card-btn">Enter Challenge →</a>
             </div>
 
             <!-- Scholarships -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">💰</div>
-                    <h3>Scholarships & Financial Aid</h3>
+            <div class="opportunity-card" data-category="scholarship">
+                <div class="card-header">
+                    <span class="category-badge category-scholarship">Scholarship</span>
                 </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>🎓 Society of Women Engineers (SWE)</h4>
-                        <p>Scholarships for women pursuing engineering</p>
-                        <a href="https://swe.org/scholarships/" target="_blank" class="opportunity-link">Apply</a>
+                <h3 class="card-title">Society of Women Engineers</h3>
+                <p class="card-description">Scholarships ranging from $1,000 to $15,000 for women pursuing ABET-accredited engineering programs.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">College</span>
                     </div>
-                    <div class="opportunity-item">
-                        <h4>🌟 National Society of Black Engineers</h4>
-                        <p>Scholarships and support for Black STEM students</p>
-                        <a href="https://www.nsbe.org/Programs/Scholarships.aspx" target="_blank" class="opportunity-link">Learn More →</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🚀 Hispanic Scholarship Fund (HSF)</h4>
-                        <p>Scholarships for Hispanic students in all majors</p>
-                        <a href="https://www.hsf.net/scholarship" target="_blank" class="opportunity-link">Apply</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>💻 Generation Google Scholarship</h4>
-                        <p>For students passionate about computer science</p>
-                        <a href="https://buildyourfuture.withgoogle.com/scholarships" target="_blank" class="opportunity-link">Details</a>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">February</span>
                     </div>
                 </div>
+                <a href="https://swe.org/scholarships/" target="_blank" class="card-btn">Apply →</a>
             </div>
 
-            <!-- Free Resources -->
-            <div class="opportunity-category">
-                <div class="category-header">
-                    <div class="category-icon">📚</div>
-                    <h3>Free Learning Resources</h3>
+            <div class="opportunity-card" data-category="scholarship">
+                <div class="card-header">
+                    <span class="category-badge category-scholarship">Scholarship</span>
                 </div>
-                <div class="opportunity-list">
-                    <div class="opportunity-item">
-                        <h4>💻 Khan Academy</h4>
-                        <p>Free courses in math, science, and coding</p>
-                        <a href="https://www.khanacademy.org/" target="_blank" class="opportunity-link">Start Learning</a>
+                <h3 class="card-title">Hispanic Scholarship Fund</h3>
+                <p class="card-description">Scholarships for Hispanic/Latino students pursuing any major, including STEM fields. Up to $5,000 per year.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">College</span>
                     </div>
-                    <div class="opportunity-item">
-                        <h4>🎓 Free Online Courses</h4>
-                        <p>Free college-level courses in STEM subjects</p>
-                        <a href="https://www.coursera.org/" target="_blank" class="opportunity-link">Browse</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🤖 Code.org</h4>
-                        <p>Learn computer science for free</p>
-                        <a href="https://code.org/" target="_blank" class="opportunity-link">Code Now</a>
-                    </div>
-                    <div class="opportunity-item">
-                        <h4>🔬 MIT OpenCourseWare</h4>
-                        <p>Free MIT courses online for everyone</p>
-                        <a href="https://ocw.mit.edu/" target="_blank" class="opportunity-link">Explore</a>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">March</span>
                     </div>
                 </div>
+                <a href="https://www.hsf.net/scholarship" target="_blank" class="card-btn">Apply →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="scholarship">
+                <div class="card-header">
+                    <span class="category-badge category-scholarship">Scholarship</span>
+                </div>
+                <h3 class="card-title">Generation Google Scholarship</h3>
+                <p class="card-description">$10,000 scholarship for students passionate about computer science from underrepresented backgrounds.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">College</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">December</span>
+                    </div>
+                </div>
+                <a href="https://buildyourfuture.withgoogle.com/scholarships" target="_blank" class="card-btn">Apply →</a>
+            </div>
+
+            <!-- Free Courses -->
+            <div class="opportunity-card" data-category="course">
+                <div class="card-header">
+                    <span class="category-badge category-course">Free Course</span>
+                </div>
+                <h3 class="card-title">Khan Academy</h3>
+                <p class="card-description">Free online courses in math, science, computer programming, and more. Learn at your own pace with video lessons.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">All Ages</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Self-paced</span>
+                    </div>
+                </div>
+                <a href="https://www.khanacademy.org/" target="_blank" class="card-btn">Start Learning →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="course">
+                <div class="card-header">
+                    <span class="category-badge category-course">Free Course</span>
+                </div>
+                <h3 class="card-title">Code.org</h3>
+                <p class="card-description">Learn computer science with interactive tutorials. Perfect for beginners with no coding experience.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">K-12</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Self-paced</span>
+                    </div>
+                </div>
+                <a href="https://code.org/learn" target="_blank" class="card-btn">Start Coding →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="course">
+                <div class="card-header">
+                    <span class="category-badge category-course">Free Course</span>
+                </div>
+                <h3 class="card-title">MIT OpenCourseWare</h3>
+                <p class="card-description">Free MIT course materials including lectures, notes, and assignments from actual MIT classes.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">High School+</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Self-paced</span>
+                    </div>
+                </div>
+                <a href="https://ocw.mit.edu/" target="_blank" class="card-btn">Browse Courses →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="course">
+                <div class="card-header">
+                    <span class="category-badge category-course">Free Course</span>
+                </div>
+                <h3 class="card-title">Google CS Education</h3>
+                <p class="card-description">Free computer science resources, curricula, and professional development for students and educators.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">K-12</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Self-paced</span>
+                    </div>
+                </div>
+                <a href="https://edu.google.com/computer-science/" target="_blank" class="card-btn">Explore Resources →</a>
+            </div>
+
+            <!-- Internships -->
+            <div class="opportunity-card" data-category="internship">
+                <div class="card-header">
+                    <span class="category-badge category-internship">Internship</span>
+                </div>
+                <h3 class="card-title">NASA Internships</h3>
+                <p class="card-description">Work alongside NASA scientists and engineers on real missions. Available for high school and college students.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">High School & College</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">Varies by session</span>
+                    </div>
+                </div>
+                <a href="https://intern.nasa.gov/" target="_blank" class="card-btn">Apply Now →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="internship">
+                <div class="card-header">
+                    <span class="category-badge category-internship">Internship</span>
+                </div>
+                <h3 class="card-title">Google STEP Internship</h3>
+                <p class="card-description">Student Training in Engineering Program for first and second-year undergraduate students interested in tech.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Grade Level:</span>
+                        <span class="meta-value">College (1st-2nd year)</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deadline:</span>
+                        <span class="meta-value">December</span>
+                    </div>
+                </div>
+                <a href="https://buildyourfuture.withgoogle.com/programs/step" target="_blank" class="card-btn">Learn More →</a>
+            </div>
+
+            <!-- STEM News -->
+            <div class="opportunity-card" data-category="news">
+                <div class="card-header">
+                    <span class="category-badge category-news">STEM News</span>
+                </div>
+                <h3 class="card-title">NASA Science</h3>
+                <p class="card-description">Latest space discoveries, mission updates, and breakthrough scientific research from NASA.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Updated:</span>
+                        <span class="meta-value">Daily</span>
+                    </div>
+                </div>
+                <a href="https://science.nasa.gov/" target="_blank" class="card-btn">Read News →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="news">
+                <div class="card-header">
+                    <span class="category-badge category-news">STEM News</span>
+                </div>
+                <h3 class="card-title">MIT Technology Review</h3>
+                <p class="card-description">Cutting-edge technology news, innovation stories, and insights into the future of science and engineering.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Updated:</span>
+                        <span class="meta-value">Daily</span>
+                    </div>
+                </div>
+                <a href="https://www.technologyreview.com/" target="_blank" class="card-btn">Explore →</a>
+            </div>
+
+            <div class="opportunity-card" data-category="news">
+                <div class="card-header">
+                    <span class="category-badge category-news">STEM News</span>
+                </div>
+                <h3 class="card-title">Science News for Students</h3>
+                <p class="card-description">Science journalism written for students by professional science writers, covering biology, physics, engineering, and more.</p>
+                <div class="card-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Updated:</span>
+                        <span class="meta-value">Weekly</span>
+                    </div>
+                </div>
+                <a href="https://www.snexplores.org/" target="_blank" class="card-btn">Read Articles →</a>
             </div>
         </div>
     </div>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const opportunityCards = document.querySelectorAll('.opportunity-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter cards
+                opportunityCards.forEach(card => {
+                    const category = card.dataset.category;
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

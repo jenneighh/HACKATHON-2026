@@ -89,6 +89,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
@@ -174,6 +182,7 @@
             border: 3px solid #E0D8E0;
             position: relative;
             z-index: 1;
+            overflow: hidden;
         }
 
         .career-card::before {
@@ -212,11 +221,27 @@
             border-color: #98899C;
         }
 
+        .career-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #F8F5FF 0%, #FFF8F0 100%);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(112, 105, 126, 0.1);
+        }
+
+        .career-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
         .career-title {
             font-size: 1.8rem;
             color: #70697E;
             margin-bottom: 1rem;
             font-weight: bold;
+            text-align: center;
         }
 
         .career-description {
@@ -283,36 +308,66 @@
         }
 
         .career-card.expanded .expanded-details {
-            display: block;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .expanded-image {
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            object-fit: contain;
+            background: linear-gradient(135deg, #FFF8F0 0%, #F8F5FF 100%);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(112, 105, 126, 0.1);
+        }
+
+        .expanded-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .detail-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
 
         .detail-box {
             background: #F8F5F8;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 15px;
             border: 1px solid #E0D8E0;
         }
 
         .detail-box h4 {
             color: #70697E;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: bold;
         }
 
         .detail-box p, .detail-box ul {
             color: #98899C;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
         .detail-box ul {
-            margin-left: 1.5rem;
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .detail-box ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .full-width-box {
+            grid-column: 1 / -1;
         }
 
         .expand-btn {
@@ -435,6 +490,21 @@
                 grid-column: 1;
             }
 
+            .career-card.expanded .expanded-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .expanded-image {
+                max-width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
             .nav-links {
                 gap: 1rem;
                 font-size: 0.9rem;
@@ -445,7 +515,10 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">✨ SeeMe in STEM</div>
+            <div class="logo">
+                <img src="/static/icon.svg" alt="SeeMe STEM Logo" class="logo-icon">
+                SeeMe in STEM
+            </div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -470,6 +543,92 @@
     <div class="careers-grid">
         {% for career_id, career in careers.items() %}
         <div class="career-card" id="card-{{ career_id }}">
+            <div class="career-icon">
+                {% if career_id == 'software_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="15" width="80" height="60" rx="4" fill="#70697E" opacity="0.2"/>
+                    <rect x="15" y="20" width="70" height="45" rx="2" fill="#FFF"/>
+                    <line x1="25" y1="30" x2="45" y2="30" stroke="#70697E" stroke-width="2"/>
+                    <line x1="25" y1="38" x2="55" y2="38" stroke="#70697E" stroke-width="2"/>
+                    <line x1="25" y1="46" x2="40" y2="46" stroke="#70697E" stroke-width="2"/>
+                    <circle cx="70" cy="38" r="8" fill="#B3E5FC"/>
+                </svg>
+                {% elif career_id == 'biomedical_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 20 L60 40 L80 40 L65 55 L70 75 L50 60 L30 75 L35 55 L20 40 L40 40 Z" fill="#FFE5D9" opacity="0.6"/>
+                    <circle cx="50" cy="50" r="20" stroke="#70697E" stroke-width="3" fill="none"/>
+                    <path d="M50 35 L50 65 M35 50 L65 50" stroke="#70697E" stroke-width="3"/>
+                </svg>
+                {% elif career_id == 'cybersecurity_analyst' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 15 L75 30 L75 55 C75 70 62.5 80 50 85 C37.5 80 25 70 25 55 L25 30 Z" fill="#D4F1F4" opacity="0.5"/>
+                    <path d="M50 20 L70 32 L70 52 C70 64 60 72 50 76 C40 72 30 64 30 52 L30 32 Z" stroke="#70697E" stroke-width="2.5" fill="none"/>
+                    <circle cx="50" cy="50" r="8" fill="#70697E"/>
+                    <rect x="48" y="50" width="4" height="10" fill="#70697E"/>
+                </svg>
+                {% elif career_id == 'computer_science_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="30" width="60" height="40" rx="3" stroke="#70697E" stroke-width="2.5" fill="#F8F5FF"/>
+                    <circle cx="35" cy="45" r="3" fill="#70697E"/>
+                    <circle cx="50" cy="45" r="3" fill="#70697E"/>
+                    <circle cx="65" cy="45" r="3" fill="#70697E"/>
+                    <path d="M30 55 L45 55 M55 55 L70 55" stroke="#B3E5FC" stroke-width="2"/>
+                </svg>
+                {% elif career_id == 'aerospace_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 20 L60 50 L80 55 L60 50 L50 80 L40 50 L20 55 L40 50 Z" fill="#FFE5D9" opacity="0.6"/>
+                    <ellipse cx="50" cy="45" rx="12" ry="20" fill="#70697E" opacity="0.3"/>
+                    <path d="M50 25 L50 70" stroke="#70697E" stroke-width="3"/>
+                    <path d="M35 60 L50 70 L65 60" stroke="#70697E" stroke-width="2.5" fill="none"/>
+                </svg>
+                {% elif career_id == 'data_scientist' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="25" y="60" width="10" height="20" fill="#B3E5FC" opacity="0.7"/>
+                    <rect x="45" y="45" width="10" height="35" fill="#70697E" opacity="0.5"/>
+                    <rect x="65" y="30" width="10" height="50" fill="#FFE5D9" opacity="0.7"/>
+                    <path d="M20 25 L35 35 L50 28 L65 40 L80 32" stroke="#70697E" stroke-width="2.5" fill="none"/>
+                </svg>
+                {% elif career_id == 'environmental_scientist' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="25" fill="#D4F1F4" opacity="0.5"/>
+                    <path d="M50 30 Q45 40 50 50 Q55 40 50 30" fill="#70697E" opacity="0.3"/>
+                    <path d="M40 50 Q45 55 50 50 Q45 55 40 50" fill="#70697E" opacity="0.4"/>
+                    <path d="M60 50 Q55 55 50 50 Q55 55 60 50" fill="#70697E" opacity="0.4"/>
+                    <rect x="48" y="50" width="4" height="15" fill="#70697E"/>
+                </svg>
+                {% elif career_id == 'robotics_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="35" y="35" width="30" height="35" rx="3" fill="#F8F5FF" stroke="#70697E" stroke-width="2.5"/>
+                    <circle cx="45" cy="48" r="4" fill="#70697E"/>
+                    <circle cx="55" cy="48" r="4" fill="#70697E"/>
+                    <rect x="42" y="58" width="16" height="4" rx="2" fill="#70697E"/>
+                    <circle cx="50" cy="25" r="6" stroke="#70697E" stroke-width="2" fill="none"/>
+                    <line x1="50" y1="31" x2="50" y2="35" stroke="#70697E" stroke-width="2"/>
+                </svg>
+                {% elif career_id == 'civil_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 70 L50 30 L80 70 Z" stroke="#70697E" stroke-width="2.5" fill="#FFE5D9" opacity="0.5"/>
+                    <rect x="45" y="55" width="10" height="15" fill="#70697E" opacity="0.6"/>
+                    <line x1="30" y1="55" x2="70" y2="55" stroke="#70697E" stroke-width="2"/>
+                    <line x1="35" y1="63" x2="65" y2="63" stroke="#70697E" stroke-width="2"/>
+                </svg>
+                {% elif career_id == 'mechanical_engineer' %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="20" fill="#D4F1F4" opacity="0.5" stroke="#70697E" stroke-width="2.5"/>
+                    <circle cx="50" cy="50" r="8" fill="#70697E"/>
+                    <rect x="48" y="28" width="4" height="10" fill="#70697E"/>
+                    <rect x="48" y="62" width="4" height="10" fill="#70697E"/>
+                    <rect x="28" y="48" width="10" height="4" fill="#70697E"/>
+                    <rect x="62" y="48" width="10" height="4" fill="#70697E"/>
+                </svg>
+                {% else %}
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="30" fill="#F8F5FF" stroke="#70697E" stroke-width="2.5"/>
+                    <path d="M35 45 L50 30 L65 45" stroke="#70697E" stroke-width="3" fill="none"/>
+                    <rect x="45" y="45" width="10" height="25" fill="#70697E" opacity="0.6"/>
+                </svg>
+                {% endif %}
+            </div>
             <h2 class="career-title">{{ career.title }}</h2>
             <p class="career-description">{{ career.description }}</p>
 
@@ -513,43 +672,117 @@
 
             <!-- Expanded Details -->
             <div class="expanded-details">
-                <div class="detail-grid">
-                    {% if career.impact %}
-                    <div class="detail-box">
-                        <h4>🌍 Possible Impact</h4>
-                        <p>{{ career.impact }}</p>
-                    </div>
+                <div class="expanded-image">
+                    {% if career_id == 'software_engineer' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="30" width="160" height="120" rx="8" fill="#70697E" opacity="0.1"/>
+                        <rect x="30" y="40" width="140" height="90" rx="4" fill="#FFF" stroke="#70697E" stroke-width="2"/>
+                        <line x1="50" y1="60" x2="90" y2="60" stroke="#70697E" stroke-width="3"/>
+                        <line x1="50" y1="76" x2="110" y2="76" stroke="#B3E5FC" stroke-width="3"/>
+                        <line x1="50" y1="92" x2="80" y2="92" stroke="#70697E" stroke-width="3"/>
+                        <circle cx="140" cy="76" r="16" fill="#D4F1F4"/>
+                    </svg>
+                    {% elif career_id == 'biomedical_engineer' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="60" stroke="#70697E" stroke-width="4" fill="none"/>
+                        <path d="M100 55 L100 145 M55 100 L145 100" stroke="#70697E" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="40" fill="#FFE5D9" opacity="0.4"/>
+                    </svg>
+                    {% elif career_id == 'cybersecurity_analyst' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 30 L150 60 L150 110 C150 140 125 160 100 170 C75 160 50 140 50 110 L50 60 Z" fill="#D4F1F4" opacity="0.5"/>
+                        <path d="M100 40 L140 64 L140 104 C140 128 120 144 100 152 C80 144 60 128 60 104 L60 64 Z" stroke="#70697E" stroke-width="4" fill="none"/>
+                        <circle cx="100" cy="100" r="16" fill="#70697E"/>
+                        <rect x="96" y="100" width="8" height="20" fill="#70697E"/>
+                    </svg>
+                    {% elif career_id == 'aerospace_engineer' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 40 L120 100 L160 110 L120 100 L100 160 L80 100 L40 110 L80 100 Z" fill="#FFE5D9" opacity="0.6"/>
+                        <ellipse cx="100" cy="90" rx="24" ry="40" fill="#70697E" opacity="0.3"/>
+                        <path d="M100 50 L100 140" stroke="#70697E" stroke-width="6"/>
+                        <path d="M70 120 L100 140 L130 120" stroke="#70697E" stroke-width="5" fill="none"/>
+                    </svg>
+                    {% elif career_id == 'data_scientist' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="120" width="20" height="40" fill="#B3E5FC" opacity="0.7"/>
+                        <rect x="90" y="90" width="20" height="70" fill="#70697E" opacity="0.5"/>
+                        <rect x="130" y="60" width="20" height="100" fill="#FFE5D9" opacity="0.7"/>
+                        <path d="M40 50 L70 70 L100 56 L130 80 L160 64" stroke="#70697E" stroke-width="5" fill="none"/>
+                    </svg>
+                    {% elif career_id == 'environmental_scientist' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="50" fill="#D4F1F4" opacity="0.5"/>
+                        <path d="M100 60 Q90 80 100 100 Q110 80 100 60" fill="#70697E" opacity="0.3"/>
+                        <path d="M80 100 Q90 110 100 100 Q90 110 80 100" fill="#70697E" opacity="0.4"/>
+                        <path d="M120 100 Q110 110 100 100 Q110 110 120 100" fill="#70697E" opacity="0.4"/>
+                        <rect x="96" y="100" width="8" height="30" fill="#70697E"/>
+                    </svg>
+                    {% elif career_id == 'robotics_engineer' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="70" y="70" width="60" height="70" rx="6" fill="#F8F5FF" stroke="#70697E" stroke-width="4"/>
+                        <circle cx="90" cy="96" r="8" fill="#70697E"/>
+                        <circle cx="110" cy="96" r="8" fill="#70697E"/>
+                        <rect x="84" y="116" width="32" height="8" rx="4" fill="#70697E"/>
+                        <circle cx="100" cy="50" r="12" stroke="#70697E" stroke-width="3" fill="none"/>
+                        <line x1="100" y1="62" x2="100" y2="70" stroke="#70697E" stroke-width="3"/>
+                    </svg>
+                    {% elif career_id == 'mechanical_engineer' %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="40" fill="#D4F1F4" opacity="0.5" stroke="#70697E" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="16" fill="#70697E"/>
+                        <rect x="96" y="56" width="8" height="20" fill="#70697E"/>
+                        <rect x="96" y="124" width="8" height="20" fill="#70697E"/>
+                        <rect x="56" y="96" width="20" height="8" fill="#70697E"/>
+                        <rect x="124" y="96" width="20" height="8" fill="#70697E"/>
+                    </svg>
+                    {% else %}
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="60" fill="#F8F5FF" stroke="#70697E" stroke-width="4"/>
+                        <path d="M70 90 L100 60 L130 90" stroke="#70697E" stroke-width="6" fill="none"/>
+                        <rect x="90" y="90" width="20" height="50" fill="#70697E" opacity="0.6"/>
+                    </svg>
                     {% endif %}
+                </div>
 
-                    {% if career.day_in_life %}
-                    <div class="detail-box">
-                        <h4>📅 A Day in This Career</h4>
-                        <p>{{ career.day_in_life }}</p>
+                <div class="expanded-content">
+                    <div class="detail-grid">
+                        {% if career.day_in_life %}
+                        <div class="detail-box">
+                            <h4>📅 A Day in This Career</h4>
+                            <p>{{ career.day_in_life }}</p>
+                        </div>
+                        {% endif %}
+
+                        {% if career.impact %}
+                        <div class="detail-box">
+                            <h4>🌍 Your Impact</h4>
+                            <p>{{ career.impact }}</p>
+                        </div>
+                        {% endif %}
+
+                        {% if career.beginner_projects %}
+                        <div class="detail-box full-width-box">
+                            <h4>🛠️ Projects to Try</h4>
+                            <ul>
+                                {% for project in career.beginner_projects %}
+                                <li>{{ project }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if career.next_steps %}
+                        <div class="detail-box full-width-box">
+                            <h4>🚀 How to Get Started</h4>
+                            <ul>
+                                {% for step in career.next_steps %}
+                                <li>{{ step }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
-
-                {% if career.beginner_projects %}
-                <div class="detail-box">
-                    <h4>🛠️ Beginner-Friendly Projects to Try</h4>
-                    <ul>
-                        {% for project in career.beginner_projects %}
-                        <li>{{ project }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-
-                {% if career.next_steps %}
-                <div class="detail-box" style="margin-top: 1.5rem;">
-                    <h4><img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" style="width: 20px; height: 20px; vertical-align: middle; border: 2px solid #98899C; border-radius: 5px; padding: 2px; background: white; margin-right: 5px;"> How to Get Started</h4>
-                    <ul>
-                        {% for step in career.next_steps %}
-                        <li>{{ step }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
             </div>
 
             <button class="expand-btn" onclick="toggleCard('{{ career_id }}')">
