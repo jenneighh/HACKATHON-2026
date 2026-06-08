@@ -1066,7 +1066,8 @@ def chat():
         if not response_text:
             response_text = "That's a great question! 🤔 I'm here to help you explore STEM careers. Try asking about:\n• What STEM career fits me?\n• What classes should I take?\n• Can I do STEM if I'm bad at math?\n• What projects should I try?\n• Are there role models like me?\n\nOr take our quiz to find your perfect STEM career match!"
 
-        return jsonify({"response": response_text})
+        # Return response with streaming flag for frontend
+        return jsonify({"response": response_text, "stream": True})
 
     except Exception as e:
         print(f"Chat ERROR: {e}")

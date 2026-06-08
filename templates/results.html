@@ -1006,6 +1006,50 @@
             text-align: right;
         }
 
+        /* Processing animation for AI thinking */
+        .mentor-message.processing {
+            background: linear-gradient(135deg, #E0D8F0 0%, #F0E8F5 100%);
+            color: #6E667B;
+            margin-right: 15%;
+            border-left: 4px solid #6B5B4B;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #786F85;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
         .mentor-label {
             font-weight: bold;
             font-size: 0.9rem;
@@ -1803,6 +1847,23 @@
             // Scroll to bottom
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            // Show processing animation
+            const processingMessage = document.createElement('div');
+            processingMessage.className = 'mentor-message processing';
+            processingMessage.innerHTML = `
+                <div class="mentor-label">🎓 Your STEM Mentor</div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>Thinking</span>
+                    <div class="typing-indicator">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+                </div>
+            `;
+            chatBox.appendChild(processingMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
             try {
                 // Send to mentor API
                 const response = await fetch('/api/mentor', {
@@ -1817,21 +1878,37 @@
                 });
 
                 const data = await response.json();
+                const responseText = data.response || 'Sorry, I had trouble understanding that. Can you rephrase your question?';
 
-                // Add mentor response
+                // Remove processing animation
+                chatBox.removeChild(processingMessage);
+
+                // Create mentor response element
                 const mentorMessage = document.createElement('div');
                 mentorMessage.className = 'mentor-message mentor';
                 mentorMessage.innerHTML = `
                     <div class="mentor-label">🎓 Your STEM Mentor</div>
-                    <div class="mentor-text">${data.response || 'Sorry, I had trouble understanding that. Can you rephrase your question?'}</div>
+                    <div class="mentor-text"></div>
                 `;
                 chatBox.appendChild(mentorMessage);
+
+                // Get the text container
+                const mentorTextElement = mentorMessage.querySelector('.mentor-text');
+
+                // Stream the response word by word
+                await streamMentorText(mentorTextElement, responseText, chatBox);
 
                 // Scroll to bottom
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             } catch (error) {
                 console.error('Error:', error);
+
+                // Remove processing animation if it exists
+                if (processingMessage.parentNode) {
+                    chatBox.removeChild(processingMessage);
+                }
+
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'mentor-message mentor';
                 errorMessage.innerHTML = `
@@ -1844,6 +1921,33 @@
                 sendBtn.disabled = false;
                 sendBtn.textContent = 'Send';
             }
+        }
+
+        /**
+         * Stream text word by word into an element for mentor chat
+         * @param {HTMLElement} element - The element to stream text into
+         * @param {string} text - The text to stream
+         * @param {HTMLElement} chatBox - The chat box for auto-scrolling
+         * @param {number} speed - Speed in milliseconds between words (default: 50)
+         */
+        async function streamMentorText(element, text, chatBox, speed = 50) {
+            // Split text by words while preserving formatting like line breaks
+            const words = text.split(' ');
+
+            // Stream words one by one
+            for (let i = 0; i < words.length; i++) {
+                // Add word with space (except for last word)
+                element.textContent += words[i] + (i < words.length - 1 ? ' ' : '');
+
+                // Auto-scroll as text appears
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Wait before showing next word
+                await new Promise(resolve => setTimeout(resolve, speed));
+            }
+
+            // After streaming is complete, apply HTML formatting if needed
+            element.innerHTML = text.replace(/\n/g, '<br>');
         }
 
         // Allow Enter key to send (Shift+Enter for new line)

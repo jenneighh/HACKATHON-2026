@@ -720,6 +720,50 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             font-weight: 600;
         }
 
+        /* Processing animation for AI thinking */
+        .chat-message.processing {
+            background: linear-gradient(135deg, #C3BBC5 0%, #E8F4FF 100%);
+            color: #6E667B;
+            margin-right: 20%;
+            border-left: 4px solid #96A78D;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #786F85;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
         .chat-message.user {
             background: linear-gradient(135deg, #786F85 0%, #857A8D 100%);
             color: white;
@@ -1825,6 +1869,7 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
         /**
          * Send user message to chatbot and display response
          * Handles the chat interaction with the backend API
+         * Shows processing animation then streams response word by word
          */
         async function sendMessage() {
             const message = chatInput.value.trim();
@@ -1842,6 +1887,20 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             // Auto-scroll to show newest messages
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            // Show processing animation
+            const processingMessage = document.createElement('div');
+            processingMessage.className = 'chat-message processing';
+            processingMessage.innerHTML = `
+                <span>AI is thinking</span>
+                <div class="typing-indicator">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                </div>
+            `;
+            chatBox.appendChild(processingMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
             try {
                 // Send message to backend API
                 const response = await fetch('/api/chat', {
@@ -1853,13 +1912,18 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
                 });
 
                 const data = await response.json();
+                const responseText = data.response || data.error || 'Oops! Something went wrong. Please try again!';
 
-                // Display bot's response with formatting
+                // Remove processing animation
+                chatBox.removeChild(processingMessage);
+
+                // Create bot message element
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                const responseText = data.response || data.error || 'Oops! Something went wrong. Please try again!';
-                botMessage.innerHTML = formatBotResponse(responseText);
                 chatBox.appendChild(botMessage);
+
+                // Stream the response word by word
+                await streamText(botMessage, responseText);
 
                 // Auto-scroll to show newest messages
                 chatBox.scrollTop = chatBox.scrollHeight;
@@ -1867,12 +1931,55 @@ Color Palette: Cream (#F7F0EA), Purple (#786F85), Lavender (#C3BBC5), Gold
             } catch (error) {
                 // Handle network or server errors
                 console.error('Error:', error);
+
+                // Remove processing animation if it exists
+                if (processingMessage.parentNode) {
+                    chatBox.removeChild(processingMessage);
+                }
+
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'chat-message bot';
                 errorMessage.textContent = 'Oops! Something went wrong. Please try again!';
                 chatBox.appendChild(errorMessage);
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
+        }
+
+        /**
+         * Stream text word by word into an element
+         * @param {HTMLElement} element - The element to stream text into
+         * @param {string} text - The text to stream
+         * @param {number} speed - Speed in milliseconds between words (default: 50)
+         */
+        async function streamText(element, text, speed = 50) {
+            // Format the text first
+            const formattedText = formatBotResponse(text);
+
+            // Create a temporary div to parse HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = formattedText;
+
+            // Get the text content and split into words
+            const plainText = tempDiv.textContent || tempDiv.innerText;
+            const words = plainText.split(' ');
+
+            // Clear the element
+            element.innerHTML = '';
+
+            // Stream words one by one
+            for (let i = 0; i < words.length; i++) {
+                // Add word with space (except for last word)
+                element.textContent += words[i] + (i < words.length - 1 ? ' ' : '');
+
+                // Auto-scroll as text appears
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Wait before showing next word
+                await new Promise(resolve => setTimeout(resolve, speed));
+            }
+
+            // After streaming is complete, replace with formatted HTML version
+            element.innerHTML = formattedText;
         }
 
         // =================================================================
