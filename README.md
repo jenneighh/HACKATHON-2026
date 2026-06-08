@@ -31,6 +31,8 @@ Too many talented students give up on STEM careers because they don't see people
 - Advice and mentorship from people who've walked the path
 
 ### 💬 STEM Career Chatbot
+- AI-powered chatbot with word-by-word streaming responses
+- Processing animation while AI generates responses
 - Ask questions about STEM careers, classes, and getting started
 - Get guidance on scholarships, summer camps, and competitions
 - Bust common myths and build confidence
@@ -49,7 +51,7 @@ Too many talented students give up on STEM careers because they don't see people
 ## 🛠️ Tech Stack
 
 - **Backend:** Python, Flask
-- **AI:** Claude API (Anthropic) with rule-based fallback
+- **AI:** AWS Bedrock (Claude Sonnet 4.5) with rule-based fallback
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
 - **Deployment:** Render/Vercel compatible
 
@@ -72,13 +74,22 @@ cd HACKATHON-2026
 pip install -r requirements.txt
 ```
 
-3. (Optional) Set up environment variables:
+3. Set up environment variables:
 ```bash
-# Create a .env file
-echo "FLASK_SECRET_KEY=your-secret-key-here" > .env
-echo "ANTHROPIC_API_KEY=your-api-key-here" >> .env
+# Create a .env file with the following content:
+FLASK_SECRET_KEY=your-secret-key-change-in-production
+
+# AWS Credentials for Bedrock (required for AI features)
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+AWS_DEFAULT_REGION=us-east-1
 ```
-*Note: The app works without API keys using rule-based matching!*
+
+**⚠️ Important AWS Setup:**
+- You need AWS Bedrock access to use AI-powered features
+- Request Claude Sonnet 4.5 model access in AWS Bedrock Console
+- See [AWS_BEDROCK_SETUP.md](./AWS_BEDROCK_SETUP.md) for detailed setup instructions
+- *Note: The app works without AWS credentials using rule-based matching!*
 
 4. Run the application:
 ```bash
@@ -126,8 +137,22 @@ HACKATHON-2026/
 2. **Take the Quiz** - Answer questions about your interests and skills
 3. **Get Matched** - Receive personalized STEM career recommendations
 4. **Explore Role Models** - Meet inspiring professionals who look like you
-5. **Chat with Guide** - Ask questions and get resources
+5. **Chat with Guide** - Ask questions and get resources (with AI streaming!)
 6. **Take Action** - Access camps, competitions, scholarships, and more
+
+## 🆕 Recent Updates
+
+### Chatbot Streaming Animation (Latest)
+- Added professional processing animation with animated dots
+- Implemented word-by-word streaming for AI responses
+- Enhanced user experience similar to ChatGPT/Claude
+- See [CHATBOT_STREAMING_UPDATE.md](./CHATBOT_STREAMING_UPDATE.md) for details
+
+### AWS Bedrock Integration
+- Migrated from Anthropic API to AWS Bedrock
+- Uses Claude Sonnet 4.5 for AI-powered features
+- Rule-based fallback when credentials not configured
+- See [AWS_BEDROCK_SETUP.md](./AWS_BEDROCK_SETUP.md) for setup guide
 
 ## 🌍 Impact
 
@@ -135,6 +160,25 @@ By helping students see themselves in STEM careers early, we can:
 - Close the diversity gap in STEM fields
 - Unlock untapped potential in underrepresented communities
 - Ensure the next generation of innovators reflects the world we live in
+
+## 🔧 Troubleshooting
+
+### AWS Bedrock Issues
+- **"Could not connect to endpoint"** - Check your `AWS_DEFAULT_REGION` setting
+- **"Access denied"** - Verify AWS credentials and IAM permissions for Bedrock
+- **"Model not found"** - Request Claude model access in AWS Bedrock Console
+
+### Chatbot Not Working
+- The app automatically falls back to rule-based matching without AWS credentials
+- Check terminal/console for error messages
+- Ensure `.env` file is in the project root directory
+
+### Environment Variables
+- Never commit `.env` file to version control (it's in `.gitignore`)
+- Make sure to replace placeholder values with actual credentials
+- Restart the Flask app after changing `.env` file
+
+For detailed AWS setup, see [AWS_BEDROCK_SETUP.md](./AWS_BEDROCK_SETUP.md)
 
 ## 🤝 Contributing
 
