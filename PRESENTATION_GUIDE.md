@@ -17,12 +17,16 @@
 
 ### 3. Live Demo - Walk Through Features (3-4 minutes)
 
-#### **Feature 1: Homepage & AI Chatbot**
-**Show:** Scroll through the homepage
+#### **Feature 1: Homepage & AI Chatbot with Streaming** ⭐ **NEW**
+**Show:** Scroll through the homepage to the chatbot
 **Say:**
-> "Our homepage welcomes students with a clean, friendly design. At the bottom, there's an AI chatbot where students can ask questions like 'What STEM career fits me?' or 'I'm bad at math, can I still do STEM?' The bot gives encouraging, helpful answers."
+> "Our homepage welcomes students with a clean, friendly design. At the bottom, there's an AI-powered chatbot using Claude via AWS Bedrock. Watch what happens when students ask questions like 'What STEM career fits me?' or 'I'm bad at math, can I still do STEM?'"
 
-**Demo:** Type "hello" or "I'm bad at math" in the chatbot and show the response.
+**Demo:** 
+- Type "I'm bad at math, can I still do STEM?" in the chatbot
+- **Point out the processing animation**: "Notice the 'AI is thinking' animation with bouncing dots"
+- **Point out the streaming**: "See how the response appears word-by-word, just like ChatGPT or Claude"
+- Say: "This creates a professional, modern AI experience that students are familiar with from other AI tools."
 
 ---
 
@@ -75,7 +79,7 @@
 #### **Feature 6: Explore All Careers Page**
 **Show:** Click "Explore All Careers" from the nav
 **Say:**
-> "Students can also browse all STEM careers. We included the five careers you requested: Software Engineer, Biomedical Engineer, Cybersecurity Analyst, Computer Science Engineer, and Aerospace Engineer. Each card shows salary, job growth, education, and key skills. When you click 'Learn More,' it expands to show the career's impact, a day in the life, beginner projects, and how to get started."
+> "Students can also browse all STEM careers. We have **17+ careers** including Software Engineer, Biomedical Engineer, Cybersecurity Analyst, Data Scientist, AI/Machine Learning Engineer, Robotics Engineer, and many more. Each card shows salary, job growth, education, and key skills. When you click 'Learn More,' it expands to show the career's impact, a day in the life, beginner projects, and how to get started."
 
 **Demo:** Click "Learn More & See Projects" on one career.
 
@@ -84,12 +88,13 @@
 #### **Feature 7: Role Models Section**
 **Show:** Click "Role Models" in the nav
 **Say:**
-> "Our Role Models section features 12+ inspiring STEM professionals from diverse backgrounds. Students can filter by women in STEM, Hispanic/Latino, African American, and Asian American role models. Each card shows their background, challenges they faced, advice for students, what you can learn from them, and buttons to request shadow opportunities or connect as a mentor."
+> "Our Role Models section features 24+ inspiring STEM professionals from diverse backgrounds. Students can filter by women in STEM, Hispanic/Latino, African American, and Asian American role models. Each card shows their background, challenges they faced, advice for students, what you can learn from them, and buttons to request shadow opportunities or connect as a mentor. We also have a mentor chatbot with the same streaming animation!"
 
 **Demo:** 
 - Click one of the filter buttons (like "Women in STEM")
 - Scroll through some role model cards
 - Click "Shadow This Person" button
+- If on results page, show the mentor chat with streaming animation
 
 ---
 
@@ -185,7 +190,10 @@ Before you present:
 **A:** "Great question! When a student clicks 'Shadow This Person,' in a full version it would send a request to that professional or connect them with similar mentors in their area. For this hackathon demo, it shows what that experience would be like."
 
 **Q: "What makes your project different from other career websites?"**
-**A:** "Three things: First, our 'Future You' feature makes careers feel real and achievable. Second, we connect students with role models who share their background - representation matters. Third, we give concrete next steps they can start today, not just generic advice."
+**A:** "Four things: First, our 'Future You' feature makes careers feel real and achievable. Second, we connect students with role models who share their background - representation matters. Third, we give concrete next steps they can start today, not just generic advice. Fourth, our AI chatbot uses the latest technology (AWS Bedrock with Claude) and provides a modern streaming experience that students are familiar with from tools like ChatGPT."
+
+**Q: "What technology did you use?"**
+**A:** "We used Python Flask for the backend, AWS Bedrock with Claude Sonnet 4.5 for AI features, and custom JavaScript for the streaming animation. The chatbot displays responses word-by-word with a professional 'thinking' animation, just like modern AI tools. We also implemented a rule-based fallback so the site works even without AWS credentials."
 
 ---
 

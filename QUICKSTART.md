@@ -48,15 +48,18 @@ Open `templates/quiz.html` and edit the question sections. Each option is a card
 
 - Check `README.md` for detailed documentation
 - Look at the terminal for error messages
-- Make sure your `.env` file has valid AWS credentials
+- Make sure your `.env` file has valid AWS Bedrock credentials
+- See [AWS_BEDROCK_SETUP.md](./AWS_BEDROCK_SETUP.md) for AWS setup
+- The app works without AWS using rule-based matching
 
 ## Tips for Demo
 
 1. **Test the full flow**: Home → Quiz → Results → Browse Careers → Role Models
 2. **Show diversity**: Point out the diverse role models feature
-3. **Explain AI**: Mention how Claude analyzes responses for personalized matches
-4. **Highlight design**: The modern UI is student-friendly
-5. **Mention scalability**: Easy to add more careers and role models
+3. **Explain AI**: Mention how Claude via AWS Bedrock analyzes responses for personalized matches
+4. **Show chatbot animation**: Demonstrate the word-by-word streaming feature
+5. **Highlight design**: The modern UI is student-friendly
+6. **Mention scalability**: Easy to add more careers and role models
 
 ## Common Issues
 
@@ -64,6 +67,8 @@ Open `templates/quiz.html` and edit the question sections. Each option is a card
 
 **"Port already in use"**: Another app is running on port 5000. Stop it or change the port in `app.py` (last line)
 
-**AI not responding**: Check AWS credentials in `.env` file
+**AI not responding**: Check AWS Bedrock credentials in `.env` file. App will use rule-based matching as fallback.
+
+**Chatbot streaming not working**: Make sure AWS Bedrock is configured. Without it, responses appear instantly instead of word-by-word.
 
 Good luck with your hackathon! 🌟

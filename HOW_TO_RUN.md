@@ -63,8 +63,8 @@ http://127.0.0.1:5000
 **Problem**: Port 5000 is already in use
 - **Solution**: Change the port by editing the last line of `app.py` to: `app.run(debug=True, port=5001)` then go to `http://localhost:5001`
 
-**Problem**: The chatbot isn't responding
-- **Solution**: That's okay! The chatbot works with simple keyword matching (no AI API needed for the demo). Just type keywords like "hello", "math", "career", "help", etc.
+**Problem**: The chatbot isn't responding with AI
+- **Solution**: The chatbot now uses AWS Bedrock for AI responses with word-by-word streaming animation. If AWS credentials aren't set up, it will fall back to simpler responses. See [AWS_BEDROCK_SETUP.md](./AWS_BEDROCK_SETUP.md) to enable full AI features.
 
 ---
 
@@ -73,11 +73,17 @@ http://127.0.0.1:5000
 1. Start the server before your presentation
 2. Open the website in your browser
 3. Show each feature:
-   - Home page with chatbot
+   - Home page with AI chatbot (show the streaming animation!)
    - Take the quiz
    - See your "Future You" results
-   - Browse all careers
+   - Browse all 17+ STEM careers
    - Meet role models and use shadow/mentor buttons
    - Demonstrate the STEM news section
+
+## ✨ New Features to Highlight:
+
+- **Chatbot Streaming Animation**: Show how the AI "thinks" with animated dots, then displays responses word-by-word
+- **AWS Bedrock Integration**: Mention the app uses Claude AI via AWS Bedrock for intelligent responses
+- **17+ STEM Careers**: Much more comprehensive than just 5 careers
 
 Good luck! 🌟

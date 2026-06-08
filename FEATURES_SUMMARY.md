@@ -84,12 +84,24 @@ talents and perspective are exactly what this field needs..."
 **Location:** `/careers` page
 
 **What it shows:**
-All 5 careers:
+All 17+ STEM careers including:
 1. **Software Engineer**
 2. **Biomedical Engineer**
 3. **Cybersecurity Analyst**
 4. **Computer Science Engineer**
 5. **Aerospace Engineer**
+6. **Data Scientist**
+7. **Environmental Scientist**
+8. **Mechanical Engineer**
+9. **UX/UI Designer**
+10. **Chemical Engineer**
+11. **Robotics Engineer**
+12. **Network/Cloud Engineer**
+13. **Bioinformatics Specialist**
+14. **Game Developer**
+15. **Electrical Engineer**
+16. **Marine Biologist**
+17. **AI/Machine Learning Engineer**
 
 **Each card includes:**
 - Career title and description
@@ -175,7 +187,35 @@ All 5 careers:
 
 ---
 
-### ✅ 5. Shadow/Mentor Opportunity Feature ⭐ **UNIQUE TO YOUR PROJECT**
+### ✅ 5. AI Chatbot with Streaming Animation ⭐ **NEW FEATURE**
+**Location:** Homepage (`/`) and throughout the site
+
+**What it does:**
+- AI-powered chatbot using Claude via AWS Bedrock
+- Provides intelligent, contextual responses about STEM careers
+- Answers questions about classes, scholarships, getting started, and more
+
+**Unique streaming features:**
+- **Processing Animation**: Shows "AI is thinking" with animated bouncing dots while waiting for response
+- **Word-by-Word Streaming**: Displays AI response word-by-word like ChatGPT/Claude
+- **Auto-scrolling**: Chat window automatically scrolls as new text appears
+- **Professional UX**: Matches modern AI tool standards
+
+**Technical implementation:**
+- Frontend: Custom JavaScript streaming with 50ms delay per word
+- Backend: AWS Bedrock integration with Claude Sonnet 4.5
+- Fallback: Rule-based responses if AWS not configured
+- Styling: Purple/lavender theme with smooth animations
+
+**Files involved:**
+- `templates/index.html` - Homepage chatbot with streaming
+- `templates/results.html` - Mentor chat with streaming
+- `app.py` - AWS Bedrock API integration
+- `CHATBOT_STREAMING_UPDATE.md` - Detailed documentation
+
+---
+
+### ✅ 6. Shadow/Mentor Opportunity Feature ⭐ **UNIQUE TO YOUR PROJECT**
 **Location:** On both `/results` page and `/role-models` page
 
 **What it does:**
@@ -211,7 +251,7 @@ A popup message explaining what this feature would do in a full version:
 
 ---
 
-### ✅ 6. AI Career Chatbot Section 💬 **DEMO VERSION**
+### ✅ 7. Additional Chatbot Features 💬
 **Location:** Homepage (`/`)
 
 **What it does:**
@@ -246,7 +286,7 @@ A popup message explaining what this feature would do in a full version:
 
 ---
 
-### ✅ 7. STEM News / Inspiration Section 📰
+### ✅ 8. STEM News / Inspiration Section 📰
 **Location:** Homepage (`/`)
 
 **What it shows:**
