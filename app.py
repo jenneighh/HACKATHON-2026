@@ -14,7 +14,7 @@ import os
 import json
 from dotenv import load_dotenv
 from datetime import timedelta
-import anthropic
+import boto3
 
 # Load environment variables from .env file
 load_dotenv()
@@ -24,9 +24,12 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key-change-in-production")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)  # Sessions last 2 hours
 
-# Initialize Anthropic AI client for chatbot functionality
-client = anthropic.Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY")
+# Initialize AWS Bedrock client for chatbot functionality
+bedrock_runtime = boto3.client(
+    service_name='bedrock-runtime',
+    region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+    aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
 )
 
 # =============================================================================
@@ -662,9 +665,9 @@ def match_careers():
         # Get quiz data from request
         data = request.get_json()
 
-        # Check if Anthropic API key is available for AI matching
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        use_ai = api_key and api_key != "your_api_key_here"
+        # Check if AWS credentials are available for AI matching
+        aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        use_ai = aws_access_key and aws_access_key != "your_aws_access_key_id_here"
 
         if use_ai:
             # Use AI for matching
@@ -700,15 +703,24 @@ Format your response as JSON with this structure:
 
 Be enthusiastic, encouraging, and specific. Remember this is for a student exploring their future!"""
 
-            response = client.messages.create(
-                model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-                max_tokens=2000,
-                messages=[
+            # Prepare request for AWS Bedrock
+            request_body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 2000,
+                "messages": [
                     {"role": "user", "content": prompt}
                 ]
+            })
+
+            # Call AWS Bedrock
+            response = bedrock_runtime.invoke_model(
+                modelId="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                body=request_body
             )
 
-            reply = response.content[0].text
+            # Parse response
+            response_body = json.loads(response['body'].read())
+            reply = response_body['content'][0]['text']
 
             # Try to parse JSON from the response
             try:
