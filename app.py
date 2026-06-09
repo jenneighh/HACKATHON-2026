@@ -15,6 +15,7 @@ import json
 from dotenv import load_dotenv
 from datetime import timedelta
 import anthropic
+from knowledge_base import search_knowledge_base, CAREER_KNOWLEDGE, SUMMER_PROGRAMS, COMPETITIONS, SCHOLARSHIPS, FAQ_RESPONSES
 
 # Load environment variables from .env file
 load_dotenv()
@@ -857,160 +858,104 @@ def mentor():
 
         # Mentor responses based on common questions
         if "how many" in user_message and ("class" in user_message or "course" in user_message):
-            response = f"""Great question! To become a {career}, here's what you typically need:
+            response = f"""To become a {career}:
 
-📚 **High School** (4 years):
-• Core: {', '.join(career_info['subjects'][:3])}
-• Plus standard requirements: English, Social Studies, etc.
+High School: Focus on {', '.join(career_info['subjects'][:2])} plus the standard requirements.
 
-🎓 **College** (4 years for Bachelor's):
-• About 120-130 credit hours total
-• 40-50 classes covering major requirements, general education, and electives
-• {career_info['education']}
+College: 4 years for a Bachelor's degree. You'll need about 120-130 credits (40-50 classes total).
 
-💡 **The good news**: You don't need to take them all at once! Most students take 4-5 classes per semester. Focus on building a strong foundation first, then specialize in what you love!"""
+{career_info['education']}
+
+Don't worry - you take 4-5 classes per semester, so it's totally manageable! Build your foundation first, then specialize."""
 
         elif "hard" in user_message or "difficult" in user_message:
-            response = f"""Honestly? {career} has its challenges, but it's absolutely achievable! Here's the real talk:
+            response = f"""{career} has challenges, but you can absolutely do it!
 
-💪 **What makes it challenging:**
-• Requires dedication and consistent practice
-• Some concepts take time to master
-• Problem-solving can be frustrating at first
+It requires dedication and practice, and some concepts take time to master. But here's the thing: everyone struggles at first, even experts.
 
-✨ **Why you CAN do it:**
-• Everyone struggles at first — even experts!
-• Breaking problems into small steps makes them manageable
-• There's a huge community ready to help you
-• Your unique perspective is valuable!
+The key isn't being naturally smart - it's being persistent. Most successful {career}s weren't prodigies; they just kept going.
 
-The "hard" part isn't about being naturally smart — it's about being persistent. Most successful {career}s weren't prodigies; they just didn't give up. And with your interests in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
+With your interest in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
 
         elif "skill" in user_message:
-            response = f"""To succeed as a {career}, you'll want to develop these skills:
+            response = f"""To succeed as a {career}, focus on:
 
-🎯 **Core Skills:**
-{chr(10).join([f'• {skill.title()}' for skill in career_info['skills']])}
+Core Skills: {', '.join([skill.title() for skill in career_info['skills'][:3]])}
 
-📖 **Subjects to Master:**
-{chr(10).join([f'• {subject.title()}' for subject in career_info['subjects']])}
+Key Subjects: {', '.join([subject.title() for subject in career_info['subjects'][:3]])}
 
-💡 **How to Build These Skills:**
-• Start with beginner-friendly online courses (Khan Academy, Coursera)
-• Work on small projects that interest you
-• Join clubs or online communities
-• Find a mentor or study group
-• Practice regularly — even 30 minutes a day helps!
+How to Build Them:
+Start with online courses (Khan Academy, Coursera), work on small projects, join clubs, and practice regularly.
 
-Remember: Nobody is born with these skills. Everyone learns them step by step. You've got this! 💪"""
+Remember: Nobody is born with these skills. You've got this! 💪"""
 
         elif "start" in user_message or "begin" in user_message:
             projects = career_info.get('beginner_projects', ['Build a personal website', 'Create a simple app', 'Join online coding communities'])
             next_steps = career_info.get('next_steps', ['Learn basics online', 'Join a STEM club', 'Find a mentor'])
 
-            response = f"""Let's get you started on your {career} journey! Here's your action plan:
+            response = f"""Here's how to start your {career} journey:
 
-🚀 **This Week:**
-1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses in your field'}
-2. {next_steps[1] if len(next_steps) > 1 else 'Join a relevant online community'}
-3. Watch YouTube videos about "Day in the Life of a {career}"
+This Week:
+1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses'}
+2. {next_steps[1] if len(next_steps) > 1 else 'Join a community'}
+3. Watch "Day in the Life" videos
 
-🛠️ **This Month:**
-Start a beginner project:
-{chr(10).join([f'• {project}' for project in projects])}
+Try a Beginner Project:
+{chr(10).join([f'• {project}' for project in projects[:2]])}
 
-📚 **This Year:**
-• Take relevant classes at school
-• Build a portfolio of 2-3 small projects
-• Attend STEM events or competitions
-• Connect with professionals in the field
-
-The key is to start small and stay consistent. Pick ONE thing from this list and do it today! What sounds most exciting to you? 🌟"""
+Start small and stay consistent. Pick ONE thing and do it today! 🌟"""
 
         elif "salary" in user_message or "money" in user_message or "pay" in user_message:
-            response = f"""Let's talk about the financial side of {career}:
+            response = f"""Salary for {career}:
 
-💰 **Salary Range:** {career_info['salary_range']}
-📊 **Average:** {career_info.get('avg_salary', 'Varies by location and experience')}
+Range: {career_info['salary_range']}
+Average: {career_info.get('avg_salary', 'Varies by location')}
 
-**What affects your salary:**
-• Location (Silicon Valley pays more than smaller cities)
-• Experience (entry-level vs. senior positions)
-• Company size (startups vs. big tech)
-• Your specialty within the field
+Your pay depends on location, experience, and company size.
 
-**Career growth:** {career_info['growth']}
+Career Growth: {career_info['growth']}
 
-💡 **The real value:**
-Beyond the salary, {career} offers:
-• Job security and demand
-• Flexibility (remote work options)
-• Continuous learning opportunities
-• Making real impact: {career_info['impact']}
+Beyond salary, this career offers job security, flexibility, and real impact: {career_info['impact']}
 
-Focus on building skills and passion — the salary will follow! 🚀"""
+Focus on building skills - the salary follows! 🚀"""
 
         elif "college" in user_message or "university" in user_message:
-            response = f"""Here's the college path for {career}:
+            response = f"""College path for {career}:
 
-🎓 **Typical Degree:** {career_info['education']}
+Typical Degree: {career_info['education']}
 
-**Timeline:**
-• 4 years for Bachelor's degree (most common path)
-• Optional: 2 years for Master's (for specialization or research)
-• Some positions accept associate degrees or bootcamps!
+Timeline: 4 years for Bachelor's (most common). Some positions accept bootcamps or associate degrees!
 
-💡 **You don't need a fancy school!**
-• Many successful professionals went to state universities
-• Online programs and bootcamps are gaining respect
-• Projects and skills matter more than school name
-• Scholarships and financial aid make it affordable
+You don't need a fancy school! Many pros went to state universities. Projects and skills matter more than school name.
 
-**What matters most:**
-• Strong foundation in {', '.join(career_info['subjects'][:2])}
-• Hands-on projects and internships
-• Building a network
-• Passion and persistence!
+What matters: Strong foundation in {', '.join(career_info['subjects'][:2])}, hands-on projects, and passion!
 
-Remember: Your college choice should fit YOUR situation — budget, location, learning style. Success comes from what YOU do with the opportunity! 🌟"""
+Your college choice should fit YOUR budget and situation. Success comes from what YOU do! 🌟"""
 
         elif "woman" in user_message or "girl" in user_message or "female" in user_message:
-            response = f"""Absolutely YES! Women are making incredible contributions to {career} and ALL of STEM! 👩‍🔬
+            response = f"""Absolutely YES! Women are making incredible contributions to {career} and all of STEM! 👩‍🔬
 
-**Here's the truth:**
-• Women bring unique perspectives that IMPROVE technology
-• Companies actively want more diverse teams
-• There are tons of support networks for women in STEM
-• Role models are everywhere (check our Role Models section!)
+Women bring unique perspectives that improve technology. Companies want diverse teams, and there are tons of support networks available.
 
-**Resources for you:**
-• Girls Who Code (free programs!)
-• Society of Women Engineers (scholarships + community)
-• Women in STEM mentorship programs
-• Female-focused hackathons and competitions
+Resources: Girls Who Code, Society of Women Engineers, Women in STEM mentorship programs.
 
-**Real talk:**
-• Yes, you might sometimes be the only woman in the room
-• Yes, there are challenges
-• BUT: You belong here. Your perspective is NEEDED.
-• The industry is actively working to be more inclusive
+Real talk: You might sometimes be the only woman in the room, but you BELONG here. Your perspective is needed, and the industry is working to be more inclusive.
 
-Don't let anyone tell you that you don't belong in {career}. The field needs more women like YOU! 💪✨"""
+The field needs more women like YOU! 💪"""
 
         else:
             # Default response for other questions
             response = f"""That's a great question about {career}!
 
-While I don't have a specific answer for that, here's what I can help you with:
+I can help you with:
+• How many classes do I need?
+• Is {career} hard?
+• What skills do I need?
+• How do I get started?
+• What's the salary?
+• What about college?
 
-• **How many classes do I need?** — Course requirements
-• **Is {career} hard?** — Real talk about challenges
-• **What skills do I need?** — Complete skill breakdown
-• **How do I get started?** — Step-by-step action plan
-• **What's the salary?** — Financial expectations
-• **What about college?** — Education pathways
-
-Try asking one of these, or rephrase your question! I'm here to help you succeed in {career}! 🚀"""
+Try asking one of these! 🚀"""
 
         return jsonify({"response": response})
 
@@ -1023,9 +968,9 @@ Try asking one of these, or rephrase your question! I'm here to help you succeed
 @app.route("/api/chat", methods=["POST"])
 def chat():
     """
-    General STEM chatbot endpoint
-    Responds to common questions about STEM careers, resources, and getting started
-    Uses keyword matching to provide helpful responses
+    Enhanced STEM chatbot endpoint
+    Uses knowledge base for detailed responses and Claude AI for natural language
+    Falls back to stored knowledge if API fails
     """
     try:
         # Get user's chat message
@@ -1033,40 +978,144 @@ def chat():
         if not data or "message" not in data:
             return jsonify({"response": "Please send a message!"}), 400
 
-        user_message = data["message"].lower()
+        user_message = data["message"]
+        user_message_lower = user_message.lower()
 
-        # Keyword-based responses for common STEM questions
-        responses = {
-            "hello": "Hi there! 👋 I'm your STEM Career Guide! Ask me anything about STEM careers, what classes to take, or how to get started!",
-            "hi": "Hello! 👋 I'm here to help you explore STEM careers! What would you like to know?",
-            "help": "I can help you with:\n• Finding STEM careers that fit you\n• What classes you should take\n• Whether you can do STEM (yes you can!)\n• Project ideas to get started\n• Summer camps, scholarships, and competitions\n\nWhat interests you?",
-            "camp": "Great question! 🏕️ There are tons of amazing STEM summer camps!\n• Girls Who Code - Free 2-week coding program\n• NASA STEM Programs - Virtual & in-person\n• AI4ALL - AI education for underrepresented students\n• Engineering For Kids - Find local camps by state\n\nCheck out the 'Opportunities' section on the homepage for more links!",
-            "summer": "Summer is a perfect time for STEM! ☀️ You can:\n• Join a summer coding camp (Girls Who Code is free!)\n• Participate in NASA programs\n• Work on personal projects\n• Enter science competitions\n• Take free online courses\n\nScroll down to see all our opportunities!",
-            "scholarship": "Yes! There are many STEM scholarships! 💰 Here are some great ones:\n• Society of Women Engineers (SWE)\n• National Society of Black Engineers (NSBE)\n• Hispanic Scholarship Fund (HSF)\n• Generation Google Scholarship\n• STEM Scholarships Database\n\nCheck the Opportunities section for direct links to apply!",
-            "competition": "STEM competitions are awesome for building skills! 🏆 Try:\n• Google Science Fair - Global online competition\n• FIRST Robotics - Build robots with teams\n• MATHCOUNTS - Math competition\n• Congressional App Challenge - Create an app\n• Regeneron Science Talent Search - Research competition\n\nFind more details in our Opportunities section!",
-            "free": "Tons of free STEM resources! 📚 Here are the best:\n• Khan Academy - Math, science, coding\n• Coursera - College-level courses\n• Code.org - Learn computer science\n• MIT OpenCourseWare - Free MIT courses\n\nAll completely free! Check our Opportunities section for links.",
-            "math": "Being 'bad at math' doesn't mean you can't do STEM! 💪 Many successful STEM professionals struggled with math at first. The key is practice and finding the right learning style. Plus, many STEM fields focus more on creativity and problem-solving than pure math. Would you like to know which STEM careers use less heavy math?",
-            "career": "Great question! There are so many exciting STEM careers! 🚀 Based on your interests, I'd recommend taking our quiz to find your perfect match. We have careers in:\n• Software Engineering\n• Biomedical Engineering\n• Cybersecurity\n• Aerospace Engineering\n• And more!\n\nWhat are you passionate about?",
-            "class": "For STEM careers, here are some key classes:\n📚 Essential: Math, Science, Computer Science\n💡 Helpful: Physics, Chemistry, Biology\n🎨 Bonus: Design, Statistics, Engineering\n\nStart with what interests you most! Which field are you curious about?",
-            "project": "Here are some beginner-friendly STEM projects:\n• Build a personal website 💻\n• Create a simple robot 🤖\n• Design a mobile app 📱\n• Build a model rocket 🚀\n• Make a heart rate monitor ❤️\n\nPick something that excites you and start small!",
-            "woman": "Absolutely! Women are making incredible contributions to STEM! 👩‍🔬 Check out our Role Models section to meet inspiring women like:\n• Dr. Mae Jemison (First Black woman in space)\n• Grace Hopper (Computer programming pioneer)\n• Ellen Ochoa (First Hispanic woman astronaut)\n\nYou belong in STEM!",
-            "hispanic": "Yes! Hispanic and Latino students are thriving in STEM! 🌟 Check out role models like Ellen Ochoa, José Hernández, and Dr. Jessica Esquivel. Your cultural perspective is valuable and needed in STEM fields!",
-            "first": "Being a first-generation college student in STEM is challenging but absolutely possible! 💪 Many successful STEM professionals were first-gen students. Look for mentors, join support groups, and remember: your unique perspective is an asset!",
-            "start": "Getting started in STEM is exciting! Here's what to do:\n1. Explore different fields (take our quiz!)\n2. Start a small project in your area of interest\n3. Join a club or online community\n4. Find a mentor or role model\n5. Keep learning and stay curious!\n\nWhat field interests you most?",
+        # Search knowledge base first
+        kb_results = search_knowledge_base(user_message)
+
+        # Try to use Claude AI for natural, personalized responses
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        use_ai = api_key and api_key != "your_api_key_here"
+
+        if use_ai and kb_results:
+            try:
+                # Build context from knowledge base
+                context = "Relevant information from knowledge base:\n"
+
+                if "career" in kb_results:
+                    career_info = kb_results["career"]
+                    context += f"\nCareer Information:\n"
+                    context += f"Daily tasks: {', '.join(career_info.get('daily_tasks', [])[:3])}\n"
+                    context += f"Skills to learn: {', '.join(career_info.get('skills_to_learn', [])[:3])}\n"
+                    context += f"First project: {career_info.get('first_project', 'N/A')}\n"
+                    context += f"Salary range: {career_info.get('salary_range', 'N/A')}\n"
+
+                if "program" in kb_results:
+                    prog_info = kb_results["program"]
+                    context += f"\nProgram: {prog_info.get('name')}\n"
+                    context += f"Description: {prog_info.get('description')}\n"
+                    context += f"Eligibility: {prog_info.get('eligibility')}\n"
+                    context += f"Cost: {prog_info.get('cost')}\n"
+                    context += f"Link: {prog_info.get('link')}\n"
+
+                if "competition" in kb_results:
+                    comp_info = kb_results["competition"]
+                    context += f"\nCompetition: {comp_info.get('name')}\n"
+                    context += f"Description: {comp_info.get('description')}\n"
+
+                if "scholarship" in kb_results:
+                    schol_info = kb_results["scholarship"]
+                    context += f"\nScholarship: {schol_info.get('name')}\n"
+                    context += f"Amount: {schol_info.get('amount')}\n"
+
+                if "faq" in kb_results:
+                    context += f"\nFAQ Answer:\n{kb_results['faq']}\n"
+
+                # Use Claude to make response natural and personalized
+                prompt = f"""You are a friendly, helpful AI assistant chatting with a student on the SeeMe in STEM platform.
+
+Student's question: {user_message}
+
+{context}
+
+Answer the student's question naturally and helpfully. Be conversational, supportive, and informative. You can answer ANY question the student asks - not just STEM-related questions. Keep responses under 200 words. If you have relevant information from the knowledge base above, incorporate it. If the question is about STEM and there's a link, mention they can find more details on our Resources page."""
+
+                response = client.messages.create(
+                    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                    max_tokens=300,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                return jsonify({"response": response.content[0].text})
+
+            except Exception as ai_error:
+                print(f"AI Error: {ai_error}")
+                # Fall through to knowledge base fallback
+
+        # Fallback: Use knowledge base directly (if API failed or no AI)
+        if kb_results:
+            response_parts = []
+
+            if "faq" in kb_results:
+                return jsonify({"response": kb_results["faq"]})
+
+            if "career" in kb_results:
+                career = kb_results["career"]
+                response = f"Great question about this career!\n\n"
+                response += f"💼 Daily tasks: {', '.join(career['daily_tasks'][:2])}\n\n"
+                response += f"📚 Skills to start: {', '.join(career['skills_to_learn'][:2])}\n\n"
+                response += f"🚀 First project idea: {career['first_project']}\n\n"
+                response += f"💰 Salary range: {career['salary_range']}"
+                return jsonify({"response": response})
+
+            if "program" in kb_results:
+                prog = kb_results["program"]
+                response = f"**{prog['name']}**\n\n"
+                response += f"{prog['description']}\n\n"
+                response += f"👥 Eligibility: {prog['eligibility']}\n"
+                response += f"💵 Cost: {prog['cost']}\n\n"
+                response += f"Check our Resources page for the application link!"
+                return jsonify({"response": response})
+
+            if "competition" in kb_results:
+                comp = kb_results["competition"]
+                response = f"**{comp['name']}**\n\n"
+                response += f"{comp['description']}\n\n"
+                response += f"Find more details on our Resources page!"
+                return jsonify({"response": response})
+
+            if "scholarship" in kb_results:
+                schol = kb_results["scholarship"]
+                response = f"**{schol['name']}**\n\n"
+                response += f"💰 Amount: {schol['amount']}\n"
+                response += f"Deadline: {schol.get('deadline', 'Check website')}\n\n"
+                response += f"Visit our Resources page for the application link!"
+                return jsonify({"response": response})
+
+        # Basic keyword fallback responses
+        fallback_responses = {
+            "hello": "Hi there! 👋 I'm here to help! Feel free to ask me anything - from STEM careers and programs to general questions. What's on your mind?",
+            "hi": "Hello! 👋 What can I help you with today?",
+            "help": "I'm here to answer any questions you have! I have detailed knowledge about:\n• STEM careers and pathways\n• Summer programs and opportunities\n• Competitions and scholarships\n• Getting started with projects\n\nBut feel free to ask me about anything else too! What would you like to know?",
         }
 
-        # Find matching response
-        response_text = None
-        for keyword, response in responses.items():
-            if keyword in user_message:
-                response_text = response
-                break
+        for keyword, response in fallback_responses.items():
+            if keyword in user_message_lower:
+                return jsonify({"response": response})
 
-        # Default response
-        if not response_text:
-            response_text = "That's a great question! 🤔 I'm here to help you explore STEM careers. Try asking about:\n• What STEM career fits me?\n• What classes should I take?\n• Can I do STEM if I'm bad at math?\n• What projects should I try?\n• Are there role models like me?\n\nOr take our quiz to find your perfect STEM career match!"
+        # Ultimate fallback - when AI is not available and no KB results
+        # Still try to use Claude AI for any general question
+        if use_ai:
+            try:
+                prompt = f"""You are a friendly, helpful AI assistant. Answer the following question naturally and helpfully:
 
-        return jsonify({"response": response_text})
+{user_message}
+
+Keep your response conversational, informative, and under 200 words."""
+
+                response = client.messages.create(
+                    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                    max_tokens=400,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                return jsonify({"response": response.content[0].text})
+            except Exception as ai_error:
+                print(f"AI Fallback Error: {ai_error}")
+
+        # Final fallback when AI is completely unavailable
+        return jsonify({"response": "I'm here to help! I have detailed information about STEM careers, programs, and opportunities, but I can try to answer other questions too. What would you like to know?"})
 
     except Exception as e:
         print(f"Chat ERROR: {e}")

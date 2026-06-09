@@ -49,7 +49,7 @@ Too many talented students give up on STEM careers because they don't see people
 ## 🛠️ Tech Stack
 
 - **Backend:** Python, Flask
-- **AI:** Claude API (Anthropic) with rule-based fallback
+- **AI:** AWS Bedrock (Claude) with rule-based fallback
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
 - **Deployment:** Render/Vercel compatible
 
@@ -72,13 +72,22 @@ cd HACKATHON-2026
 pip install -r requirements.txt
 ```
 
-3. (Optional) Set up environment variables:
+3. Set up environment variables:
 ```bash
-# Create a .env file
-echo "FLASK_SECRET_KEY=your-secret-key-here" > .env
-echo "ANTHROPIC_API_KEY=your-api-key-here" >> .env
+# Create a .env file with your AWS credentials
+# Copy .env.example to .env and fill in your credentials
+cp .env.example .env
 ```
-*Note: The app works without API keys using rule-based matching!*
+
+Then edit `.env` and add:
+```
+FLASK_SECRET_KEY=your-secret-key-change-in-production
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+AWS_DEFAULT_REGION=us-east-1
+```
+
+*Note: You'll receive AWS credentials via email. The app works with limited features without AWS credentials.*
 
 4. Run the application:
 ```bash
