@@ -848,7 +848,7 @@ def rule_based_matching(data):
 @app.route("/api/mentor", methods=["POST"])
 def mentor():
     """
-    Career mentor chatbot endpoint
+    Career mentor chatbot endpoint powered by Claude via AWS Bedrock
     Provides detailed answers about specific STEM careers
     Includes information about classes, difficulty, skills, salary, and advice
     """
@@ -858,7 +858,7 @@ def mentor():
         if not data or "message" not in data:
             return jsonify({"response": "Please send a message!"}), 400
 
-        user_message = data["message"].lower()
+        user_message = data["message"]
         career = data.get("career", "STEM professional")
 
         # Career-specific information
@@ -867,164 +867,71 @@ def mentor():
             STEM_CAREERS["software_engineer"]
         )
 
-        # Mentor responses based on common questions
-        if "how many" in user_message and ("class" in user_message or "course" in user_message):
-            response = f"""Great question! To become a {career}, here's what you typically need:
+        # Check if AWS credentials are available
+        aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        use_ai = aws_access_key and aws_access_key != "your_aws_access_key_id_here"
 
-📚 **High School** (4 years):
-• Core: {', '.join(career_info['subjects'][:3])}
-• Plus standard requirements: English, Social Studies, etc.
+        if use_ai:
+            # Use Claude AI for intelligent, personalized responses
+            prompt = f"""You are a friendly, encouraging STEM career mentor helping a student learn about becoming a {career}.
 
-🎓 **College** (4 years for Bachelor's):
-• About 120-130 credit hours total
-• 40-50 classes covering major requirements, general education, and electives
-• {career_info['education']}
+Career Information:
+- Title: {career}
+- Education Required: {career_info['education']}
+- Key Skills: {', '.join(career_info['skills'])}
+- Subjects to Study: {', '.join(career_info['subjects'])}
+- Salary Range: {career_info['salary_range']}
+- Job Growth: {career_info['growth']}
+- Impact: {career_info['impact']}
+- Beginner Projects: {', '.join(career_info.get('beginner_projects', []))}
+- Next Steps: {', '.join(career_info.get('next_steps', []))}
 
-💡 **The good news**: You don't need to take them all at once! Most students take 4-5 classes per semester. Focus on building a strong foundation first, then specialize in what you love!"""
+Student's Question: {user_message}
 
-        elif "hard" in user_message or "difficult" in user_message:
-            response = f"""Honestly? {career} has its challenges, but it's absolutely achievable! Here's the real talk:
+Provide a helpful, encouraging response that:
+- Directly answers their question with specific details from the career information above
+- Is conversational and supportive (use "you" and "your")
+- Keeps response to 2-4 short paragraphs
+- Uses emojis sparingly (1-2 max) for personality
+- Emphasizes that they CAN succeed in this career
+- Provides actionable advice when relevant
 
-💪 **What makes it challenging:**
-• Requires dedication and consistent practice
-• Some concepts take time to master
-• Problem-solving can be frustrating at first
+Be authentic, enthusiastic, and specific. Focus on being helpful rather than just motivational."""
 
-✨ **Why you CAN do it:**
-• Everyone struggles at first — even experts!
-• Breaking problems into small steps makes them manageable
-• There's a huge community ready to help you
-• Your unique perspective is valuable!
+            # Prepare request for AWS Bedrock
+            request_body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 1000,
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ]
+            })
 
-The "hard" part isn't about being naturally smart — it's about being persistent. Most successful {career}s weren't prodigies; they just didn't give up. And with your interests in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
+            # Call AWS Bedrock
+            response = bedrock_runtime.invoke_model(
+                modelId="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                body=request_body
+            )
 
-        elif "skill" in user_message:
-            response = f"""To succeed as a {career}, you'll want to develop these skills:
-
-🎯 **Core Skills:**
-{chr(10).join([f'• {skill.title()}' for skill in career_info['skills']])}
-
-📖 **Subjects to Master:**
-{chr(10).join([f'• {subject.title()}' for subject in career_info['subjects']])}
-
-💡 **How to Build These Skills:**
-• Start with beginner-friendly online courses (Khan Academy, Coursera)
-• Work on small projects that interest you
-• Join clubs or online communities
-• Find a mentor or study group
-• Practice regularly — even 30 minutes a day helps!
-
-Remember: Nobody is born with these skills. Everyone learns them step by step. You've got this! 💪"""
-
-        elif "start" in user_message or "begin" in user_message:
-            projects = career_info.get('beginner_projects', ['Build a personal website', 'Create a simple app', 'Join online coding communities'])
-            next_steps = career_info.get('next_steps', ['Learn basics online', 'Join a STEM club', 'Find a mentor'])
-
-            response = f"""Let's get you started on your {career} journey! Here's your action plan:
-
-🚀 **This Week:**
-1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses in your field'}
-2. {next_steps[1] if len(next_steps) > 1 else 'Join a relevant online community'}
-3. Watch YouTube videos about "Day in the Life of a {career}"
-
-🛠️ **This Month:**
-Start a beginner project:
-{chr(10).join([f'• {project}' for project in projects])}
-
-📚 **This Year:**
-• Take relevant classes at school
-• Build a portfolio of 2-3 small projects
-• Attend STEM events or competitions
-• Connect with professionals in the field
-
-The key is to start small and stay consistent. Pick ONE thing from this list and do it today! What sounds most exciting to you? 🌟"""
-
-        elif "salary" in user_message or "money" in user_message or "pay" in user_message:
-            response = f"""Let's talk about the financial side of {career}:
-
-💰 **Salary Range:** {career_info['salary_range']}
-📊 **Average:** {career_info.get('avg_salary', 'Varies by location and experience')}
-
-**What affects your salary:**
-• Location (Silicon Valley pays more than smaller cities)
-• Experience (entry-level vs. senior positions)
-• Company size (startups vs. big tech)
-• Your specialty within the field
-
-**Career growth:** {career_info['growth']}
-
-💡 **The real value:**
-Beyond the salary, {career} offers:
-• Job security and demand
-• Flexibility (remote work options)
-• Continuous learning opportunities
-• Making real impact: {career_info['impact']}
-
-Focus on building skills and passion — the salary will follow! 🚀"""
-
-        elif "college" in user_message or "university" in user_message:
-            response = f"""Here's the college path for {career}:
-
-🎓 **Typical Degree:** {career_info['education']}
-
-**Timeline:**
-• 4 years for Bachelor's degree (most common path)
-• Optional: 2 years for Master's (for specialization or research)
-• Some positions accept associate degrees or bootcamps!
-
-💡 **You don't need a fancy school!**
-• Many successful professionals went to state universities
-• Online programs and bootcamps are gaining respect
-• Projects and skills matter more than school name
-• Scholarships and financial aid make it affordable
-
-**What matters most:**
-• Strong foundation in {', '.join(career_info['subjects'][:2])}
-• Hands-on projects and internships
-• Building a network
-• Passion and persistence!
-
-Remember: Your college choice should fit YOUR situation — budget, location, learning style. Success comes from what YOU do with the opportunity! 🌟"""
-
-        elif "woman" in user_message or "girl" in user_message or "female" in user_message:
-            response = f"""Absolutely YES! Women are making incredible contributions to {career} and ALL of STEM! 👩‍🔬
-
-**Here's the truth:**
-• Women bring unique perspectives that IMPROVE technology
-• Companies actively want more diverse teams
-• There are tons of support networks for women in STEM
-• Role models are everywhere (check our Role Models section!)
-
-**Resources for you:**
-• Girls Who Code (free programs!)
-• Society of Women Engineers (scholarships + community)
-• Women in STEM mentorship programs
-• Female-focused hackathons and competitions
-
-**Real talk:**
-• Yes, you might sometimes be the only woman in the room
-• Yes, there are challenges
-• BUT: You belong here. Your perspective is NEEDED.
-• The industry is actively working to be more inclusive
-
-Don't let anyone tell you that you don't belong in {career}. The field needs more women like YOU! 💪✨"""
+            # Parse response
+            response_body = json.loads(response['body'].read())
+            response_text = response_body['content'][0]['text']
 
         else:
-            # Default response for other questions
-            response = f"""That's a great question about {career}!
+            # Fallback response if no AI available
+            response_text = f"""I'm your {career} mentor! I can help you with:
 
-While I don't have a specific answer for that, here's what I can help you with:
+• How many classes you need
+• Whether {career} is hard
+• What skills to develop
+• How to get started
+• Salary expectations
+• College requirements
+• Opportunities for women in STEM
 
-• **How many classes do I need?** — Course requirements
-• **Is {career} hard?** — Real talk about challenges
-• **What skills do I need?** — Complete skill breakdown
-• **How do I get started?** — Step-by-step action plan
-• **What's the salary?** — Financial expectations
-• **What about college?** — Education pathways
+Ask me anything about becoming a {career}! 🚀"""
 
-Try asking one of these, or rephrase your question! I'm here to help you succeed in {career}! 🚀"""
-
-        return jsonify({"response": response})
+        return jsonify({"response": response_text})
 
     except Exception as e:
         print(f"Mentor ERROR: {e}")
