@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f \"flask run\")",
+      "Bash(pkill -f \"python.*app.py\")",
+      "Bash(python3 *)",
+      "Bash(py *)",
+      "Bash(curl -s -X POST http://localhost:5000/api/chat -H \"Content-Type: application/json\" -d '{\"message\": \"What is a software engineer?\"}')",
+      "Bash(curl *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git add *)",
+      "Bash(git pull *)",
+      "Bash(git fetch *)",
+      "Bash(python app.py)",
+      "Bash(where python *)",
+      "Bash(cd HACKATHON-2026-main *)",
+      "Bash(git init *)",
+      "Bash(git remote *)"
+    ]
+  }
+}
