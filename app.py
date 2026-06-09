@@ -14,8 +14,7 @@ import os
 import json
 from dotenv import load_dotenv
 from datetime import timedelta
-import anthropic
-from knowledge_base import search_knowledge_base, CAREER_KNOWLEDGE, SUMMER_PROGRAMS, COMPETITIONS, SCHOLARSHIPS, FAQ_RESPONSES
+import boto3
 
 # Load environment variables from .env file
 load_dotenv()
@@ -25,9 +24,12 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key-change-in-production")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)  # Sessions last 2 hours
 
-# Initialize Anthropic AI client for chatbot functionality
-client = anthropic.Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY")
+# Initialize AWS Bedrock client for chatbot functionality
+bedrock_runtime = boto3.client(
+    service_name='bedrock-runtime',
+    region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+    aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
 )
 
 # =============================================================================
@@ -663,9 +665,9 @@ def match_careers():
         # Get quiz data from request
         data = request.get_json()
 
-        # Check if Anthropic API key is available for AI matching
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        use_ai = api_key and api_key != "your_api_key_here"
+        # Check if AWS credentials are available for AI matching
+        aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        use_ai = aws_access_key and aws_access_key != "your_aws_access_key_id_here"
 
         if use_ai:
             # Use AI for matching
@@ -701,15 +703,24 @@ Format your response as JSON with this structure:
 
 Be enthusiastic, encouraging, and specific. Remember this is for a student exploring their future!"""
 
-            response = client.messages.create(
-                model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-                max_tokens=2000,
-                messages=[
+            # Prepare request for AWS Bedrock
+            request_body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 2000,
+                "messages": [
                     {"role": "user", "content": prompt}
                 ]
+            })
+
+            # Call AWS Bedrock
+            response = bedrock_runtime.invoke_model(
+                modelId="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                body=request_body
             )
 
-            reply = response.content[0].text
+            # Parse response
+            response_body = json.loads(response['body'].read())
+            reply = response_body['content'][0]['text']
 
             # Try to parse JSON from the response
             try:
@@ -858,104 +869,160 @@ def mentor():
 
         # Mentor responses based on common questions
         if "how many" in user_message and ("class" in user_message or "course" in user_message):
-            response = f"""To become a {career}:
+            response = f"""Great question! To become a {career}, here's what you typically need:
 
-High School: Focus on {', '.join(career_info['subjects'][:2])} plus the standard requirements.
+📚 **High School** (4 years):
+• Core: {', '.join(career_info['subjects'][:3])}
+• Plus standard requirements: English, Social Studies, etc.
 
-College: 4 years for a Bachelor's degree. You'll need about 120-130 credits (40-50 classes total).
+🎓 **College** (4 years for Bachelor's):
+• About 120-130 credit hours total
+• 40-50 classes covering major requirements, general education, and electives
+• {career_info['education']}
 
-{career_info['education']}
-
-Don't worry - you take 4-5 classes per semester, so it's totally manageable! Build your foundation first, then specialize."""
+💡 **The good news**: You don't need to take them all at once! Most students take 4-5 classes per semester. Focus on building a strong foundation first, then specialize in what you love!"""
 
         elif "hard" in user_message or "difficult" in user_message:
-            response = f"""{career} has challenges, but you can absolutely do it!
+            response = f"""Honestly? {career} has its challenges, but it's absolutely achievable! Here's the real talk:
 
-It requires dedication and practice, and some concepts take time to master. But here's the thing: everyone struggles at first, even experts.
+💪 **What makes it challenging:**
+• Requires dedication and consistent practice
+• Some concepts take time to master
+• Problem-solving can be frustrating at first
 
-The key isn't being naturally smart - it's being persistent. Most successful {career}s weren't prodigies; they just kept going.
+✨ **Why you CAN do it:**
+• Everyone struggles at first — even experts!
+• Breaking problems into small steps makes them manageable
+• There's a huge community ready to help you
+• Your unique perspective is valuable!
 
-With your interest in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
+The "hard" part isn't about being naturally smart — it's about being persistent. Most successful {career}s weren't prodigies; they just didn't give up. And with your interests in {', '.join(career_info['skills'][:2])}, you're already on the right path! 🚀"""
 
         elif "skill" in user_message:
-            response = f"""To succeed as a {career}, focus on:
+            response = f"""To succeed as a {career}, you'll want to develop these skills:
 
-Core Skills: {', '.join([skill.title() for skill in career_info['skills'][:3]])}
+🎯 **Core Skills:**
+{chr(10).join([f'• {skill.title()}' for skill in career_info['skills']])}
 
-Key Subjects: {', '.join([subject.title() for subject in career_info['subjects'][:3]])}
+📖 **Subjects to Master:**
+{chr(10).join([f'• {subject.title()}' for subject in career_info['subjects']])}
 
-How to Build Them:
-Start with online courses (Khan Academy, Coursera), work on small projects, join clubs, and practice regularly.
+💡 **How to Build These Skills:**
+• Start with beginner-friendly online courses (Khan Academy, Coursera)
+• Work on small projects that interest you
+• Join clubs or online communities
+• Find a mentor or study group
+• Practice regularly — even 30 minutes a day helps!
 
-Remember: Nobody is born with these skills. You've got this! 💪"""
+Remember: Nobody is born with these skills. Everyone learns them step by step. You've got this! 💪"""
 
         elif "start" in user_message or "begin" in user_message:
             projects = career_info.get('beginner_projects', ['Build a personal website', 'Create a simple app', 'Join online coding communities'])
             next_steps = career_info.get('next_steps', ['Learn basics online', 'Join a STEM club', 'Find a mentor'])
 
-            response = f"""Here's how to start your {career} journey:
+            response = f"""Let's get you started on your {career} journey! Here's your action plan:
 
-This Week:
-1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses'}
-2. {next_steps[1] if len(next_steps) > 1 else 'Join a community'}
-3. Watch "Day in the Life" videos
+🚀 **This Week:**
+1. {next_steps[0] if len(next_steps) > 0 else 'Research online courses in your field'}
+2. {next_steps[1] if len(next_steps) > 1 else 'Join a relevant online community'}
+3. Watch YouTube videos about "Day in the Life of a {career}"
 
-Try a Beginner Project:
-{chr(10).join([f'• {project}' for project in projects[:2]])}
+🛠️ **This Month:**
+Start a beginner project:
+{chr(10).join([f'• {project}' for project in projects])}
 
-Start small and stay consistent. Pick ONE thing and do it today! 🌟"""
+📚 **This Year:**
+• Take relevant classes at school
+• Build a portfolio of 2-3 small projects
+• Attend STEM events or competitions
+• Connect with professionals in the field
+
+The key is to start small and stay consistent. Pick ONE thing from this list and do it today! What sounds most exciting to you? 🌟"""
 
         elif "salary" in user_message or "money" in user_message or "pay" in user_message:
-            response = f"""Salary for {career}:
+            response = f"""Let's talk about the financial side of {career}:
 
-Range: {career_info['salary_range']}
-Average: {career_info.get('avg_salary', 'Varies by location')}
+💰 **Salary Range:** {career_info['salary_range']}
+📊 **Average:** {career_info.get('avg_salary', 'Varies by location and experience')}
 
-Your pay depends on location, experience, and company size.
+**What affects your salary:**
+• Location (Silicon Valley pays more than smaller cities)
+• Experience (entry-level vs. senior positions)
+• Company size (startups vs. big tech)
+• Your specialty within the field
 
-Career Growth: {career_info['growth']}
+**Career growth:** {career_info['growth']}
 
-Beyond salary, this career offers job security, flexibility, and real impact: {career_info['impact']}
+💡 **The real value:**
+Beyond the salary, {career} offers:
+• Job security and demand
+• Flexibility (remote work options)
+• Continuous learning opportunities
+• Making real impact: {career_info['impact']}
 
-Focus on building skills - the salary follows! 🚀"""
+Focus on building skills and passion — the salary will follow! 🚀"""
 
         elif "college" in user_message or "university" in user_message:
-            response = f"""College path for {career}:
+            response = f"""Here's the college path for {career}:
 
-Typical Degree: {career_info['education']}
+🎓 **Typical Degree:** {career_info['education']}
 
-Timeline: 4 years for Bachelor's (most common). Some positions accept bootcamps or associate degrees!
+**Timeline:**
+• 4 years for Bachelor's degree (most common path)
+• Optional: 2 years for Master's (for specialization or research)
+• Some positions accept associate degrees or bootcamps!
 
-You don't need a fancy school! Many pros went to state universities. Projects and skills matter more than school name.
+💡 **You don't need a fancy school!**
+• Many successful professionals went to state universities
+• Online programs and bootcamps are gaining respect
+• Projects and skills matter more than school name
+• Scholarships and financial aid make it affordable
 
-What matters: Strong foundation in {', '.join(career_info['subjects'][:2])}, hands-on projects, and passion!
+**What matters most:**
+• Strong foundation in {', '.join(career_info['subjects'][:2])}
+• Hands-on projects and internships
+• Building a network
+• Passion and persistence!
 
-Your college choice should fit YOUR budget and situation. Success comes from what YOU do! 🌟"""
+Remember: Your college choice should fit YOUR situation — budget, location, learning style. Success comes from what YOU do with the opportunity! 🌟"""
 
         elif "woman" in user_message or "girl" in user_message or "female" in user_message:
-            response = f"""Absolutely YES! Women are making incredible contributions to {career} and all of STEM! 👩‍🔬
+            response = f"""Absolutely YES! Women are making incredible contributions to {career} and ALL of STEM! 👩‍🔬
 
-Women bring unique perspectives that improve technology. Companies want diverse teams, and there are tons of support networks available.
+**Here's the truth:**
+• Women bring unique perspectives that IMPROVE technology
+• Companies actively want more diverse teams
+• There are tons of support networks for women in STEM
+• Role models are everywhere (check our Role Models section!)
 
-Resources: Girls Who Code, Society of Women Engineers, Women in STEM mentorship programs.
+**Resources for you:**
+• Girls Who Code (free programs!)
+• Society of Women Engineers (scholarships + community)
+• Women in STEM mentorship programs
+• Female-focused hackathons and competitions
 
-Real talk: You might sometimes be the only woman in the room, but you BELONG here. Your perspective is needed, and the industry is working to be more inclusive.
+**Real talk:**
+• Yes, you might sometimes be the only woman in the room
+• Yes, there are challenges
+• BUT: You belong here. Your perspective is NEEDED.
+• The industry is actively working to be more inclusive
 
-The field needs more women like YOU! 💪"""
+Don't let anyone tell you that you don't belong in {career}. The field needs more women like YOU! 💪✨"""
 
         else:
             # Default response for other questions
             response = f"""That's a great question about {career}!
 
-I can help you with:
-• How many classes do I need?
-• Is {career} hard?
-• What skills do I need?
-• How do I get started?
-• What's the salary?
-• What about college?
+While I don't have a specific answer for that, here's what I can help you with:
 
-Try asking one of these! 🚀"""
+• **How many classes do I need?** — Course requirements
+• **Is {career} hard?** — Real talk about challenges
+• **What skills do I need?** — Complete skill breakdown
+• **How do I get started?** — Step-by-step action plan
+• **What's the salary?** — Financial expectations
+• **What about college?** — Education pathways
+
+Try asking one of these, or rephrase your question! I'm here to help you succeed in {career}! 🚀"""
 
         return jsonify({"response": response})
 
@@ -968,9 +1035,8 @@ Try asking one of these! 🚀"""
 @app.route("/api/chat", methods=["POST"])
 def chat():
     """
-    Enhanced STEM chatbot endpoint
-    Uses knowledge base for detailed responses and Claude AI for natural language
-    Falls back to stored knowledge if API fails
+    General STEM chatbot endpoint powered by Claude via AWS Bedrock
+    Responds to questions about STEM careers, resources, and getting started
     """
     try:
         # Get user's chat message
@@ -979,143 +1045,62 @@ def chat():
             return jsonify({"response": "Please send a message!"}), 400
 
         user_message = data["message"]
-        user_message_lower = user_message.lower()
 
-        # Search knowledge base first
-        kb_results = search_knowledge_base(user_message)
+        # Check if AWS credentials are available
+        aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        use_ai = aws_access_key and aws_access_key != "your_aws_access_key_id_here"
 
-        # Try to use Claude AI for natural, personalized responses
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        use_ai = api_key and api_key != "your_api_key_here"
-
-        if use_ai and kb_results:
-            try:
-                # Build context from knowledge base
-                context = "Relevant information from knowledge base:\n"
-
-                if "career" in kb_results:
-                    career_info = kb_results["career"]
-                    context += f"\nCareer Information:\n"
-                    context += f"Daily tasks: {', '.join(career_info.get('daily_tasks', [])[:3])}\n"
-                    context += f"Skills to learn: {', '.join(career_info.get('skills_to_learn', [])[:3])}\n"
-                    context += f"First project: {career_info.get('first_project', 'N/A')}\n"
-                    context += f"Salary range: {career_info.get('salary_range', 'N/A')}\n"
-
-                if "program" in kb_results:
-                    prog_info = kb_results["program"]
-                    context += f"\nProgram: {prog_info.get('name')}\n"
-                    context += f"Description: {prog_info.get('description')}\n"
-                    context += f"Eligibility: {prog_info.get('eligibility')}\n"
-                    context += f"Cost: {prog_info.get('cost')}\n"
-                    context += f"Link: {prog_info.get('link')}\n"
-
-                if "competition" in kb_results:
-                    comp_info = kb_results["competition"]
-                    context += f"\nCompetition: {comp_info.get('name')}\n"
-                    context += f"Description: {comp_info.get('description')}\n"
-
-                if "scholarship" in kb_results:
-                    schol_info = kb_results["scholarship"]
-                    context += f"\nScholarship: {schol_info.get('name')}\n"
-                    context += f"Amount: {schol_info.get('amount')}\n"
-
-                if "faq" in kb_results:
-                    context += f"\nFAQ Answer:\n{kb_results['faq']}\n"
-
-                # Use Claude to make response natural and personalized
-                prompt = f"""You are a friendly, helpful AI assistant chatting with a student on the SeeMe in STEM platform.
-
-Student's question: {user_message}
-
-{context}
-
-Answer the student's question naturally and helpfully. Be conversational, supportive, and informative. You can answer ANY question the student asks - not just STEM-related questions. Keep responses under 200 words. If you have relevant information from the knowledge base above, incorporate it. If the question is about STEM and there's a link, mention they can find more details on our Resources page."""
-
-                response = client.messages.create(
-                    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-                    max_tokens=300,
-                    messages=[{"role": "user", "content": prompt}]
-                )
-
-                return jsonify({"response": response.content[0].text})
-
-            except Exception as ai_error:
-                print(f"AI Error: {ai_error}")
-                # Fall through to knowledge base fallback
-
-        # Fallback: Use knowledge base directly (if API failed or no AI)
-        if kb_results:
-            response_parts = []
-
-            if "faq" in kb_results:
-                return jsonify({"response": kb_results["faq"]})
-
-            if "career" in kb_results:
-                career = kb_results["career"]
-                response = f"Great question about this career!\n\n"
-                response += f"💼 Daily tasks: {', '.join(career['daily_tasks'][:2])}\n\n"
-                response += f"📚 Skills to start: {', '.join(career['skills_to_learn'][:2])}\n\n"
-                response += f"🚀 First project idea: {career['first_project']}\n\n"
-                response += f"💰 Salary range: {career['salary_range']}"
-                return jsonify({"response": response})
-
-            if "program" in kb_results:
-                prog = kb_results["program"]
-                response = f"**{prog['name']}**\n\n"
-                response += f"{prog['description']}\n\n"
-                response += f"👥 Eligibility: {prog['eligibility']}\n"
-                response += f"💵 Cost: {prog['cost']}\n\n"
-                response += f"Check our Resources page for the application link!"
-                return jsonify({"response": response})
-
-            if "competition" in kb_results:
-                comp = kb_results["competition"]
-                response = f"**{comp['name']}**\n\n"
-                response += f"{comp['description']}\n\n"
-                response += f"Find more details on our Resources page!"
-                return jsonify({"response": response})
-
-            if "scholarship" in kb_results:
-                schol = kb_results["scholarship"]
-                response = f"**{schol['name']}**\n\n"
-                response += f"💰 Amount: {schol['amount']}\n"
-                response += f"Deadline: {schol.get('deadline', 'Check website')}\n\n"
-                response += f"Visit our Resources page for the application link!"
-                return jsonify({"response": response})
-
-        # Basic keyword fallback responses
-        fallback_responses = {
-            "hello": "Hi there! 👋 I'm here to help! Feel free to ask me anything - from STEM careers and programs to general questions. What's on your mind?",
-            "hi": "Hello! 👋 What can I help you with today?",
-            "help": "I'm here to answer any questions you have! I have detailed knowledge about:\n• STEM careers and pathways\n• Summer programs and opportunities\n• Competitions and scholarships\n• Getting started with projects\n\nBut feel free to ask me about anything else too! What would you like to know?",
-        }
-
-        for keyword, response in fallback_responses.items():
-            if keyword in user_message_lower:
-                return jsonify({"response": response})
-
-        # Ultimate fallback - when AI is not available and no KB results
-        # Still try to use Claude AI for any general question
         if use_ai:
-            try:
-                prompt = f"""You are a friendly, helpful AI assistant. Answer the following question naturally and helpfully:
+            # Use Claude AI for intelligent responses
+            prompt = f"""You are a friendly and enthusiastic STEM Career Guide chatbot helping students explore STEM careers and opportunities. Your goal is to inspire, encourage, and provide helpful information about STEM education and careers.
 
-{user_message}
+Context about this platform:
+- We help students discover STEM careers through career matching quizzes
+- We feature 17+ STEM careers including Software Engineer, Biomedical Engineer, Cybersecurity Analyst, Aerospace Engineer, Data Scientist, Environmental Scientist, and more
+- We showcase diverse role models like Dr. Mae Jemison, Grace Hopper, Katherine Johnson, Ellen Ochoa, and others
+- We provide information about summer camps, scholarships, competitions, and free learning resources
 
-Keep your response conversational, informative, and under 200 words."""
+Available resources we offer:
+- Career Quiz: Matches students with ideal STEM careers
+- Role Models Section: Inspiring STEM professionals from diverse backgrounds
+- Opportunities Section: Summer camps (Girls Who Code, NASA programs, AI4ALL), scholarships (SWE, NSBE, HSF), competitions (FIRST Robotics, Google Science Fair)
+- Free Learning: Khan Academy, Coursera, Code.org, MIT OpenCourseWare
 
-                response = client.messages.create(
-                    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-                    max_tokens=400,
-                    messages=[{"role": "user", "content": prompt}]
-                )
+User's message: {user_message}
 
-                return jsonify({"response": response.content[0].text})
-            except Exception as ai_error:
-                print(f"AI Fallback Error: {ai_error}")
+Respond in a friendly, encouraging tone. Keep responses concise (2-4 short paragraphs). Use emojis sparingly to add personality. Focus on:
+- Answering their specific question
+- Being encouraging and positive
+- Suggesting relevant resources from our platform when appropriate
+- Inspiring confidence that they CAN succeed in STEM
 
-        # Final fallback when AI is completely unavailable
-        return jsonify({"response": "I'm here to help! I have detailed information about STEM careers, programs, and opportunities, but I can try to answer other questions too. What would you like to know?"})
+If they ask about specific careers, classes, getting started, scholarships, camps, or role models, provide helpful specific information. Always be supportive and never dismissive."""
+
+            # Prepare request for AWS Bedrock
+            request_body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 1000,
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ]
+            })
+
+            # Call AWS Bedrock
+            response = bedrock_runtime.invoke_model(
+                modelId="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                body=request_body
+            )
+
+            # Parse response
+            response_body = json.loads(response['body'].read())
+            response_text = response_body['content'][0]['text']
+
+        else:
+            # Fallback response if no AI available
+            response_text = "Hi! 👋 I'm your STEM Career Guide! I can help you explore STEM careers, find resources, and answer your questions. Try asking about:\n• What STEM career fits me?\n• What classes should I take?\n• Are there scholarships available?\n• What summer camps can I join?\n• Can I do STEM if I'm bad at math?\n\nWhat would you like to know?"
+
+        # Return response with streaming flag for frontend
+        return jsonify({"response": response_text, "stream": True})
 
     except Exception as e:
         print(f"Chat ERROR: {e}")
