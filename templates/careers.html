@@ -168,7 +168,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .career-card {
@@ -183,6 +183,8 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .career-card::before {
@@ -253,18 +255,22 @@
         .career-info {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.9rem;
+            flex: 1;
         }
 
         .info-row {
             display: flex;
             align-items: flex-start;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .info-icon {
             font-size: 1.2rem;
-            min-width: 24px;
+            min-width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .info-content {
@@ -483,7 +489,7 @@
             .careers-grid {
                 grid-template-columns: 1fr;
                 margin: 1rem;
-                gap: 1.5rem;
+                gap: 1rem;
             }
 
             .career-card.expanded {
@@ -650,7 +656,7 @@
                 </div>
 
                 <div class="info-row">
-                    <div class="info-icon"><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" style="width: 100%; height: 100%; object-fit: contain;"></div>
+                    <div class="info-icon">🎓</div>
                     <div class="info-content">
                         <div class="info-label">Education</div>
                         <div class="info-text">{{ career.education }}</div>

@@ -534,12 +534,17 @@
         .loading {
             text-align: center;
             padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
         }
 
         .spinner {
             width: 60px;
             height: 60px;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1.5rem;
             position: relative;
         }
 
@@ -567,12 +572,13 @@
 
         .loading h3 {
             color: #70697E;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
             font-size: 1.5rem;
         }
 
         .loading p {
             color: #98899C;
+            margin: 0;
         }
 
         .hidden {
